@@ -24,8 +24,7 @@ namespace Videotheque.Model
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Genre>().HasMany(x => x.GenreMedias);
-            modelBuilder.Entity<Media>().HasMany(x => x.GenreMedias);
+            modelBuilder.Entity<GenreMedia>().HasKey(gm => new {gm.MediaId, gm.GenreId});
         }
 
 
