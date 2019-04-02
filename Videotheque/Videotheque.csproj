@@ -181,7 +181,8 @@
     <Compile Include="Model\GenreMedia.cs" />
     <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Genre.cs" />
-    <Compile Include="Model\VidethequeDbContext.cs" />
+    <Compile Include="Model\VideothequeDbContextFactory.cs" />
+    <Compile Include="Model\VideothequeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

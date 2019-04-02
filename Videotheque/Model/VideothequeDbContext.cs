@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    class VidethequeDbContext : DbContext
+    class VideothequeDbContext : DbContext
     {
         public string DatabasePath { get; }
         public DbSet<Genre> Genres { get; set; }
@@ -29,18 +29,18 @@ namespace Videotheque.Model
         }
 
 
-        internal VidethequeDbContext(DbContextOptions options) : base(options) { }
-        private static VidethequeDbContext _context;
-        public async Task<VidethequeDbContext> getInstance()
+        internal VideothequeDbContext(DbContextOptions options) : base(options) { }
+        private static VideothequeDbContext _context;
+        public async Task<VideothequeDbContext> getInstance()
         {
             if (_context == null)
             {
-                _context = new VidethequeDbContext(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
+                _context = new VideothequeDbContext(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
                 await _context.Database.MigrateAsync();
             }
             return _context;
         }
-        private VidethequeDbContext(string databasePath) : base()
+        private VideothequeDbContext(string databasePath) : base()
         {
             DatabasePath = databasePath;
         }
