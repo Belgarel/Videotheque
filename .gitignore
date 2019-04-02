@@ -1,4 +1,5 @@
 /packages
+/.vs
 
 #Junk Files
 *.DS_Store

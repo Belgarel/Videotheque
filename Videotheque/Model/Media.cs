@@ -24,7 +24,10 @@ namespace Videotheque.Model
         public string DateReleae { get; set; }
         public int Duration { get; set; }
         public int MinAge { get; set; }
+        [Required]
+        public TypeMedia Type { get; set; }
         public Language LanguageVO { get; set; }
+        [Required]
         public Language LanguageMedia { get; set; }
         public Language LanguageSubtitles { get; set; }
         public Boolean PhysicalSupport { get; set; }
@@ -32,5 +35,8 @@ namespace Videotheque.Model
 
         [InverseProperty(nameof(GenreMedia.Media))]
         public List<GenreMedia> GenreMedias { get; set; }
+        [InverseProperty(nameof(Episode.Media))]
+        public List<Episode> Episodes { get; set; }
+
     }
 }

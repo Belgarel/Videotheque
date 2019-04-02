@@ -30,7 +30,7 @@ namespace Videotheque.Model
 
         internal VideothequeDbContext(DbContextOptions options) : base(options) { }
         private static VideothequeDbContext _context;
-        public async Task<VideothequeDbContext> getInstance()
+        public static async Task<VideothequeDbContext> getInstance()
         {
             if (_context == null)
             {
