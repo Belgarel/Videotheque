@@ -22,9 +22,14 @@ namespace Videotheque.Model
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseSqlite($"Filename={DatabasePath}", x => x.SuppressForeignKeyEnforcement());
         }
-//        protected override void OnModelCreating()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Genre>().HasMany(x => x.GenreMedias);
+            modelBuilder.Entity<Media>().HasMany(x => x.GenreMedias);
+        }
 
 
+        internal VidethequeDbContext(DbContextOptions options) : base(options) { }
         private static VidethequeDbContext _context;
         public async Task<VidethequeDbContext> getInstance()
         {
