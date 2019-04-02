@@ -177,7 +177,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Enum.cs" />
+    <Compile Include="Model\GenreMedia.cs" />
+    <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\VidethequeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
