@@ -18,4 +18,18 @@ namespace Videotheque.Model
         Movie,
         Series
     }
+
+    enum PersonTitle
+    {
+        Mme,
+        Mlle,
+        Mr
+    }
+
+    enum PersonMediaFunction
+    {
+        Actor,
+        Director,
+        Productor
+    }
 }

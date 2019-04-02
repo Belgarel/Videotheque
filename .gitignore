@@ -1,5 +1,7 @@
 /packages
 /.vs
+*.cache
+*.lref
 
 #Junk Files
 *.DS_Store
