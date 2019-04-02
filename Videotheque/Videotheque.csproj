@@ -178,9 +178,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Enum.cs" />
+    <Compile Include="Model\Episode.cs" />
     <Compile Include="Model\GenreMedia.cs" />
     <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\Person.cs" />
     <Compile Include="Model\VideothequeDbContextFactory.cs" />
     <Compile Include="Model\VideothequeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
