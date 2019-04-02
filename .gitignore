@@ -1,3 +1,5 @@
+/packages
+
 #Junk Files
 *.DS_Store
 [Tt]humbs.db
@@ -11,7 +13,7 @@
 *.suo
 *.exe
 *.pdb
-*.aps
+*.aps       
 *_i.c
 *_p.c
 *.ncb
