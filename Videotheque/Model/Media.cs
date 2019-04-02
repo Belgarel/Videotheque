@@ -25,7 +25,7 @@ namespace Videotheque.Model
         public int Duration { get; set; }
         public int MinAge { get; set; }
         [Required]
-        public TypeMedia type { get; set; }
+        public TypeMedia Type { get; set; }
         public Language LanguageVO { get; set; }
         [Required]
         public Language LanguageMedia { get; set; }
