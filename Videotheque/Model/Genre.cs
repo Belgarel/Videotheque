@@ -14,6 +14,9 @@ namespace Videotheque.Model
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GenreId { get; set; }
 
-        public string libelle { get; set; }
+        public string Libelle { get; set; }
+
+        [InverseProperty(nameof(GenreMedia.Genre))]
+        public List<GenreMedia> GenreMedias { get; set; }
     }
 }
