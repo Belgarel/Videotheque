@@ -14,6 +14,8 @@ namespace Videotheque.Model
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<GenreMedia> GenreMedias { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<PersonMedia> PersonMedias { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
