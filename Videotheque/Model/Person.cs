@@ -28,5 +28,8 @@ namespace Videotheque.Model
         public DateTime BirthDate { get; set; }
 
         public string Picture { get; set; }
+
+        [InverseProperty(nameof(PersonMedia.Person))]
+        public List<PersonMedia> PersonMedias { get; set; }
     }
 }
