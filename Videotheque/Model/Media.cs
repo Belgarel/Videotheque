@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    class Media
+    public class Media
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]

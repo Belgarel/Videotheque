@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    class Episode
+    public class Episode
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]

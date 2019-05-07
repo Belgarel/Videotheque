@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace Videotheque.Model
 {
-    class Genre
+    public class Genre
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GenreId { get; set; }

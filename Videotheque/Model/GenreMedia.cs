@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    class GenreMedia
+    public class GenreMedia
     {
         public int GenreId { get; set; }
         public int MediaId { get; set; }

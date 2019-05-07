@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    class PersonMedia
+    public class PersonMedia
     {
         public int PersonMediaId { get; set; }
 

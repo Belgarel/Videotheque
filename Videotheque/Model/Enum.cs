@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace Videotheque.Model
 {
-    enum Language
+    public enum Language
     {
         English,
         French,
         Japanese,
         Korean
     }
-    enum TypeMedia
+    public enum TypeMedia
     {
         Movie,
         Series
     }
 
-    enum PersonTitle
+    public enum PersonTitle
     {
         Mme,
         Mlle,
         Mr
     }
 
-    enum PersonMediaFunction
+    public enum PersonMediaFunction
     {
         Actor,
         Director,
