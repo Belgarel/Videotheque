@@ -38,6 +38,8 @@ namespace Videotheque
             action.Libelle = "Adventure";
             context.Genres.Add(adventure);
 
+            Console.Out.WriteLine(action);
+
 
             //Creating a movie
             Media matrix = new Media();
@@ -199,6 +201,8 @@ namespace Videotheque
             peterJurasik.Nationality = "Ameéicaine";
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
             context.Persons.Add(peterJurasik);
+
+            Console.WriteLine(peterJurasik);
         }
     }
 }
