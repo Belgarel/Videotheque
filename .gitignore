@@ -3,6 +3,9 @@
 *.cache
 *.lref
 
+#Target
+Videotheque/obj/*
+
 #Junk Files
 *.DS_Store
 [Tt]humbs.db
