@@ -203,6 +203,8 @@ namespace Videotheque
             context.Persons.Add(peterJurasik);
 
             Console.WriteLine(peterJurasik);
+
+            context.SaveChanges();
         }
     }
 }

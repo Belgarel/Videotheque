@@ -23,6 +23,8 @@ namespace Videotheque
         public MainWindow()
         {
             InitializeComponent();
+            TestData td = new TestData();
+            td.createData();
         }
     }
 }
