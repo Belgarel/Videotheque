@@ -15,6 +15,18 @@ namespace Videotheque
         {
             var context = await VideothequeDbContext.getInstance();
 
+            await createGenre();
+            await createMedia();
+            await createPerson();
+            await createGenreMedia();
+
+          
+        }
+
+        public async Task createGenre()
+        {
+            var context = await VideothequeDbContext.getInstance();
+
             //Creating genres
             Genre action = new Genre();
             action.Libelle = "Action";
@@ -38,6 +50,14 @@ namespace Videotheque
             adventure.Libelle = "Adventure";
             context.Genres.Add(adventure);
 
+            context.SaveChanges();
+
+        }
+
+        public async Task createMedia()
+        {
+            var context = await VideothequeDbContext.getInstance();
+
             //Creating a movie
             Media matrix = new Media();
             matrix.Type = TypeMedia.Movie;
@@ -50,6 +70,7 @@ namespace Videotheque
             matrix.LanguageMedia = Language.English;
             matrix.PhysicalSupport = true;
             context.Medias.Add(matrix);
+
             //Creating another movie
             Media fightClub = new Media();
             fightClub.Type = TypeMedia.Movie;
@@ -64,6 +85,7 @@ namespace Videotheque
             fightClub.PhysicalSupport = false;
             fightClub.NumericalSupport = true;
             context.Medias.Add(fightClub);
+
             //Creating a series
             Media babylon5 = new Media();
             babylon5.Type = TypeMedia.Series;
@@ -76,6 +98,13 @@ namespace Videotheque
             babylon5.LanguageSubtitles = Language.French;
             babylon5.NumericalSupport = true;
             context.Medias.Add(babylon5);
+
+            context.SaveChanges();
+        }
+
+        public async Task createPerson()
+        {
+            var context = await VideothequeDbContext.getInstance();
 
             //Create a Person Matrix director
             Person lanaWachowski = new Person();
@@ -200,6 +229,21 @@ namespace Videotheque
             context.Persons.Add(peterJurasik);
 
             context.SaveChanges();
+        }
+
+        public async Task createGenreMedia()
+        {
+           /* var context = await VideothequeDbContext.getInstance();
+
+            // Genre for serie Babylon5
+            GenreMedia babylon5SF = new GenreMedia();
+            Media b5 = context.Medias.Where((m) => m.Title.Equals("Babylon 5"));
+            babylon5SF.MediaId = b5.MediaId;
+            Genre sf = (Genre) context.Genres.Where((g) => g.Libelle.Equals("SF"));
+            babylon5SF.GenreId = sf.GenreId;
+
+            */
+
         }
     }
 }
