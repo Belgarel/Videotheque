@@ -27,6 +27,6 @@ namespace Videotheque.Model
 
         public int MediaId { get; set; }
         [ForeignKey(nameof(MediaId))]
-        public Genre Media { get; set; }
+        public Media Media { get; set; }
     }
 }

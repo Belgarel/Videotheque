@@ -20,26 +20,23 @@ namespace Videotheque
             action.Libelle = "Action";
             context.Genres.Add(action);
             Genre sf = new Genre();
-            action.Libelle = "SF";
+            sf.Libelle = "SF";
             context.Genres.Add(sf);
             Genre spaceOpera = new Genre();
-            action.Libelle = "Space Opera";
+            spaceOpera.Libelle = "Space Opera";
             context.Genres.Add(spaceOpera);
             Genre robots = new Genre();
-            action.Libelle = "Robots";
+            robots.Libelle = "Robots";
             context.Genres.Add(robots);
             Genre aliens = new Genre();
-            action.Libelle = "Aliens";
+            aliens.Libelle = "Aliens";
             context.Genres.Add(aliens);
             Genre cartoon = new Genre();
-            action.Libelle = "Cartoon";
+            cartoon.Libelle = "Cartoon";
             context.Genres.Add(cartoon);
             Genre adventure = new Genre();
-            action.Libelle = "Adventure";
+            adventure.Libelle = "Adventure";
             context.Genres.Add(adventure);
-
-            Console.Out.WriteLine(action);
-
 
             //Creating a movie
             Media matrix = new Media();
@@ -194,15 +191,13 @@ namespace Videotheque
             andreasKatsulas.Nationality = "Ameéicaine";
             andreasKatsulas.BirthDate = new DateTime(1946, 5, 18);
             context.Persons.Add(andreasKatsulas);
-            //Create a Person John Sherridan
+            //Create a Person Londo Mollari
             Person peterJurasik = new Person();
             peterJurasik.LastName = "Jurasik";
             peterJurasik.FirstName = "Peter";
             peterJurasik.Nationality = "Ameéicaine";
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
             context.Persons.Add(peterJurasik);
-
-            Console.WriteLine(peterJurasik);
 
             context.SaveChanges();
         }
