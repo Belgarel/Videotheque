@@ -38,5 +38,8 @@ namespace Videotheque.Model
         [InverseProperty(nameof(Episode.Media))]
         public List<Episode> Episodes { get; set; }
 
+        [InverseProperty(nameof(PersonMedia.Media))]
+        public List<PersonMedia> PersonMedias{ get; set; }
+
     }
 }
