@@ -50,6 +50,7 @@ namespace Videotheque
             adventure.Libelle = "Adventure";
             context.Genres.Add(adventure);
 
+            // Save VideothequeDbContext
             context.SaveChanges();
 
         }
@@ -99,6 +100,7 @@ namespace Videotheque
             babylon5.NumericalSupport = true;
             context.Medias.Add(babylon5);
 
+            // Save VideothequeDbContext
             context.SaveChanges();
         }
 
@@ -228,21 +230,42 @@ namespace Videotheque
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
             context.Persons.Add(peterJurasik);
 
+            // Save VideothequeDbContext
             context.SaveChanges();
         }
 
         public async Task createGenreMedia()
         {
-           /* var context = await VideothequeDbContext.getInstance();
+           var context = await VideothequeDbContext.getInstance();
 
             // Genre for serie Babylon5
             GenreMedia babylon5SF = new GenreMedia();
-            Media b5 = context.Medias.Where((m) => m.Title.Equals("Babylon 5"));
+            Media b5 = context.Medias.Where((m) => m.Title.Equals("Babylon 5")).FirstOrDefault();
             babylon5SF.MediaId = b5.MediaId;
-            Genre sf = (Genre) context.Genres.Where((g) => g.Libelle.Equals("SF"));
+            Genre sf = context.Genres.Where((g) => g.Libelle.Equals("SF")).FirstOrDefault();
             babylon5SF.GenreId = sf.GenreId;
 
-            */
+            context.GenreMedias.Add(babylon5SF);
+
+            // Genre for serie FightClub
+            GenreMedia fightClubAction  = new GenreMedia();
+            Media fightClub = context.Medias.Where((m) => m.Title.Equals("Fight Club")).FirstOrDefault();
+            fightClubAction.MediaId = fightClub.MediaId;
+            Genre action = context.Genres.Where((g) => g.Libelle.Equals("Action")).FirstOrDefault();
+            fightClubAction.GenreId = action.GenreId;
+
+            context.GenreMedias.Add(fightClubAction);
+
+            // Genre for serie Matrix
+            GenreMedia matrixSF = new GenreMedia();
+            Media matrix = context.Medias.Where((m) => m.Title.Equals("Matrix")).FirstOrDefault();
+            matrixSF.MediaId = matrix.MediaId;
+            fightClubAction.GenreId = sf.GenreId;
+
+            context.GenreMedias.Add(matrixSF);
+
+            // Save dbContext
+            context.SaveChanges();
 
         }
     }
