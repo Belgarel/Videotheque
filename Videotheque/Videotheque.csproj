@@ -171,17 +171,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\ShowMedia.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20190507064652_initial.cs" />
-    <Compile Include="Migrations\20190507064652_initial.designer.cs">
-      <DependentUpon>20190507064652_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="Model\Enum.cs" />
     <Compile Include="Model\Episode.cs" />
     <Compile Include="Model\Genre.cs" />
@@ -220,7 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

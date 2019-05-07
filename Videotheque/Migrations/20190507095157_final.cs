@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Videotheque.Migrations
 {
-    public partial class initial : Migration
+    public partial class final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,21 +26,21 @@ namespace Videotheque.Migrations
                 {
                     MediaId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Seen = table.Column<bool>(nullable: false),
+                    Seen = table.Column<bool>(nullable: true),
                     Rated = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
                     Synopsis = table.Column<string>(nullable: true),
                     ImagePath = table.Column<string>(nullable: true),
-                    DateReleae = table.Column<string>(nullable: true),
-                    Duration = table.Column<int>(nullable: false),
-                    MinAge = table.Column<int>(nullable: false),
+                    DateRelease = table.Column<string>(nullable: true),
+                    Duration = table.Column<int>(nullable: true),
+                    MinAge = table.Column<int>(nullable: true),
                     Type = table.Column<int>(nullable: false),
                     LanguageVO = table.Column<int>(nullable: false),
                     LanguageMedia = table.Column<int>(nullable: false),
                     LanguageSubtitles = table.Column<int>(nullable: false),
-                    PhysicalSupport = table.Column<bool>(nullable: false),
-                    NumericalSupport = table.Column<bool>(nullable: false)
+                    PhysicalSupport = table.Column<bool>(nullable: true),
+                    NumericalSupport = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {

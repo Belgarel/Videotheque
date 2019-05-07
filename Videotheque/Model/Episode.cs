@@ -25,6 +25,7 @@ namespace Videotheque.Model
         [Required]
         public DateTime BroadcastDate { get; set; }
 
+        [Required]
         public int MediaId { get; set; }
         [ForeignKey(nameof(MediaId))]
         public Media Media { get; set; }

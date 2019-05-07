@@ -75,9 +75,9 @@ namespace Videotheque.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<string>("DateReleae");
+                    b.Property<string>("DateRelease");
 
-                    b.Property<int>("Duration");
+                    b.Property<int?>("Duration");
 
                     b.Property<string>("ImagePath");
 
@@ -87,15 +87,15 @@ namespace Videotheque.Migrations
 
                     b.Property<int>("LanguageVO");
 
-                    b.Property<int>("MinAge");
+                    b.Property<int?>("MinAge");
 
-                    b.Property<bool>("NumericalSupport");
+                    b.Property<bool?>("NumericalSupport");
 
-                    b.Property<bool>("PhysicalSupport");
+                    b.Property<bool?>("PhysicalSupport");
 
                     b.Property<int>("Rated");
 
-                    b.Property<bool>("Seen");
+                    b.Property<bool?>("Seen");
 
                     b.Property<string>("Synopsis");
 
@@ -179,12 +179,12 @@ namespace Videotheque.Migrations
             modelBuilder.Entity("Videotheque.Model.PersonMedia", b =>
                 {
                     b.HasOne("Videotheque.Model.Media", "Media")
-                        .WithMany()
+                        .WithMany("PersonMedias")
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Videotheque.Model.Person", "Person")
-                        .WithMany()
+                        .WithMany("PersonMedias")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
