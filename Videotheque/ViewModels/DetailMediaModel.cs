@@ -7,7 +7,7 @@ using Videotheque.Model;
 
 namespace Videotheque.ViewModels
 {
-    public class ShowMedia : BaseNotifyPropertyChanged
+    public class DetailMediaModel : BaseNotifyPropertyChanged
     {
         public Media Media
         {
@@ -48,21 +48,13 @@ namespace Videotheque.ViewModels
             set { SetProperty(value); }
         }
 
-        public ShowMedia()
+        public DetailMediaModel()
         {
-            //Creating a series for testing purposes
-            Media babylon5 = new Media();
-            babylon5.Type = TypeMedia.Series;
-            babylon5.Title = "Babylon 5";
-            babylon5.Comment = "Londo 4ever";
-            babylon5.Seen = true;
-            babylon5.Rated = 5;
-            babylon5.LanguageVO = Language.English;
-            babylon5.LanguageMedia = Language.English;
-            babylon5.LanguageSubtitles = Language.French;
-            babylon5.NumericalSupport = true;
-
-            this.Media = babylon5;
+            this.Media = new Media();
+        }
+        public DetailMediaModel(Media media)
+        {
+            this.Media = media;
         }
     }
 }
