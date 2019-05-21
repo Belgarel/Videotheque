@@ -18,7 +18,7 @@ namespace Videotheque
             await createGenre();
             await createMedia();
             await createPerson();
-            await createGenreMedia();
+            //await createGenreMedia();
 
           
         }
