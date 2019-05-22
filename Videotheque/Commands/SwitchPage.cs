@@ -18,7 +18,6 @@ namespace Videotheque.Commands
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("Lol");
             if (parameter.GetType() != typeof(SwitchPageParameter))
                 return;
             SwitchPageParameter param = (SwitchPageParameter)parameter;
