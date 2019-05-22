@@ -7,24 +7,27 @@
         xmlns:viewmodels="clr-namespace:Videotheque.ViewModels"
         mc:Ignorable="d"
         Title="ShowMedia" Height="500" Width="800">
-
+    
     <Window.DataContext>
         <viewmodels:MainWindowModel/>
     </Window.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Label Grid.Column="1" Grid.Row="0" Style="{StaticResource sMainTitle}">Vidéothèque</Label>
+
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
-            <Button Content="Films" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListMovies}"></Button>
-            <Button Content="Séries" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListSeries}"></Button>
-            <Button Content="Acteurs" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}"></Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Films" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListMovies}"></Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Séries" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListSeries}"></Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Acteurs" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}"></Button>
         </StackPanel>
         
         <Frame Content="{Binding CurrentPage}" Grid.Column="1" Grid.Row="1"
