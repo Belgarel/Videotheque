@@ -3,10 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Videotheque.Views"
+      xmlns:local="clr-namespace:Videotheque.Views" 
+      xmlns:model="clr-namespace:Videotheque.Model"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListMoviesPage">
+
+    <Page.Resources>
+        <ObjectDataProvider ObjectType="{x:Type model:Media}"
+                            MethodName="GetGenres" x:Key="getGenres">
+        </ObjectDataProvider>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,22 +21,53 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Liste des films"></Label>
+        <Label Grid.Row="0" Style="{StaticResource sPageTitle}" Content="Liste des films"></Label>
         <ListBox Grid.Row="1" ItemsSource="{Binding ListMovies}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/> <!-- Labels -->
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" /> <!-- Title -->
+                                <RowDefinition Height="*" /> <!-- Genres -->
+                                <RowDefinition Height="*" /> <!-- Rated / Comment -->
+                                <RowDefinition Height="*" /> <!-- Synopsis -->
+                                <RowDefinition Height="*" /> <!-- VO -->
+                                <RowDefinition Height="*" /> <!-- Language -->
+                                <RowDefinition Height="*" /> <!-- Subs -->
                             </Grid.RowDefinitions>
 
-                            <Label Content="{Binding Title}" Grid.Row="0" />
+                            <Label Content="{Binding Title}" Grid.Row="0" Style="{StaticResource sElementTitle}" />
+                            <Label Content="Genre" Grid.Row="1" Grid.Column="0" />
+ <!--                           <Label Grid.Row="1" Grid.Column="1">
+                                <Binding Source="{StaticResource getGenres}"/>
+                            </Label> -->
+                            <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Genre.Libelle}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ListBox>
+                            <Label Content="{Binding Rated}" Grid.Row="2" Grid.Column="0" />
+                            <Label Content="{Binding Comment}" Grid.Row="2" Grid.Column="1" />
+                            <Label Content="Synopsis" Grid.Row="3" Grid.Column="0" />
+                            <Label Content="{Binding Synopsis}" Grid.Row="3" Grid.Column="1" />
+                            <Label Content="VO" Grid.Row="4" Grid.Column="0" />
+                            <Label Content="{Binding LanguageVO}" Grid.Row="4" Grid.Column="1" />
+                            <Label Content="Langage" Grid.Row="5" Grid.Column="0" />
+                            <Label Content="{Binding LanguageMedia}" Grid.Row="5" Grid.Column="1" />
+                            <Label Content="Sous-titres" Grid.Row="6" Grid.Column="0" />
+                            <Label Content="{Binding LanguageSubtitles}" Grid.Row="6" Grid.Column="1" />
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

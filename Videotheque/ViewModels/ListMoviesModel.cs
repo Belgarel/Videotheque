@@ -20,6 +20,7 @@ namespace Videotheque.ViewModels
             //For testing purposes
             List < Media > liste = new List<Media>();
             Media matrix = new Media();
+            matrix.MediaId = 1;
             matrix.Type = TypeMedia.Movie;
             matrix.Seen = true;
             matrix.Title = "Matrix";
@@ -30,6 +31,7 @@ namespace Videotheque.ViewModels
             matrix.LanguageMedia = Language.English;
             matrix.PhysicalSupport = true;
             Media fightClub = new Media();
+            fightClub.MediaId = 2;
             fightClub.Type = TypeMedia.Movie;
             fightClub.Seen = false;
             fightClub.Rated = 2;
@@ -41,8 +43,45 @@ namespace Videotheque.ViewModels
             fightClub.LanguageMedia = Language.Japanese;
             fightClub.PhysicalSupport = false;
             fightClub.NumericalSupport = true;
+
+            Genre robots = new Genre();
+            robots.GenreId = 1;
+            robots.Libelle = "Robots";
+            GenreMedia fcr = new GenreMedia();
+            fcr.MediaId = 2;
+            fcr.GenreId = 1;
+            fcr.Genre = robots;
+            Genre aliens = new Genre();
+            aliens.GenreId = 2;
+            aliens.Libelle = "Aliens";
+            GenreMedia fca = new GenreMedia();
+            fca.MediaId = 2;
+            fca.GenreId = 2;
+            fca.Genre = aliens;
+            Genre cartoon = new Genre();
+            cartoon.GenreId = 3;
+            cartoon.Libelle = "Cartoon";
+            GenreMedia fcc = new GenreMedia();
+            fcc.MediaId = 2;
+            fcc.GenreId = 3;
+            fcc.Genre = cartoon;
+            List<GenreMedia> gmList = new List<GenreMedia>();
+            gmList.Add(fcr);
+            gmList.Add(fca);
+            gmList.Add(fcc);
+            fightClub.GenreMedias = gmList;
             liste.Add(matrix);
             liste.Add(fightClub);
+
+            foreach (Media m in liste)
+            {
+                Console.WriteLine(m.Title);
+                if (m.GenreMedias != null)
+                    foreach(GenreMedia gm in gmList)
+                    {
+                        Console.WriteLine(gm.Genre.Libelle);
+                    }
+            }
 
             this.ListMovies = liste;
         }
