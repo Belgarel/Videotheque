@@ -4,16 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Videotheque.Views" 
+      xmlns:vm="clr-namespace:Videotheque.ViewModels" 
+      xmlns:custom="clr-namespace:Videotheque.Controls" 
       xmlns:model="clr-namespace:Videotheque.Model"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListMoviesPage">
-
-    <Page.Resources>
-        <ObjectDataProvider ObjectType="{x:Type model:Media}"
-                            MethodName="GetGenres" x:Key="getGenres">
-        </ObjectDataProvider>
-    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -43,9 +39,6 @@
 
                             <Label Content="{Binding Title}" Grid.Row="0" Style="{StaticResource sElementTitle}" />
                             <Label Content="Genre" Grid.Row="1" Grid.Column="0" />
- <!--                           <Label Grid.Row="1" Grid.Column="1">
-                                <Binding Source="{StaticResource getGenres}"/>
-                            </Label> -->
                             <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -58,7 +51,7 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ListBox>
-                            <Label Content="{Binding Rated}" Grid.Row="2" Grid.Column="0" />
+                            <custom:RatingBar Grid.Row="2" Grid.Column="0"/>
                             <Label Content="{Binding Comment}" Grid.Row="2" Grid.Column="1" />
                             <Label Content="Synopsis" Grid.Row="3" Grid.Column="0" />
                             <Label Content="{Binding Synopsis}" Grid.Row="3" Grid.Column="1" />
