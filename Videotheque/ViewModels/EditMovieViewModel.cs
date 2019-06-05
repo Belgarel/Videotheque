@@ -11,12 +11,11 @@ namespace Videotheque.ViewModels
 {
     class EditMovieViewModel : BaseNotifyPropertyChanged
     {
-        public ICommand Save
+        public BaseCommand Save
         {
             get
             {
-                return new SwitchPage();
-//                return new GenericCommand(param => this.SaveObject(), param => this.CanSave());
+                return new BaseCommand(this.SaveObject, this.CanSave);
             }
         }
 
@@ -121,7 +120,29 @@ namespace Videotheque.ViewModels
         }
         private void SaveObject()
         {
-            ;
+            this.Media.Title = this.Title;
+            this.Media.Synopsis = this.Synopsis;
+            this.Media.Seen = this.Seen;
+            this.Media.Comment = this.Comment;
+            this.Media.Rated = this.Rated ?? 0;
+            this.Media.MinAge = this.MinAge;
+            //this.Media.DateRelease = this.DateRelease;
+            this.Media.Duration = this.Duration;
+            //this.Media.ImagePath = this.ImagePath;
+            this.Media.NumericalSupport = this.NumericalSupport;
+            this.Media.PhysicalSupport = this.PhysicalSupport;
+
+            Language Parsed;
+            Language.TryParse(this.LanguageMedia, out Parsed);
+            this.Media.LanguageMedia = Parsed;
+            Language.TryParse(this.LanguageSubtitles, out Parsed);
+            this.Media.LanguageSubtitles = Parsed;
+            Language.TryParse(this.LanguageVO, out Parsed);
+            this.Media.LanguageVO = Parsed;
+
+            //TODO: genres
+
+            //TODO: actual saving. Not just mocking all of that mess.
         }
 
         public EditMovieViewModel(Media media)

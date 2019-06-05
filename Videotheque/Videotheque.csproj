@@ -240,6 +240,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\EditMedia.cs" />
     <Compile Include="Controls\RatingBar.xaml.cs">
       <DependentUpon>RatingBar.xaml</DependentUpon>

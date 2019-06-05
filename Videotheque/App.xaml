@@ -32,7 +32,25 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="3,5,3,5"/>
         </Style>
-        <CollectionViewSource x:Key="dataLanguages">
+        <CollectionViewSource x:Key="dataLanguagesVO">
+            <CollectionViewSource.Source>
+                <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="model:Language" />
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </CollectionViewSource.Source>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="dataLanguagesMedia">
+            <CollectionViewSource.Source>
+                <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="model:Language" />
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </CollectionViewSource.Source>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="dataLanguagesSubs">
             <CollectionViewSource.Source>
                 <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}">
                     <ObjectDataProvider.MethodParameters>

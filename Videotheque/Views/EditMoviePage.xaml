@@ -91,15 +91,15 @@
 
         <Label Content="VO" Grid.Row="9" Grid.Column="0" />
         <ComboBox Grid.Row="9" Grid.Column="1"
-            ItemsSource="{Binding Source={StaticResource dataLanguages}}" SelectedItem="{Binding LanguageVO}" />
+            ItemsSource="{Binding Source={StaticResource dataLanguagesVO}}" SelectedItem="{Binding LanguageVO}" />
 
         <Label Content="Langage" Grid.Row="10" Grid.Column="0" />
         <ComboBox Grid.Row="10" Grid.Column="1"
-            ItemsSource="{Binding Source={StaticResource dataLanguages}}" SelectedItem="{Binding LanguageMedia}" />
+            ItemsSource="{Binding Source={StaticResource dataLanguagesMedia}}" SelectedItem="{Binding LanguageMedia}" />
 
         <Label Content="Sous-titres" Grid.Row="11" Grid.Column="0" />
         <ComboBox Grid.Row="11" Grid.Column="1"
-            ItemsSource="{Binding Source={StaticResource dataLanguages}}" SelectedItem="{Binding LanguageSubtitles}" />
+            ItemsSource="{Binding Source={StaticResource dataLanguagesSubs}}" SelectedItem="{Binding LanguageSubtitles}" />
 
         <Label Content="Physique" Grid.Row="12" Grid.Column="0" />
         <CheckBox IsThreeState="True" IsChecked="{Binding PhysicalSupport}" Grid.Row="12" Grid.Column="1" />
