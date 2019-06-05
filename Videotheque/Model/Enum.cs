@@ -11,25 +11,29 @@ namespace Videotheque.Model
         English,
         French,
         Japanese,
-        Korean
+        Korean,
+        Unknown
     }
     public enum TypeMedia
     {
         Movie,
-        Series
+        Series,
+        Unknown
     }
 
     public enum PersonTitle
     {
         Mme,
         Mlle,
-        Mr
+        Mr,
+        Unknown
     }
 
     public enum PersonMediaFunction
     {
         Actor,
         Director,
-        Productor
+        Productor,
+        Unknown
     }
 }

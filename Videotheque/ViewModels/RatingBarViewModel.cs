@@ -15,7 +15,7 @@ namespace Videotheque.ViewModels
         [Description("Grade"), Category("Value"), DefaultValue(0), Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         public int Grade
         {
-            get { return Grade; }
+            get { return (int) GetProperty(); }
             set
             {
                 int val = value;
@@ -23,7 +23,7 @@ namespace Videotheque.ViewModels
                     val = 0;
                 else if (5 <= val)
                     val = 5;
-                Grade = val;
+                SetProperty(val);
 
                 Rate[0] = Rate[1] = Rate[2] = Rate[3] = Rate[4] = "pack://application:,,,/" + assembly + ";component/Controls/star_ko.png";
                 for (int i = 0; i != val; i++)

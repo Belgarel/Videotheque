@@ -3,30 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Videotheque.Commands;
 using Videotheque.Model;
 
 namespace Videotheque.ViewModels
 {
     class ListMoviesModel : BaseNotifyPropertyChanged
     {
+        public MainWindowModel MainWindow { get; set; }
         public List<Media> ListMovies
         {
             get { return (List<Media>)GetProperty(); }
             set { SetProperty(value); }
         }
 
-        public ListMoviesModel()
+        public EditMedia EditMedia { get; }
+        public ListMoviesModel(MainWindowModel MainWindow)
         {
+            this.MainWindow = MainWindow;
+            this.EditMedia = new EditMedia(MainWindow);
+
             //For testing purposes
             List < Media > liste = new List<Media>();
             Media matrix = new Media();
             matrix.MediaId = 1;
             matrix.Type = TypeMedia.Movie;
-            matrix.Seen = true;
+            matrix.Rated = 4;
             matrix.Title = "Matrix";
             matrix.Comment = "Genius.";
             matrix.Duration = 130;
-            matrix.MinAge = 15;
             matrix.LanguageVO = Language.English;
             matrix.LanguageMedia = Language.English;
             matrix.PhysicalSupport = true;
@@ -72,16 +77,6 @@ namespace Videotheque.ViewModels
             fightClub.GenreMedias = gmList;
             liste.Add(matrix);
             liste.Add(fightClub);
-
-            foreach (Media m in liste)
-            {
-                Console.WriteLine(m.Title);
-                if (m.GenreMedias != null)
-                    foreach(GenreMedia gm in gmList)
-                    {
-                        Console.WriteLine(gm.Genre.Libelle);
-                    }
-            }
 
             this.ListMovies = liste;
         }

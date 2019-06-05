@@ -7,7 +7,9 @@
         xmlns:viewmodels="clr-namespace:Videotheque.ViewModels"
         mc:Ignorable="d"
         Title="ShowMedia" Height="500" Width="800">
-    
+
+    <!-- Install mscorlib package! -->
+
     <Window.DataContext>
         <viewmodels:MainWindowModel/>
     </Window.DataContext>
