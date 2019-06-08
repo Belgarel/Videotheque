@@ -28,11 +28,11 @@
         <!-- Page content -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>    
                 <!-- Labels -->
+                <ColumnDefinition Width="Auto"/>    
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
                 <!-- Button -->
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <!-- 1.Title -->
@@ -67,9 +67,11 @@
 
             <Label Content="Nom" Grid.Row="1" Grid.Column="0" />
             <TextBox Text="{Binding Title}" Grid.Row="1" Grid.Column="1" />
-        
+
             <Label Content="Genre(s)" Grid.Row="2" Grid.Column="0" />
-            <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Media.GenreMedias}" >
+            <TextBox Text="{Binding Genres}" Grid.Row="2" Grid.Column="1" />
+
+        <!--            <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Media.GenreMedias}" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -80,7 +82,7 @@
                         <Label Content="{Binding Genre.Libelle}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ListBox>
+            </ListBox> -->
 
             <Label Content="Vu" Grid.Row="3" Grid.Column="0" />
             <CheckBox IsThreeState="True" IsChecked="{Binding Seen}" Grid.Row="3" Grid.Column="1" />

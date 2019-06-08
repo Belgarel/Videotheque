@@ -32,6 +32,11 @@ namespace Videotheque.ViewModels
             get { return (string)GetProperty(); }
             set { SetProperty(value); }
         }
+        public string Genres
+        {
+            get { return (string)GetProperty(); }
+            set { SetProperty(value); }
+        }
         public string Comment
         {
             get { return (string)GetProperty(); }
@@ -114,6 +119,14 @@ namespace Videotheque.ViewModels
             this.Synopsis = this.Media.Synopsis;
             this.Title = this.Media.Title;
 
+            this.Genres = "";
+            if (this.Media.GenreMedias != null)
+            {
+                foreach (GenreMedia gm in this.Media.GenreMedias)
+                    this.Genres += gm.Genre.Libelle + ", ";
+                if (this.Genres.Length >= 2)
+                    this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
+            }
         }
         private bool CanSave()
         {
@@ -141,7 +154,16 @@ namespace Videotheque.ViewModels
             Language.TryParse(this.LanguageVO, out Parsed);
             this.Media.LanguageVO = Parsed;
 
-            //TODO: genres
+            // genres
+            string[] genres = this.Genres.Split(',');
+            foreach (string genre in genres)
+            {
+                string libelle = genre;
+                if (libelle.EndsWith(" "))
+                    libelle = genre.Substring(0, this.Genres.Length - 1);
+                // TODO : if genre found, add. Else create
+                Console.WriteLine("// TODO : manage genres saving");
+            }
 
             //TODO: actual saving. Not just mocking all of that mess.
             Console.WriteLine("// TODO : save media");
