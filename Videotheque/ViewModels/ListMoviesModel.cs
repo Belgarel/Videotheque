@@ -19,6 +19,8 @@ namespace Videotheque.ViewModels
         }
 
         public EditMedia EditMedia { get; }
+        public Media NewMedia { get; set; } // NewMedia is an empty media that will be taken to the EditMedia page if button "Créer" is used
+
         public BaseCommand DeleteMedia
         {
             get
@@ -26,12 +28,11 @@ namespace Videotheque.ViewModels
                 return new BaseCommand(this.Delete);
             }
         }
-        public Media NewMedia { get; set; } // NewMedia is an empty media that will be taken to the EditMedia page if button "Créer" is used
-
         public void Delete()
         {
             Console.WriteLine("TODO: delete media " + this.NewMedia);
         }
+
         public void Refresh()
         {
             //For testing purposes
