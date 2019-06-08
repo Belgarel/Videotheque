@@ -11,14 +11,6 @@ namespace Videotheque.ViewModels
 {
     class EditMovieViewModel : BaseNotifyPropertyChanged
     {
-        public BaseCommand Save
-        {
-            get
-            {
-                return new BaseCommand(this.SaveObject, this.CanSave);
-            }
-        }
-
         public Media Media
         {
             get { return (Media)GetProperty(); }
@@ -96,6 +88,15 @@ namespace Videotheque.ViewModels
             set { SetProperty(value); }
         }
 
+        public SwitchPageParameter GoToNextPage { get; set; }
+        public BaseCommand Save
+        {
+            get
+            {
+                return new BaseCommand(this.SaveObject, this.CanSave);
+            }
+        }
+
         private void InitValues()
         {
             this.Comment = this.Media.Comment;
@@ -143,12 +144,17 @@ namespace Videotheque.ViewModels
             //TODO: genres
 
             //TODO: actual saving. Not just mocking all of that mess.
+            Console.WriteLine("// TODO : save media");
+
+            ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
+            new SwitchPage().Execute(this.GoToNextPage);
         }
 
-        public EditMovieViewModel(Media media)
+        public EditMovieViewModel(Media media, SwitchPageParameter goToNextPage)
         {
             this.Media = media;
             this.InitValues();
+            this.GoToNextPage = goToNextPage;
         }
     }
 }

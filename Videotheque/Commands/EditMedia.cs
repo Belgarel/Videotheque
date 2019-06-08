@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Videotheque.Model;
 using Videotheque.ViewModels;
@@ -13,6 +14,7 @@ namespace Videotheque.Commands
     class EditMedia : ICommand
     {
         public MainWindowModel MainWindow { get; set; }
+        public SwitchPageParameter GoToNextPage { get;set;}
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -25,11 +27,12 @@ namespace Videotheque.Commands
             if (parameter.GetType() != typeof(Media))
                 return;
             this.MainWindow.CurrentPage = new EditMoviePage();
-            this.MainWindow.CurrentPage.DataContext = new EditMovieViewModel((Media) parameter);
+            this.MainWindow.CurrentPage.DataContext = new EditMovieViewModel((Media) parameter, this.GoToNextPage);
         }
-        public EditMedia(MainWindowModel MainWindowModel)
+        public EditMedia(MainWindowModel mainWindowModel, Page destinationPage, BaseNotifyPropertyChanged destinationModel)
         {
-            this.MainWindow = MainWindowModel;
+            this.MainWindow = mainWindowModel;
+            this.GoToNextPage = new SwitchPageParameter(mainWindowModel, destinationPage, destinationModel);
         }
     }
 }

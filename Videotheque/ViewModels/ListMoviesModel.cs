@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Videotheque.Commands;
 using Videotheque.Model;
+using Videotheque.Views;
 
 namespace Videotheque.ViewModels
 {
@@ -25,21 +26,16 @@ namespace Videotheque.ViewModels
                 return new BaseCommand(this.Delete);
             }
         }
-public Media NewMedia { get; set; } // NewMedia is an empty media that will be taken to the EditMedia page if button "Créer" is used
+        public Media NewMedia { get; set; } // NewMedia is an empty media that will be taken to the EditMedia page if button "Créer" is used
 
         public void Delete()
         {
             Console.WriteLine("TODO: delete media " + this.NewMedia);
         }
-
-        public ListMoviesModel(MainWindowModel MainWindow)
+        public void Refresh()
         {
-            this.MainWindow = MainWindow;
-            this.EditMedia = new EditMedia(MainWindow);
-            this.NewMedia = new Media();
-
             //For testing purposes
-            List < Media > liste = new List<Media>();
+            List<Media> liste = new List<Media>();
             Media matrix = new Media();
             matrix.MediaId = 1;
             matrix.Type = TypeMedia.Movie;
@@ -63,6 +59,19 @@ public Media NewMedia { get; set; } // NewMedia is an empty media that will be t
             fightClub.LanguageMedia = Language.Japanese;
             fightClub.PhysicalSupport = false;
             fightClub.NumericalSupport = true;
+            Media nouveau = new Media();
+            nouveau.MediaId = 3;
+            nouveau.Type = TypeMedia.Movie;
+            nouveau.Seen = false;
+            nouveau.Rated = 4;
+            nouveau.Title = "Nouveau";
+            nouveau.Comment = "Nouveau media";
+            nouveau.Duration = 150;
+            nouveau.MinAge = 0;
+            nouveau.LanguageVO = Language.English;
+            nouveau.LanguageMedia = Language.Japanese;
+            nouveau.PhysicalSupport = false;
+            nouveau.NumericalSupport = true;
 
             Genre robots = new Genre();
             robots.GenreId = 1;
@@ -92,8 +101,17 @@ public Media NewMedia { get; set; } // NewMedia is an empty media that will be t
             fightClub.GenreMedias = gmList;
             liste.Add(matrix);
             liste.Add(fightClub);
+            liste.Add(nouveau);
 
             this.ListMovies = liste;
+        }
+
+        public ListMoviesModel(MainWindowModel MainWindow)
+        {
+            this.MainWindow = MainWindow;
+            this.EditMedia = new EditMedia(MainWindow, new ListMoviesPage(), this);
+            this.NewMedia = new Media();
+            this.Refresh(); // populate the list of medias by reading from the database
         }
     }
 }
