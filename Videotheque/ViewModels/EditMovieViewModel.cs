@@ -135,6 +135,7 @@ namespace Videotheque.ViewModels
         private void SaveObject()
         {
             this.Media.Title = this.Title;
+            this.Media.Type = TypeMedia.Movie;
             this.Media.Synopsis = this.Synopsis;
             this.Media.Seen = this.Seen;
             this.Media.Comment = this.Comment;

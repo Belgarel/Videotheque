@@ -12,13 +12,13 @@ namespace Videotheque.ViewModels
     class ListMoviesModel : BaseNotifyPropertyChanged
     {
         public MainWindowModel MainWindow { get; set; }
-        public List<Media> ListMovies
+        public List<Media> ListMedias
         {
             get { return (List<Media>)GetProperty(); }
             set { SetProperty(value); }
         }
 
-        public EditMedia EditMedia { get; }
+        public EditMedia EditMedia { get; set; }
         public Media NewMedia { get; set; } // NewMedia is an empty media that will be taken to the EditMedia page if button "Créer" is used
 
         public BaseCommand DeleteMedia
@@ -33,8 +33,11 @@ namespace Videotheque.ViewModels
             Console.WriteLine("TODO: delete media " + this.NewMedia);
         }
 
-        public void Refresh()
+        public virtual void Refresh()
         {
+            this.NewMedia = new Media();
+            this.NewMedia.Type = TypeMedia.Movie;
+
             //For testing purposes
             List<Media> liste = new List<Media>();
             Media matrix = new Media();
@@ -104,14 +107,13 @@ namespace Videotheque.ViewModels
             liste.Add(fightClub);
             liste.Add(nouveau);
 
-            this.ListMovies = liste;
+            this.ListMedias = liste;
         }
 
         public ListMoviesModel(MainWindowModel MainWindow)
         {
             this.MainWindow = MainWindow;
             this.EditMedia = new EditMedia(MainWindow, new ListMoviesPage(), this);
-            this.NewMedia = new Media();
             this.Refresh(); // populate the list of medias by reading from the database
         }
     }

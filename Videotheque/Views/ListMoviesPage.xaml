@@ -27,7 +27,7 @@
             <Button Grid.Column="2" Content="Créer" Command="{Binding EditMedia}"
                                             CommandParameter="{Binding NewMedia}" />
         </Grid>
-        <ListBox Grid.Row="2" ItemsSource="{Binding ListMovies}">
+        <ListBox Grid.Row="2" ItemsSource="{Binding ListMedias}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Expander Header="{Binding Title}" Style="{StaticResource sHeaderTitle}">

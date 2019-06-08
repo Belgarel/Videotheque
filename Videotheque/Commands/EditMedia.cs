@@ -26,8 +26,20 @@ namespace Videotheque.Commands
         {
             if (parameter.GetType() != typeof(Media))
                 return;
-            this.MainWindow.CurrentPage = new EditMoviePage();
-            this.MainWindow.CurrentPage.DataContext = new EditMovieViewModel((Media) parameter, this.GoToNextPage);
+            Media media = (Media) parameter;
+
+            if (media.Type == TypeMedia.Movie)
+            {
+                Console.WriteLine("TypeLine Movie");
+                this.MainWindow.CurrentPage = new EditMoviePage();
+                this.MainWindow.CurrentPage.DataContext = new EditMovieViewModel(media, this.GoToNextPage);
+            }
+            else if (media.Type == TypeMedia.Series)
+            {
+                Console.WriteLine("TypeLine Série");
+                this.MainWindow.CurrentPage = new EditSeriesPage();
+                this.MainWindow.CurrentPage.DataContext = new EditSeriesViewModel(media, this.GoToNextPage);
+            }
         }
         public EditMedia(MainWindowModel mainWindowModel, Page destinationPage, BaseNotifyPropertyChanged destinationModel)
         {

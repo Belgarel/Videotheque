@@ -250,9 +250,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditSeriesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\EditMoviePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListSeriesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ListMoviesPage.xaml">
       <SubType>Designer</SubType>
@@ -274,7 +282,9 @@
     </Compile>
     <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\EditSeriesViewModel.cs" />
     <Compile Include="ViewModels\EditMovieViewModel.cs" />
+    <Compile Include="ViewModels\ListSeriesModel.cs" />
     <Compile Include="ViewModels\ListMoviesModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\DetailMediaModel.cs" />
@@ -282,8 +292,14 @@
     <Compile Include="Views\DetailMediaPage.xaml.cs">
       <DependentUpon>DetailMediaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditSeriesPage.xaml.cs">
+      <DependentUpon>EditSeriesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditMoviePage.xaml.cs">
       <DependentUpon>EditMoviePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListSeriesPage.xaml.cs">
+      <DependentUpon>ListSeriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListMoviesPage.xaml.cs">
       <DependentUpon>ListMoviesPage.xaml</DependentUpon>
