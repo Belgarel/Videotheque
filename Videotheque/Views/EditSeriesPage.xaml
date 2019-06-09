@@ -61,6 +61,8 @@
                 <RowDefinition Height="Auto" />
                 <!-- 13 Numerical Support -->
                 <RowDefinition Height="Auto" />
+                <!-- 14 Episodes -->
+                <RowDefinition Height="Auto" />
                 <!-- 16.Button -->
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -70,19 +72,6 @@
 
             <Label Content="Genre(s)" Grid.Row="2" Grid.Column="0" />
             <TextBox Text="{Binding Genres}" Grid.Row="2" Grid.Column="1" />
-
-        <!--            <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Media.GenreMedias}" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Genre.Libelle}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListBox> -->
 
             <Label Content="Vu" Grid.Row="3" Grid.Column="0" />
             <CheckBox IsThreeState="True" IsChecked="{Binding Seen}" Grid.Row="3" Grid.Column="1" />
@@ -123,6 +112,36 @@
 
             <Label Content="Numérique" Grid.Row="13" Grid.Column="0" />
             <CheckBox IsThreeState="True" IsChecked="{Binding NumericalSupport}" Grid.Row="13" Grid.Column="1" />
+
+            <Label Content="Episodes" Grid.Row="14" Grid.Column="0" />
+            <ListBox Grid.Row="14" Grid.Column="1" ItemsSource="{Binding Episodes}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Content="Saison "/>
+                            <TextBox Text="{Binding NumSeason}" Grid.Column="1" />
+                            <Label Grid.Column="2" Content=" épisode "/>
+                            <TextBox Text="{Binding NumEpisode}" Grid.Column="3" />
+                            <Label Grid.Column="4" Content=" - "/>
+                            <TextBox Text="{Binding Title}" Grid.Column="5" />
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Content="Description"/>
+                            <TextBox Text="{Binding Description}" Grid.Row="1" Grid.Column="5" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox> 
 
             <Button Content="Sauvegarder" Command="{Binding Save}"
                                             Grid.Row="16" Grid.Column="2"/>

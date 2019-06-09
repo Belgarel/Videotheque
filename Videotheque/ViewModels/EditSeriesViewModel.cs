@@ -11,6 +11,11 @@ namespace Videotheque.ViewModels
 {
     class EditSeriesViewModel : EditMovieViewModel
     {
+        public List<Episode> Episodes
+        {
+            get { return (List<Episode>)GetProperty(); }
+            set { SetProperty(value); }
+        }
         private void InitValues()
         {
             this.Comment = this.Media.Comment;
@@ -36,6 +41,10 @@ namespace Videotheque.ViewModels
                 if (this.Genres.Length >= 2)
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }
+
+            this.Episodes = new List<Episode>();
+            foreach (Episode episode in this.Media.Episodes)
+                this.Episodes.Add(episode);
         }
         private void SaveObject()
         {
@@ -61,6 +70,7 @@ namespace Videotheque.ViewModels
             this.Media.LanguageVO = Parsed;
 
             // genres
+            Console.WriteLine("// TODO : manage genres saving");
             string[] genres = this.Genres.Split(',');
             foreach (string genre in genres)
             {
@@ -68,8 +78,10 @@ namespace Videotheque.ViewModels
                 if (libelle.EndsWith(" "))
                     libelle = genre.Substring(0, this.Genres.Length - 1);
                 // TODO : if genre found, add. Else create
-                Console.WriteLine("// TODO : manage genres saving");
             }
+
+            //episodes
+            Console.WriteLine("// TODO : manage episodes saving");
 
             //TODO: actual saving. Not just mocking all of that mess.
             Console.WriteLine("// TODO : save media");
