@@ -63,7 +63,7 @@ namespace Videotheque.ViewModels
             this.Episodes = episodes;
         }
 
-        private void SaveObject()
+        protected override void SaveObject()
         {
             this.Media.Title = this.Title;
             this.Media.Type = TypeMedia.Series;
@@ -97,7 +97,6 @@ namespace Videotheque.ViewModels
                 // TODO : if genre found, add. Else create
             }
 
-            //episodes
             Console.WriteLine("// TODO : manage episodes saving");
 
             MediaService.GetInstance().Save(this.Media);

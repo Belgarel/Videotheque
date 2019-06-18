@@ -15,7 +15,11 @@ namespace Videotheque.ViewModels
         public Media Media
         {
             get { return (Media)GetProperty(); }
-            set { SetProperty(value); }
+            set
+            {
+                SetProperty(value);
+                InitValues();
+            }
         }
         public Boolean? Seen
         {
@@ -133,7 +137,7 @@ namespace Videotheque.ViewModels
         {
             return (!"".Equals(this.Title));
         }
-        private void SaveObject()
+        protected virtual void SaveObject()
         {
             this.Media.Title = this.Title;
             this.Media.Type = TypeMedia.Movie;
@@ -176,7 +180,6 @@ namespace Videotheque.ViewModels
         public EditMovieViewModel(Media media, SwitchPageParameter goToNextPage)
         {
             this.Media = media;
-            this.InitValues();
             this.GoToNextPage = goToNextPage;
         }
     }
