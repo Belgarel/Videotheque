@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Videotheque.Commands;
 using Videotheque.Model;
+using Videotheque.Service;
 
 namespace Videotheque.ViewModels
 {
@@ -166,8 +167,7 @@ namespace Videotheque.ViewModels
                 Console.WriteLine("// TODO : manage genres saving");
             }
 
-            //TODO: actual saving. Not just mocking all of that mess.
-            Console.WriteLine("// TODO : save media");
+            MediaService.GetInstance().Save(this.Media);
 
             ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
             new SwitchPage().Execute(this.GoToNextPage);

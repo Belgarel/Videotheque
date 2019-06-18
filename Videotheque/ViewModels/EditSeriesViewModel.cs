@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Videotheque.Commands;
 using Videotheque.Model;
+using Videotheque.Service;
 
 namespace Videotheque.ViewModels
 {
@@ -56,8 +57,9 @@ namespace Videotheque.ViewModels
         private void RefreshEpisodes()
         {
             List<Episode> episodes = new List<Episode>();
-            foreach (Episode episode in this.Media.Episodes)
-                episodes.Add(episode);
+            if (this.Media.Episodes != null)
+                foreach (Episode episode in this.Media.Episodes)
+                    episodes.Add(episode);
             this.Episodes = episodes;
         }
 
@@ -98,8 +100,7 @@ namespace Videotheque.ViewModels
             //episodes
             Console.WriteLine("// TODO : manage episodes saving");
 
-            //TODO: actual saving. Not just mocking all of that mess.
-            Console.WriteLine("// TODO : save media");
+            MediaService.GetInstance().Save(this.Media);
 
             ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
             new SwitchPage().Execute(this.GoToNextPage);
@@ -111,10 +112,10 @@ namespace Videotheque.ViewModels
         }
         private void RemoveEpisodeExecute()
         {
-            Console.WriteLine("REMOVE ------------------- " + this.Episodes.Count);
+            if (this.Media.Episodes == null)
+                return;
             this.Media.Episodes.Remove(this.SelectedEpisode);
             this.RefreshEpisodes();
-            Console.WriteLine("removed " + this.Episodes.Count);
         }
         private bool CanAddEpisode()
         {
@@ -122,10 +123,10 @@ namespace Videotheque.ViewModels
         }
         private void AddEpisodeExecute()
         {
-            Console.WriteLine("ADD ------------------- " + this.Episodes.Count);
+            if (this.Media.Episodes == null)
+                this.Media.Episodes = new List<Episode>();
             this.Media.Episodes.Add(new Episode());
             this.RefreshEpisodes();
-            Console.WriteLine("added " + this.Episodes.Count);
         }
 
         public EditSeriesViewModel(Media media, SwitchPageParameter goToNextPage) :

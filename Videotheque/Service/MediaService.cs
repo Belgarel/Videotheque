@@ -32,14 +32,44 @@ namespace Videotheque.Service
         }
 
 
-        public IEnumerable<Media> GetMedias()
+        public List<Media> GetMedias()
         {
             return context.Medias.ToList();
         }
-
-        public IEnumerable<Media> GetMovies()
+        public Media findByMediaId(int mediaId)
         {
-            return context.Medias.Where((m) => m.Type.Equals(TypeMedia.Movie));
+            return context.Medias.Find(mediaId);
+        }
+
+        public List<Media> GetMovies()
+        {
+            return context.Medias
+                .Where(m => m.Type.Equals(TypeMedia.Movie))
+                .OrderBy(m => m.Title)
+                .ToList();
+        }
+        public List<Media> GetSeries()
+        {
+            return context.Medias
+                .Where((m) => m.Type.Equals(TypeMedia.Series))
+                .OrderBy(m => m.Title)
+                .ToList();
+        }
+        public void Save(Media m)
+        {
+            if (m.MediaId == 0)
+            {
+                if (this.findByMediaId(m.MediaId) != null)
+                    return;
+                context.Medias.Add(m);
+            }
+            else
+            {
+                if (this.findByMediaId(m.MediaId) == null)
+                    return;
+                context.Medias.Update(m);
+            }
+            context.SaveChanges();
         }
     }
 }

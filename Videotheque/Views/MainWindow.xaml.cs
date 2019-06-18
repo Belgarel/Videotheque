@@ -25,6 +25,7 @@ namespace Videotheque
         {
             InitializeComponent();
             Service.MediaService m = MediaService.GetInstance();
+//            (new InitData()).createData();
             Console.WriteLine(m.GetMovies());
         }
     }
