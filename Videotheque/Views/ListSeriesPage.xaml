@@ -11,97 +11,129 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListSeriesPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Style="{StaticResource sPageTitle}" Content="Liste des séries"></Label>
-            <Button Grid.Column="2" Content="Créer" Command="{Binding EditMedia}"
-                                            CommandParameter="{Binding NewMedia}" />
-        </Grid>
-        <ListBox Grid.Row="2" ItemsSource="{Binding ListMedias}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Expander Header="{Binding Title}" Style="{StaticResource sHeaderTitle}">
-                        <StackPanel Orientation="Vertical">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/> <!-- Labels -->
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/> <!-- Button -->
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" /> <!-- Genres -->
-                                    <RowDefinition Height="*" /> <!-- Rated / Comment -->
-                                    <RowDefinition Height="*" /> <!-- Synopsis -->
-                                    <RowDefinition Height="*" /> <!-- VO -->
-                                    <RowDefinition Height="*" /> <!-- Language -->
-                                    <RowDefinition Height="*" /> <!-- Subs -->
-                                    <RowDefinition Height="*" /> <!-- Nb Episodes -->
-                                    <RowDefinition Height="*" /> <!-- Button modify -->
-                                    <RowDefinition Height="*" /> <!-- Button delete -->
-                                </Grid.RowDefinitions>
-                            
-                                <Label Content="Genre(s)" Grid.Row="0" Grid.Column="0" />
-                                <ListBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding Genre.Libelle}" />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ListBox>
-                            
-    <!--                            <custom:RatingBar Grid.Row="2" Grid.Column="0"/> -->
-                                <Grid  Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource sPageTitle}" Content="Liste des séries"></Label>
+                    <Button Grid.Column="2" Content="Créer" Command="{Binding EditMedia}"
+                                                    CommandParameter="{Binding NewMedia}" />
+            </Grid>
+            <ListBox Grid.Row="2" ItemsSource="{Binding ListMedias}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Header="{Binding Title}" Style="{StaticResource sHeaderTitle}">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/> <!-- Labels -->
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/> <!-- Button -->
                                     </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding Rated}" Grid.Column="0"/>
-                                    <Label Content=" / 5" Grid.Column="1"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" /> <!-- Genres -->
+                                        <RowDefinition Height="*" /> <!-- Rated / Comment -->
+                                        <RowDefinition Height="*" /> <!-- Synopsis -->
+                                        <RowDefinition Height="*" /> <!-- VO -->
+                                        <RowDefinition Height="*" /> <!-- Language -->
+                                        <RowDefinition Height="*" /> <!-- Subs -->
+                                        <RowDefinition Height="*" /> <!-- Nb Episodes -->
+                                        <RowDefinition Height="*" /> <!-- Button modify -->
+                                        <RowDefinition Height="*" /> <!-- Button delete -->
+                                    </Grid.RowDefinitions>
+                            
+                                    <Label Content="Genre(s)" Grid.Row="0" Grid.Column="0" />
+                                    <ListBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Genre.Libelle}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ListBox>
+                            
+                                    <Grid  Grid.Row="1" Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding Rated}" Grid.Column="0"/>
+                                        <Label Content=" / 5" Grid.Column="1"/>
+                                    </Grid>
+                                    <Label Content="{Binding Comment}" Grid.Row="1" Grid.Column="1" />
+
+                                    <Label Content="Synopsis" Grid.Row="2" Grid.Column="0" />
+                                    <Label Content="{Binding Synopsis}" Grid.Row="2" Grid.Column="1" />
+
+                                    <Label Content="VO" Grid.Row="3" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageVO}" Grid.Row="3" Grid.Column="1" />
+
+                                    <Label Content="Langage" Grid.Row="4" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageMedia}" Grid.Row="4" Grid.Column="1" />
+
+                                    <Label Content="Sous-titres" Grid.Row="5" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageSubtitles}" Grid.Row="5" Grid.Column="1" />
+
+    <!--                                <Label Content="Nb. épisodes" Grid.Row="6" Grid.Column="0" />
+                                    <Label Content="{Binding Episodes.Count}" Grid.Row="6" Grid.Column="1" /> -->
+
+                                    <Label Content="Episodes" Grid.Row="6" Grid.Column="0" />
+                                    <ListBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Episodes}" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="60"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="60"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label Content="Saison " Grid.Column="0"/>
+                                                    <Label Content="{Binding NumSeason}" Grid.Column="1" />
+                                                    <Label Content=" épisode " Grid.Column="2" />
+                                                    <Label Content="{Binding NumEpisode}" Grid.Column="3" />
+                                                    <Label Content=" - " Grid.Column="4"/>
+                                                    <Label Content="{Binding Title}" Grid.Column="5" />
+
+                                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Content="Description"/>
+                                                    <Label Grid.Row="1" Grid.Column="5" Content="{Binding Description}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ListBox>
+
+
+                                    <Button Content="Modifier" Command="{Binding DataContext.EditMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Row="7" Grid.Column="2"/>
+
+                                    <Button Content="Supprimer" Command="{Binding DataContext.DeleteMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Row="8" Grid.Column="2"/>
                                 </Grid>
-                                <Label Content="{Binding Comment}" Grid.Row="1" Grid.Column="1" />
-
-                                <Label Content="Synopsis" Grid.Row="2" Grid.Column="0" />
-                                <Label Content="{Binding Synopsis}" Grid.Row="2" Grid.Column="1" />
-
-                                <Label Content="VO" Grid.Row="3" Grid.Column="0" />
-                                <Label Content="{Binding LanguageVO}" Grid.Row="3" Grid.Column="1" />
-
-                                <Label Content="Langage" Grid.Row="4" Grid.Column="0" />
-                                <Label Content="{Binding LanguageMedia}" Grid.Row="4" Grid.Column="1" />
-
-                                <Label Content="Sous-titres" Grid.Row="5" Grid.Column="0" />
-                                <Label Content="{Binding LanguageSubtitles}" Grid.Row="5" Grid.Column="1" />
-
-                                <Label Content="Nb. épisodes" Grid.Row="6" Grid.Column="0" />
-                                <Label Content="{Binding Episodes.Count}" Grid.Row="6" Grid.Column="1" />
-
-                                <Button Content="Modifier" Command="{Binding DataContext.EditMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                        CommandParameter="{Binding}"
-                                        Grid.Row="7" Grid.Column="2"/>
-
-                                <Button Content="Supprimer" Command="{Binding DataContext.DeleteMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                        CommandParameter="{Binding}"
-                                        Grid.Row="8" Grid.Column="2"/>
-                            </Grid>
-                        </StackPanel>
-                    </Expander>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ListBox>
-    </Grid>
+                            </StackPanel>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
 </Page>
