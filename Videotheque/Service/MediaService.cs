@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,9 +44,10 @@ namespace Videotheque.Service
 
         public List<Media> GetMovies()
         {
-            return context.Medias
+            return  context.Medias
                 .Where(m => m.Type.Equals(TypeMedia.Movie))
                 .OrderBy(m => m.Title)
+                .Include(m => m.GenreMedias)
                 .ToList();
         }
         public List<Media> GetSeries()
@@ -53,6 +55,8 @@ namespace Videotheque.Service
             return context.Medias
                 .Where((m) => m.Type.Equals(TypeMedia.Series))
                 .OrderBy(m => m.Title)
+                .Include(m => m.GenreMedias)
+                .Include(m => m.Episodes)
                 .ToList();
         }
         public void Save(Media m)
