@@ -11,7 +11,6 @@ namespace Videotheque.Model
     public class Media
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         public int MediaId { get; set; }
         public Boolean? Seen { get; set; }
         public int Rated { get; set; }

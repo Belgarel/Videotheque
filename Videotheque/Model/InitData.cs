@@ -7,9 +7,9 @@ using Videotheque.Model;
 
 namespace Videotheque
 {
-    class TestData
+    class InitData
     {
-        public TestData() { }
+        public InitData() { }
 
         public async void createData()
         {
@@ -18,9 +18,7 @@ namespace Videotheque
             await createGenre();
             await createMedia();
             await createPerson();
-            //await createGenreMedia();
-
-          
+            await createGenreMedia(); 
         }
 
         public async Task createGenre()
@@ -50,7 +48,6 @@ namespace Videotheque
             adventure.Libelle = "Adventure";
             context.Genres.Add(adventure);
 
-            // Save VideothequeDbContext
             context.SaveChanges();
 
         }
@@ -100,7 +97,6 @@ namespace Videotheque
             babylon5.NumericalSupport = true;
             context.Medias.Add(babylon5);
 
-            // Save VideothequeDbContext
             context.SaveChanges();
         }
 
@@ -115,6 +111,7 @@ namespace Videotheque
             lanaWachowski.Nationality = "Americaine";
             lanaWachowski.BirthDate = new DateTime(1965, 6, 21);
             context.Persons.Add(lanaWachowski);
+
             //Create a Person Matrix director
             Person lillyWachowski = new Person();
             lillyWachowski.LastName = "Wachowski";
@@ -122,6 +119,7 @@ namespace Videotheque
             lillyWachowski.Nationality = "Americaine";
             lillyWachowski.BirthDate = new DateTime(1967, 12, 29);
             context.Persons.Add(lanaWachowski);
+
             //Create a Person Neo
             Person keanuReeves = new Person();
             keanuReeves.LastName = "Reeves";
@@ -129,6 +127,7 @@ namespace Videotheque
             keanuReeves.Nationality = "Canadienne";
             keanuReeves.BirthDate = new DateTime(1964, 9, 2);
             context.Persons.Add(keanuReeves);
+
             //Create a Person Trinity
             Person carrieAnneMoss = new Person();
             carrieAnneMoss.LastName = "Moss";
@@ -136,6 +135,7 @@ namespace Videotheque
             carrieAnneMoss.Nationality = "Canadienne";
             carrieAnneMoss.BirthDate = new DateTime(1967, 8, 21);
             context.Persons.Add(carrieAnneMoss);
+
             //Create a Person Morpheus
             Person laurenceFishburne = new Person();
             laurenceFishburne.LastName = "Fishburne";
@@ -143,6 +143,7 @@ namespace Videotheque
             laurenceFishburne.Nationality = "Americaine";
             laurenceFishburne.BirthDate = new DateTime(1960, 7, 30);
             context.Persons.Add(laurenceFishburne);
+
             //Create a Person Agent Smith
             Person hugoWeaving = new Person();
             hugoWeaving.LastName = "Weaving";
@@ -158,6 +159,7 @@ namespace Videotheque
             davidFincher.Nationality = "Américaine";
             davidFincher.BirthDate = new DateTime(1962, 8, 28);
             context.Persons.Add(davidFincher);
+
             //Create a Person Main Character
             Person edwardNorton = new Person();
             edwardNorton.LastName = "Norton";
@@ -165,6 +167,7 @@ namespace Videotheque
             edwardNorton.Nationality = "Américaine";
             edwardNorton.BirthDate = new DateTime(1969, 8, 18);
             context.Persons.Add(edwardNorton);
+
             //Create a Person Tyler Durden
             Person bradPitt = new Person();
             bradPitt.LastName = "Pitt";
@@ -172,6 +175,7 @@ namespace Videotheque
             bradPitt.Nationality = "Américaine";
             bradPitt.BirthDate = new DateTime(1963, 12, 18);
             context.Persons.Add(bradPitt);
+
             //Create a Person Marla Singer
             Person helenaCarter = new Person();
             helenaCarter.LastName = "Carter";
@@ -179,6 +183,7 @@ namespace Videotheque
             helenaCarter.Nationality = "Britannique";
             helenaCarter.BirthDate = new DateTime(1966, 5, 26);
             context.Persons.Add(helenaCarter);
+
             //Create a Person Bob Paulson
             Person meatLoaf = new Person();
             meatLoaf.LastName = "Loaf";
@@ -215,6 +220,7 @@ namespace Videotheque
             miraFurlan.Nationality = "Croate";
             miraFurlan.BirthDate = new DateTime(1955, 9, 7);
             context.Persons.Add(miraFurlan);
+
             //Create a Person G'kar
             Person andreasKatsulas = new Person();
             andreasKatsulas.LastName = "Katsulas";
@@ -222,6 +228,7 @@ namespace Videotheque
             andreasKatsulas.Nationality = "Ameéicaine";
             andreasKatsulas.BirthDate = new DateTime(1946, 5, 18);
             context.Persons.Add(andreasKatsulas);
+
             //Create a Person Londo Mollari
             Person peterJurasik = new Person();
             peterJurasik.LastName = "Jurasik";
@@ -230,7 +237,6 @@ namespace Videotheque
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
             context.Persons.Add(peterJurasik);
 
-            // Save VideothequeDbContext
             context.SaveChanges();
         }
 
@@ -260,11 +266,10 @@ namespace Videotheque
             GenreMedia matrixSF = new GenreMedia();
             Media matrix = context.Medias.Where((m) => m.Title.Equals("Matrix")).FirstOrDefault();
             matrixSF.MediaId = matrix.MediaId;
-            fightClubAction.GenreId = sf.GenreId;
+            matrixSF.GenreId = sf.GenreId;
 
             context.GenreMedias.Add(matrixSF);
 
-            // Save dbContext
             context.SaveChanges();
 
         }
