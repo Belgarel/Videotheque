@@ -246,10 +246,6 @@
     <Compile Include="Controls\RatingBar.xaml.cs">
       <DependentUpon>RatingBar.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DetailMediaPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EditSeriesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -287,11 +283,7 @@
     <Compile Include="ViewModels\ListSeriesModel.cs" />
     <Compile Include="ViewModels\ListMoviesModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
-    <Compile Include="ViewModels\DetailMediaModel.cs" />
     <Compile Include="ViewModels\RatingBarViewModel.cs" />
-    <Compile Include="Views\DetailMediaPage.xaml.cs">
-      <DependentUpon>DetailMediaPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EditSeriesPage.xaml.cs">
       <DependentUpon>EditSeriesPage.xaml</DependentUpon>
     </Compile>
