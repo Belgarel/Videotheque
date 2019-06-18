@@ -16,6 +16,15 @@ namespace Videotheque.ViewModels
             get { return (List<Episode>)GetProperty(); }
             set { SetProperty(value); }
         }
+        public Episode SelectedEpisode
+        {
+            get { return (Episode)GetProperty(); }
+            set { if (SetProperty(value)) RemoveEpisode.OnCanExecuteChanged(); }
+        }
+        public BaseCommand RemoveEpisode { get; }
+        public BaseCommand AddEpisode { get; }
+
+
         private void InitValues()
         {
             this.Comment = this.Media.Comment;
@@ -42,10 +51,16 @@ namespace Videotheque.ViewModels
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }
 
-            this.Episodes = new List<Episode>();
-            foreach (Episode episode in this.Media.Episodes)
-                this.Episodes.Add(episode);
+            this.RefreshEpisodes();
         }
+        private void RefreshEpisodes()
+        {
+            List<Episode> episodes = new List<Episode>();
+            foreach (Episode episode in this.Media.Episodes)
+                episodes.Add(episode);
+            this.Episodes = episodes;
+        }
+
         private void SaveObject()
         {
             this.Media.Title = this.Title;
@@ -90,12 +105,37 @@ namespace Videotheque.ViewModels
             new SwitchPage().Execute(this.GoToNextPage);
         }
 
+        private bool CanRemoveEpisode()
+        {
+            return this.SelectedEpisode != null;
+        }
+        private void RemoveEpisodeExecute()
+        {
+            Console.WriteLine("REMOVE ------------------- " + this.Episodes.Count);
+            this.Media.Episodes.Remove(this.SelectedEpisode);
+            this.RefreshEpisodes();
+            Console.WriteLine("removed " + this.Episodes.Count);
+        }
+        private bool CanAddEpisode()
+        {
+            return true;
+        }
+        private void AddEpisodeExecute()
+        {
+            Console.WriteLine("ADD ------------------- " + this.Episodes.Count);
+            this.Media.Episodes.Add(new Episode());
+            this.RefreshEpisodes();
+            Console.WriteLine("added " + this.Episodes.Count);
+        }
+
         public EditSeriesViewModel(Media media, SwitchPageParameter goToNextPage) :
             base(media, goToNextPage)
         {
             this.Media = media;
             this.InitValues();
             this.GoToNextPage = goToNextPage;
+            this.RemoveEpisode = new BaseCommand(this.RemoveEpisodeExecute, this.CanRemoveEpisode);
+            this.AddEpisode = new BaseCommand(this.AddEpisodeExecute, this.CanAddEpisode);
         }
     }
 }
