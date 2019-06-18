@@ -27,12 +27,6 @@ namespace Videotheque.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GenreMedia>().HasKey(gm => new {gm.MediaId, gm.GenreId});
-
-            //modelBuilder.Entity<Media>().HasData(
-            //    new Media() { Comment = "" },
-            //    new Media() { });
-            //InitData newData = new InitData();
-            // envoyer modelbuilder a dans le create data
         }
 
 

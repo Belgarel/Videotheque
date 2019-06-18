@@ -14,49 +14,52 @@ namespace Videotheque
         public async void createData()
         {
             var context = await VideothequeDbContext.getInstance();
-
-            await createGenre();
-            await createMedia();
             await createPerson();
-            await createGenreMedia(); 
         }
-
-        public async Task createGenre()
+        public static Genre GenreAction()
         {
-            var context = await VideothequeDbContext.getInstance();
-
-            //Creating genres
             Genre action = new Genre();
             action.Libelle = "Action";
-            context.Genres.Add(action);
+            return action;
+        }
+        public static Genre GenreSf()
+        {
             Genre sf = new Genre();
             sf.Libelle = "Sf";
-            context.Genres.Add(sf);
+            return sf;
+        }
+        public static Genre GenreSpaceOpera()
+        {
             Genre spaceOpera = new Genre();
             spaceOpera.Libelle = "Space opera";
-            context.Genres.Add(spaceOpera);
+            return spaceOpera;
+        }
+        public static Genre GenreRobots()
+        {
             Genre robots = new Genre();
             robots.Libelle = "Robots";
-            context.Genres.Add(robots);
+            return robots;
+        }
+        public static Genre GenreAliens()
+        {
             Genre aliens = new Genre();
             aliens.Libelle = "Aliens";
-            context.Genres.Add(aliens);
+            return aliens;
+        }
+        public static Genre GenreCartoon()
+        {
             Genre cartoon = new Genre();
             cartoon.Libelle = "Cartoon";
-            context.Genres.Add(cartoon);
+            return cartoon;
+        }
+        public static Genre GenreAdventure()
+        {
             Genre adventure = new Genre();
             adventure.Libelle = "Adventure";
-            context.Genres.Add(adventure);
-
-            context.SaveChanges();
-
+            return adventure;
         }
-
-        public async Task createMedia()
+        public static Media MovieMatrix(List<Genre> genres)
         {
-            var context = await VideothequeDbContext.getInstance();
-
-            //Creating a movie
             Media matrix = new Media();
             matrix.Type = TypeMedia.Movie;
             matrix.Seen = true;
@@ -67,9 +70,19 @@ namespace Videotheque
             matrix.LanguageVO = Language.English;
             matrix.LanguageMedia = Language.English;
             matrix.PhysicalSupport = true;
-            context.Medias.Add(matrix);
+            matrix.GenreMedias = new List<GenreMedia>();
+            foreach (Genre genre in genres)
+            {
+                GenreMedia gm = new GenreMedia();
+                gm.Media = matrix;
+                gm.Genre = genre;
+                matrix.GenreMedias.Add(gm);
+            }
+            return matrix;
+        }
 
-            //Creating another movie
+        public static Media MovieFightClub(List<Genre> genres)
+        {
             Media fightClub = new Media();
             fightClub.Type = TypeMedia.Movie;
             fightClub.Seen = false;
@@ -82,9 +95,19 @@ namespace Videotheque
             fightClub.LanguageMedia = Language.Japanese;
             fightClub.PhysicalSupport = false;
             fightClub.NumericalSupport = true;
-            context.Medias.Add(fightClub);
-
-            //Creating a series
+            fightClub.GenreMedias = new List<GenreMedia>();
+            foreach (Genre genre in genres)
+            {
+                GenreMedia gm = new GenreMedia();
+                gm.Media = fightClub;
+                gm.Genre = genre;
+                fightClub.GenreMedias.Add(gm);
+            }
+            return fightClub;
+        }
+                
+        public static Media SeriesBabylon5(List<Genre> genres)
+        {
             Media babylon5 = new Media();
             babylon5.Type = TypeMedia.Series;
             babylon5.Title = "Babylon 5";
@@ -95,9 +118,37 @@ namespace Videotheque
             babylon5.LanguageMedia = Language.English;
             babylon5.LanguageSubtitles = Language.French;
             babylon5.NumericalSupport = true;
-            context.Medias.Add(babylon5);
-
-            context.SaveChanges();
+            babylon5.GenreMedias = new List<GenreMedia>();
+            foreach (Genre genre in genres)
+            {
+                GenreMedia gm = new GenreMedia();
+                gm.Media = babylon5;
+                gm.Genre = genre;
+                babylon5.GenreMedias.Add(gm);
+            }
+            babylon5.Episodes = new List<Episode>();
+            babylon5.Episodes.Add(new Episode()
+            {
+                NumSeason = 1,
+                NumEpisode = 1,
+                Title = "Londo il est content",
+                Description = "Encore bourré au casino :'-)"
+            });
+            babylon5.Episodes.Add(new Episode()
+            {
+                NumSeason = 1,
+                NumEpisode = 2,
+                Title = "Londo il est triste",
+                Description = "Adira elle est mourrue :("
+            });
+            babylon5.Episodes.Add(new Episode()
+            {
+                NumSeason = 1,
+                NumEpisode = 3,
+                Title = "Londo il est en colère",
+                Description = "Plein de Narns ils sont mourrus D:"
+            });
+            return babylon5;
         }
 
         public async Task createPerson()
@@ -238,40 +289,6 @@ namespace Videotheque
             context.Persons.Add(peterJurasik);
 
             context.SaveChanges();
-        }
-
-        public async Task createGenreMedia()
-        {
-           var context = await VideothequeDbContext.getInstance();
-
-            // Genre for serie Babylon5
-            GenreMedia babylon5SF = new GenreMedia();
-            Media b5 = context.Medias.Where((m) => m.Title.Equals("Babylon 5")).FirstOrDefault();
-            babylon5SF.MediaId = b5.MediaId;
-            Genre sf = context.Genres.Where((g) => g.Libelle.Equals("SF")).FirstOrDefault();
-            babylon5SF.GenreId = sf.GenreId;
-
-            context.GenreMedias.Add(babylon5SF);
-
-            // Genre for serie FightClub
-            GenreMedia fightClubAction  = new GenreMedia();
-            Media fightClub = context.Medias.Where((m) => m.Title.Equals("Fight Club")).FirstOrDefault();
-            fightClubAction.MediaId = fightClub.MediaId;
-            Genre action = context.Genres.Where((g) => g.Libelle.Equals("Action")).FirstOrDefault();
-            fightClubAction.GenreId = action.GenreId;
-
-            context.GenreMedias.Add(fightClubAction);
-
-            // Genre for serie Matrix
-            GenreMedia matrixSF = new GenreMedia();
-            Media matrix = context.Medias.Where((m) => m.Title.Equals("Matrix")).FirstOrDefault();
-            matrixSF.MediaId = matrix.MediaId;
-            matrixSF.GenreId = sf.GenreId;
-
-            context.GenreMedias.Add(matrixSF);
-
-            context.SaveChanges();
-
         }
     }
 }
