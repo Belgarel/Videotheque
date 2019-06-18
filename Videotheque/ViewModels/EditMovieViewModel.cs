@@ -107,7 +107,7 @@ namespace Videotheque.ViewModels
             }
         }
 
-        private void InitValues()
+        protected virtual void InitValues()
         {
             this.Comment = this.Media.Comment;
             //            this.DateRelease = this.Media.DateRelease;
@@ -128,7 +128,8 @@ namespace Videotheque.ViewModels
             if (this.Media.GenreMedias != null)
             {
                 foreach (GenreMedia gm in this.Media.GenreMedias)
-                    this.Genres += gm.Genre.Libelle + ", ";
+                    if (gm.Genre != null)
+                        this.Genres += gm.Genre.Libelle + ", ";
                 if (this.Genres.Length >= 2)
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }

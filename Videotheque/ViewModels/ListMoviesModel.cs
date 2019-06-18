@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Videotheque.ViewModels
     class ListMoviesModel : BaseNotifyPropertyChanged
     {
         public MainWindowModel MainWindow { get; set; }
-        public List<Media> ListMedias
+        public ObservableCollection<Media> ListMedias
         {
-            get { return (List<Media>)GetProperty(); }
+            get { return (ObservableCollection<Media>)GetProperty(); }
             set { SetProperty(value); }
         }
 
@@ -38,7 +39,7 @@ namespace Videotheque.ViewModels
         {
             this.NewMedia = new Media();
             this.NewMedia.Type = TypeMedia.Movie;
-            this.ListMedias = MediaService.GetInstance().GetMovies();
+            this.ListMedias = new ObservableCollection<Media>(MediaService.GetInstance().GetMovies());
         }
 
         public ListMoviesModel(MainWindowModel MainWindow)

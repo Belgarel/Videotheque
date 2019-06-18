@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace Videotheque.ViewModels
 {
     class EditSeriesViewModel : EditMovieViewModel
     {
-        public List<Episode> Episodes
+        public ObservableCollection<Episode> Episodes
         {
-            get { return (List<Episode>)GetProperty(); }
+            get { return (ObservableCollection<Episode>)GetProperty(); }
             set { SetProperty(value); }
         }
         public Episode SelectedEpisode
@@ -26,7 +27,7 @@ namespace Videotheque.ViewModels
         public BaseCommand AddEpisode { get; }
 
 
-        private void InitValues()
+        protected override void InitValues()
         {
             this.Comment = this.Media.Comment;
             //            this.DateRelease = this.Media.DateRelease;
@@ -47,7 +48,8 @@ namespace Videotheque.ViewModels
             if (this.Media.GenreMedias != null)
             {
                 foreach (GenreMedia gm in this.Media.GenreMedias)
-                    this.Genres += gm.Genre.Libelle + ", ";
+                    if (gm.Genre != null)
+                        this.Genres += gm.Genre.Libelle + ", ";
                 if (this.Genres.Length >= 2)
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }
@@ -56,7 +58,7 @@ namespace Videotheque.ViewModels
         }
         private void RefreshEpisodes()
         {
-            List<Episode> episodes = new List<Episode>();
+            ObservableCollection<Episode> episodes = new ObservableCollection<Episode>();
             if (this.Media.Episodes != null)
                 foreach (Episode episode in this.Media.Episodes)
                     episodes.Add(episode);
