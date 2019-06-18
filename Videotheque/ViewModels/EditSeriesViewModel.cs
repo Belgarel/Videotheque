@@ -30,6 +30,7 @@ namespace Videotheque.ViewModels
         protected override void InitValues()
         {
             this.Comment = this.Media.Comment;
+            this.TypeMedia = TypeMedia.Series;
             //            this.DateRelease = this.Media.DateRelease;
             this.Duration = this.Media.Duration ?? 0;
             //            this.ImagePath = this.Media.ImagePath;
@@ -63,41 +64,6 @@ namespace Videotheque.ViewModels
                 foreach (Episode episode in this.Media.Episodes)
                     episodes.Add(episode);
             this.Episodes = episodes;
-        }
-
-        protected override void SaveObject()
-        {
-            this.Media.Title = this.Title;
-            this.Media.Type = TypeMedia.Series;
-            this.Media.Synopsis = this.Synopsis;
-            this.Media.Seen = this.Seen;
-            this.Media.Comment = this.Comment;
-            this.Media.Rated = this.Rated ?? 0;
-            this.Media.MinAge = this.MinAge;
-            //this.Media.DateRelease = this.DateRelease;
-            this.Media.Duration = this.Duration;
-            //this.Media.ImagePath = this.ImagePath;
-            this.Media.NumericalSupport = this.NumericalSupport;
-            this.Media.PhysicalSupport = this.PhysicalSupport;
-
-            Language Parsed;
-            Language.TryParse(this.LanguageMedia, out Parsed);
-            this.Media.LanguageMedia = Parsed;
-            Language.TryParse(this.LanguageSubtitles, out Parsed);
-            this.Media.LanguageSubtitles = Parsed;
-            Language.TryParse(this.LanguageVO, out Parsed);
-            this.Media.LanguageVO = Parsed;
-
-            // If genres already exist, they are found; else, they are created.
-            // Same goes for GenreMedia.
-            //TODO: avoid code duplication
-            this.Media.GenreMedias = GenreMediaService.GetInstance()
-                .ToGenreMedias(this.Media, GenreService.GetInstance().ToGenres(this.Genres));
-
-            MediaService.GetInstance().Save(this.Media);
-
-            ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
-            new SwitchPage().Execute(this.GoToNextPage);
         }
 
         private bool CanRemoveEpisode()

@@ -12,6 +12,7 @@ namespace Videotheque.ViewModels
 {
     class EditMovieViewModel : BaseNotifyPropertyChanged
     {
+        public TypeMedia TypeMedia { get; set; }
         public Media Media
         {
             get { return (Media)GetProperty(); }
@@ -110,6 +111,7 @@ namespace Videotheque.ViewModels
         protected virtual void InitValues()
         {
             this.Comment = this.Media.Comment;
+            this.TypeMedia = TypeMedia.Movie;
             //            this.DateRelease = this.Media.DateRelease;
             this.Duration = this.Media.Duration ?? 0;
             //            this.ImagePath = this.Media.ImagePath;
@@ -141,7 +143,7 @@ namespace Videotheque.ViewModels
         protected virtual void SaveObject()
         {
             this.Media.Title = this.Title;
-            this.Media.Type = TypeMedia.Movie;
+            this.Media.Type = this.TypeMedia;
             this.Media.Synopsis = this.Synopsis;
             this.Media.Seen = this.Seen;
             this.Media.Comment = this.Comment;
@@ -163,6 +165,8 @@ namespace Videotheque.ViewModels
 
             // If genres already exist, they are found; else, they are created.
             // Same goes for GenreMedia.
+            //TODO: avoid code duplication (override)
+            //TODO: cleanup unused genres
             this.Media.GenreMedias = GenreMediaService.GetInstance()
                 .ToGenreMedias(this.Media, GenreService.GetInstance().ToGenres(this.Genres));
 
