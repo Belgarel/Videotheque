@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Videotheque.Service;
 
 namespace Videotheque
 {
@@ -23,8 +24,8 @@ namespace Videotheque
         public MainWindow()
         {
             InitializeComponent();
-            TestData td = new TestData();
-            td.createData();
+            Service.MediaService m = MediaService.GetInstance();
+            Console.WriteLine(m.GetMovies());
         }
     }
 }

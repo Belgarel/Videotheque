@@ -272,11 +272,12 @@
     </Compile>
     <Compile Include="Commands\SwitchPage.cs" />
     <Compile Include="Commands\SwitchPageParameter.cs" />
-    <Compile Include="Migrations\20190507095157_final.cs" />
-    <Compile Include="Migrations\20190507095157_final.designer.cs">
-      <DependentUpon>20190507095157_final.cs</DependentUpon>
+    <Compile Include="Migrations\20190618070054_final.cs" />
+    <Compile Include="Migrations\20190618070054_final.designer.cs">
+      <DependentUpon>20190618070054_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
+    <Compile Include="Service\MediaService.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\EditSeriesViewModel.cs" />
     <Compile Include="ViewModels\EditMovieViewModel.cs" />
@@ -315,7 +316,7 @@
     <Compile Include="Model\PersonMedia.cs" />
     <Compile Include="Model\VideothequeDbContext.cs" />
     <Compile Include="Model\VideothequeDbContextFactory.cs" />
-    <Compile Include="TestData.cs" />
+    <Compile Include="Model\InitData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -350,6 +351,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
