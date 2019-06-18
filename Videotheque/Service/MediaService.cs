@@ -46,17 +46,19 @@ namespace Videotheque.Service
         {
             return  context.Medias
                 .Where(m => m.Type.Equals(TypeMedia.Movie))
-                .OrderBy(m => m.Title)
                 .Include(m => m.GenreMedias)
+                    .ThenInclude(gm => gm.Genre)
+                .OrderBy(m => m.Title)
                 .ToList();
         }
         public List<Media> GetSeries()
         {
             return context.Medias
                 .Where((m) => m.Type.Equals(TypeMedia.Series))
-                .OrderBy(m => m.Title)
                 .Include(m => m.GenreMedias)
+                    .ThenInclude(gm => gm.Genre)
                 .Include(m => m.Episodes)
+                .OrderBy(m => m.Title)
                 .ToList();
         }
         public void Save(Media m)
@@ -73,7 +75,7 @@ namespace Videotheque.Service
                     return;
                 context.Medias.Update(m);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
     }
 }

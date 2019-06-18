@@ -277,6 +277,8 @@
       <DependentUpon>20190618070054_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
+    <Compile Include="Service\GenreMediaService.cs" />
+    <Compile Include="Service\GenreService.cs" />
     <Compile Include="Service\MediaService.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\EditSeriesViewModel.cs" />

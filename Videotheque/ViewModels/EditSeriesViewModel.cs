@@ -88,18 +88,11 @@ namespace Videotheque.ViewModels
             Language.TryParse(this.LanguageVO, out Parsed);
             this.Media.LanguageVO = Parsed;
 
-            // genres
-            Console.WriteLine("// TODO : manage genres saving");
-            string[] genres = this.Genres.Split(',');
-            foreach (string genre in genres)
-            {
-                string libelle = genre;
-                if (libelle.EndsWith(" "))
-                    libelle = genre.Substring(0, this.Genres.Length - 1);
-                // TODO : if genre found, add. Else create
-            }
-
-            Console.WriteLine("// TODO : manage episodes saving");
+            // If genres already exist, they are found; else, they are created.
+            // Same goes for GenreMedia.
+            //TODO: avoid code duplication
+            this.Media.GenreMedias = GenreMediaService.GetInstance()
+                .ToGenreMedias(this.Media, GenreService.GetInstance().ToGenres(this.Genres));
 
             MediaService.GetInstance().Save(this.Media);
 

@@ -30,10 +30,10 @@ namespace Videotheque
             action.Libelle = "Action";
             context.Genres.Add(action);
             Genre sf = new Genre();
-            sf.Libelle = "SF";
+            sf.Libelle = "Sf";
             context.Genres.Add(sf);
             Genre spaceOpera = new Genre();
-            spaceOpera.Libelle = "Space Opera";
+            spaceOpera.Libelle = "Space opera";
             context.Genres.Add(spaceOpera);
             Genre robots = new Genre();
             robots.Libelle = "Robots";
