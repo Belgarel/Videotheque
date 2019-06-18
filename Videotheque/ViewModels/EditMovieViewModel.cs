@@ -165,13 +165,13 @@ namespace Videotheque.ViewModels
 
             // If genres already exist, they are found; else, they are created.
             // Same goes for GenreMedia.
-            //TODO: avoid code duplication (override)
             //TODO: cleanup unused genres
             this.Media.GenreMedias = GenreMediaService.GetInstance()
                 .ToGenreMedias(this.Media, GenreService.GetInstance().ToGenres(this.Genres));
 
             MediaService.GetInstance().Save(this.Media);
 
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
             ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
             new SwitchPage().Execute(this.GoToNextPage);
         }

@@ -77,5 +77,10 @@ namespace Videotheque.Service
             }
             context.SaveChangesAsync();
         }
+        public void Delete(Media m)
+        {
+            context.Remove(m);
+            context.SaveChangesAsync();
+        }
     }
 }

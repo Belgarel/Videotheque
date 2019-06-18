@@ -19,20 +19,24 @@ namespace Videotheque.ViewModels
         }
 
         public SwitchPage SwitchPage { get; }
-        public SwitchPageParameter GoToListMovies { get; }
-        public SwitchPageParameter GoToListSeries { get; }
-        public SwitchPageParameter GoToListActors { get; }
+        public SwitchPageParameter GoToListMovies { get; set; }
+        public SwitchPageParameter GoToListSeries { get; set; }
+        public SwitchPageParameter GoToListActors { get; set; }
+
+        public void Refresh()
+        {
+            this.GoToListMovies = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
+            this.GoToListSeries = new SwitchPageParameter(this, new ListSeriesPage(), new ListSeriesModel(this));
+            this.GoToListActors = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
+        }
 
 
         public MainWindowModel()
         {
             this.CurrentPage = new ListMoviesPage();
             this.CurrentPage.DataContext = new ListMoviesModel(this);
-
             this.SwitchPage = new SwitchPage();
-            this.GoToListMovies = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
-            this.GoToListSeries = new SwitchPageParameter(this, new ListSeriesPage(), new ListSeriesModel(this));
-            this.GoToListActors = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
+            this.Refresh();
         }
     }
 }

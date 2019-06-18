@@ -242,6 +242,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommandWithParameter.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\DeleteMedia.cs" />
     <Compile Include="Commands\EditMedia.cs" />
     <Compile Include="Controls\RatingBar.xaml.cs">
       <DependentUpon>RatingBar.xaml</DependentUpon>
