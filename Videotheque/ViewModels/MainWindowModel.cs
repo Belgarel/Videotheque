@@ -27,7 +27,7 @@ namespace Videotheque.ViewModels
         {
             this.GoToListMovies = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
             this.GoToListSeries = new SwitchPageParameter(this, new ListSeriesPage(), new ListSeriesModel(this));
-            this.GoToListActors = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
+            this.GoToListActors = new SwitchPageParameter(this, new ListPersonsPage(), new ListPersonsModel(this));
         }
 
 

@@ -59,6 +59,15 @@
                 </ObjectDataProvider>
             </CollectionViewSource.Source>
         </CollectionViewSource>
+        <CollectionViewSource x:Key="dataPersonTitles">
+            <CollectionViewSource.Source>
+                <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="model:PersonTitle" />
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </CollectionViewSource.Source>
+        </CollectionViewSource>
     </Application.Resources>
 </Application>
 

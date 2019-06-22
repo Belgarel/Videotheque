@@ -242,11 +242,17 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommandWithParameter.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\DeletePerson.cs" />
     <Compile Include="Commands\DeleteMedia.cs" />
+    <Compile Include="Commands\EditPerson.cs" />
     <Compile Include="Commands\EditMedia.cs" />
     <Compile Include="Controls\RatingBar.xaml.cs">
       <DependentUpon>RatingBar.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EditPersonPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\EditSeriesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -254,6 +260,10 @@
     <Page Include="Views\EditMoviePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListPersonsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ListSeriesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -279,20 +289,29 @@
     </Compile>
     <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="Service\GenreMediaService.cs" />
+    <Compile Include="Service\PersonService.cs" />
     <Compile Include="Service\GenreService.cs" />
     <Compile Include="Service\MediaService.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\EditSeriesViewModel.cs" />
     <Compile Include="ViewModels\EditMovieViewModel.cs" />
+    <Compile Include="ViewModels\ListPersonsModel.cs" />
     <Compile Include="ViewModels\ListSeriesModel.cs" />
     <Compile Include="ViewModels\ListMoviesModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\RatingBarViewModel.cs" />
+    <Compile Include="Views\EditPersonPage.xaml.cs">
+      <DependentUpon>EditPersonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditSeriesPage.xaml.cs">
       <DependentUpon>EditSeriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditMoviePage.xaml.cs">
       <DependentUpon>EditMoviePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListPersonsPage.xaml.cs">
+      <DependentUpon>ListPersonsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListSeriesPage.xaml.cs">
       <DependentUpon>ListSeriesPage.xaml</DependentUpon>
