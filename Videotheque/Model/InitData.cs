@@ -9,56 +9,174 @@ namespace Videotheque
 {
     class InitData
     {
-        public InitData() { }
-
-        public async void createData()
+        private static InitData _instance { get; set; }
+        private InitData() { }
+        public static InitData GetInstance()
         {
-            var context = await VideothequeDbContext.getInstance();
-            await createPerson();
+            if (_instance == null)
+            {
+                _instance = new InitData();
+            }
+            return _instance;
         }
-        public static Genre GenreAction()
+
+        public void createData(VideothequeDbContext context)
+        {
+            // Create genres
+            var genres = new Genre[]
+            {
+                GenreAction(),
+                GenreAdventure(),
+                GenreAliens(),
+                GenreCartoon(),
+                GenreRobots(),
+                GenreSf(),
+                GenreSpaceOpera()
+            };
+            List<Genre> genresFightClub = new List<Genre>();
+            genresFightClub.Add(genres[0]);
+            List<Genre> genresMatrix = new List<Genre>();
+            genresMatrix.Add(genres[0]);
+            genresMatrix.Add(genres[4]);
+            genresMatrix.Add(genres[5]);
+            List<Genre> genresBabylon5 = new List<Genre>();
+            genresBabylon5.Add(genres[2]);
+            genresBabylon5.Add(genres[5]);
+            genresBabylon5.Add(genres[6]);
+
+            // Create Medias
+            var medias = new Media[]
+            {
+                MovieMatrix(genresMatrix),
+                MovieFightClub(genresFightClub),
+                SeriesBabylon5(genresBabylon5)
+            };
+
+            // Create Persons
+            var persons = new Person[]
+            {
+                PersonLanaWachowski(),
+                PersonLillyWachowski(),
+                PersonKeanuReeves(),
+                PersonCarrieAnneMoss(),
+                PersonLaurenceFishburne(),
+                PersonHugoWeaving(),
+                PersonDavidFincher(),
+                PersonEdwardNorton(),
+                PersonBradPitt(),
+                PersonHelenaCarter(),
+                PersonMeatLoaf(),
+                PersonBruceBoxleitner(),
+                PersonClaudiaChristian(),
+                PersonJerryDoyle(),
+                PersonMiraFurlan(),
+                PersonAndreasKatsulas(),
+                PersonPeterJurasik()
+        };
+            // Adding their roles
+            this.AddRole(medias[0], persons[0], PersonMediaFunction.Director, ""); // Matrix
+            this.AddRole(medias[0], persons[1], PersonMediaFunction.Director, ""); // Matrix
+            this.AddRole(medias[0], persons[2], PersonMediaFunction.Actor, "Neo"); // Matrix
+            this.AddRole(medias[0], persons[3], PersonMediaFunction.Actor, "Trinity"); // Matrix
+            this.AddRole(medias[0], persons[4], PersonMediaFunction.Actor, "Morpheus"); // Matrix
+            this.AddRole(medias[0], persons[5], PersonMediaFunction.Actor, "Agent Smith"); // Matrix
+            this.AddRole(medias[1], persons[6], PersonMediaFunction.Director, ""); // Fight Club
+            this.AddRole(medias[1], persons[7], PersonMediaFunction.Actor, "Narrateur"); // Fight Club
+            this.AddRole(medias[1], persons[8], PersonMediaFunction.Actor, "Tyler Durden"); // Fight Club
+            this.AddRole(medias[1], persons[9], PersonMediaFunction.Actor, "Marla Singer"); // Fight Club
+            this.AddRole(medias[1], persons[10], PersonMediaFunction.Actor, "Bob Paulson"); // Fight Club
+            this.AddRole(medias[2], persons[11], PersonMediaFunction.Actor, "John Sheridan"); // Babylon 5
+            this.AddRole(medias[2], persons[12], PersonMediaFunction.Actor, "Susan Ivanova"); // Babylon 5
+            this.AddRole(medias[2], persons[13], PersonMediaFunction.Actor, "Michael Garibaldi"); // Babylon 5
+            this.AddRole(medias[2], persons[14], PersonMediaFunction.Actor, "Delenn"); // Babylon 5
+            this.AddRole(medias[2], persons[15], PersonMediaFunction.Actor, "G'Kar"); // Babylon 5
+            this.AddRole(medias[2], persons[16], PersonMediaFunction.Actor, "Londo Mollari"); // Babylon 5
+
+            // Save changes
+            foreach (Genre genre in genres)
+                context.Genres.Add(genre);
+            foreach (Media media in medias)
+                context.Medias.Add(media);
+            foreach (Person person in persons)
+                context.Persons.Add(person);
+            context.SaveChanges();
+        }
+
+        private void AddRole(Media media, Person person, PersonMediaFunction function, string role)
+        {
+            List<PersonMedia> pms = person.PersonMedias;
+            if (person.PersonMedias == null || media.PersonMedias == null)
+            {
+                pms = person.PersonMedias != null ? person.PersonMedias : new List<PersonMedia>();
+                person.PersonMedias = pms;
+                media.PersonMedias = pms;
+            }
+            PersonMedia pm = new PersonMedia();
+            pm.Person = person;
+            pm.Media = media;
+            pm.Function = function;
+            pm.Role = role;
+            pms.Add(pm);
+        }
+        private void AddGenre(Media media, Genre genre)
+        {
+            List<GenreMedia> gms = media.GenreMedias;
+            if (genre.GenreMedias == null || media.GenreMedias == null)
+            {
+                gms = genre.GenreMedias != null ? genre.GenreMedias : new List<GenreMedia>();
+                genre.GenreMedias = gms;
+                media.GenreMedias = gms;
+            }
+            GenreMedia gm = new GenreMedia();
+            gm.Genre = genre;
+            gm.Media = media;
+            gms.Add(gm);
+        }
+
+        private Genre GenreAction()
         {
             Genre action = new Genre();
             action.Libelle = "Action";
             return action;
         }
-        public static Genre GenreSf()
+        private Genre GenreSf()
         {
             Genre sf = new Genre();
             sf.Libelle = "Sf";
             return sf;
         }
-        public static Genre GenreSpaceOpera()
+        private Genre GenreSpaceOpera()
         {
             Genre spaceOpera = new Genre();
             spaceOpera.Libelle = "Space opera";
             return spaceOpera;
         }
-        public static Genre GenreRobots()
+        private Genre GenreRobots()
         {
             Genre robots = new Genre();
             robots.Libelle = "Robots";
             return robots;
         }
-        public static Genre GenreAliens()
+        private Genre GenreAliens()
         {
             Genre aliens = new Genre();
             aliens.Libelle = "Aliens";
             return aliens;
         }
-        public static Genre GenreCartoon()
+        private Genre GenreCartoon()
         {
             Genre cartoon = new Genre();
             cartoon.Libelle = "Cartoon";
             return cartoon;
         }
-        public static Genre GenreAdventure()
+        private Genre GenreAdventure()
         {
             Genre adventure = new Genre();
             adventure.Libelle = "Adventure";
             return adventure;
         }
-        public static Media MovieMatrix(List<Genre> genres)
+
+        private Media MovieMatrix(List<Genre> genres)
         {
             Media matrix = new Media();
             matrix.Type = TypeMedia.Movie;
@@ -80,8 +198,7 @@ namespace Videotheque
             }
             return matrix;
         }
-
-        public static Media MovieFightClub(List<Genre> genres)
+        private Media MovieFightClub(List<Genre> genres)
         {
             Media fightClub = new Media();
             fightClub.Type = TypeMedia.Movie;
@@ -106,7 +223,7 @@ namespace Videotheque
             return fightClub;
         }
                 
-        public static Media SeriesBabylon5(List<Genre> genres)
+        private Media SeriesBabylon5(List<Genre> genres)
         {
             Media babylon5 = new Media();
             babylon5.Type = TypeMedia.Series;
@@ -151,144 +268,158 @@ namespace Videotheque
             return babylon5;
         }
 
-        public async Task createPerson()
+        private Person PersonLanaWachowski()
         {
-            var context = await VideothequeDbContext.getInstance();
-
-            //Create a Person Matrix director
             Person lanaWachowski = new Person();
             lanaWachowski.LastName = "Wachowski";
             lanaWachowski.FirstName = "Lana";
             lanaWachowski.Nationality = "Americaine";
             lanaWachowski.BirthDate = new DateTime(1965, 6, 21);
-            context.Persons.Add(lanaWachowski);
-
-            //Create a Person Matrix director
+            return lanaWachowski;
+        }
+        private Person PersonLillyWachowski()
+        {
             Person lillyWachowski = new Person();
             lillyWachowski.LastName = "Wachowski";
             lillyWachowski.FirstName = "Lilly";
             lillyWachowski.Nationality = "Americaine";
             lillyWachowski.BirthDate = new DateTime(1967, 12, 29);
-            context.Persons.Add(lanaWachowski);
-
-            //Create a Person Neo
+            return lillyWachowski;
+        }
+        private Person PersonKeanuReeves()
+        {
             Person keanuReeves = new Person();
             keanuReeves.LastName = "Reeves";
             keanuReeves.FirstName = "Keanu";
             keanuReeves.Nationality = "Canadienne";
             keanuReeves.BirthDate = new DateTime(1964, 9, 2);
-            context.Persons.Add(keanuReeves);
-
-            //Create a Person Trinity
+            return keanuReeves;
+        }
+        private Person PersonCarrieAnneMoss()
+        {
             Person carrieAnneMoss = new Person();
             carrieAnneMoss.LastName = "Moss";
             carrieAnneMoss.FirstName = "Carrie-Anne";
             carrieAnneMoss.Nationality = "Canadienne";
             carrieAnneMoss.BirthDate = new DateTime(1967, 8, 21);
-            context.Persons.Add(carrieAnneMoss);
-
-            //Create a Person Morpheus
+            return carrieAnneMoss;
+        }
+        private Person PersonLaurenceFishburne()
+        {
             Person laurenceFishburne = new Person();
             laurenceFishburne.LastName = "Fishburne";
             laurenceFishburne.FirstName = "Laurence";
             laurenceFishburne.Nationality = "Americaine";
             laurenceFishburne.BirthDate = new DateTime(1960, 7, 30);
-            context.Persons.Add(laurenceFishburne);
-
-            //Create a Person Agent Smith
+            return laurenceFishburne;
+        }
+        private Person PersonHugoWeaving()
+        {
             Person hugoWeaving = new Person();
             hugoWeaving.LastName = "Weaving";
             hugoWeaving.FirstName = "Hugo";
             hugoWeaving.Nationality = "Australienne";
             hugoWeaving.BirthDate = new DateTime(1960, 4, 4);
-            context.Persons.Add(hugoWeaving);
-
-            //Create a Person Fight Club Director
+            return hugoWeaving;
+        }
+        private Person PersonDavidFincher()
+        {
             Person davidFincher = new Person();
             davidFincher.LastName = "Fincher";
             davidFincher.FirstName = "David";
             davidFincher.Nationality = "Américaine";
             davidFincher.BirthDate = new DateTime(1962, 8, 28);
-            context.Persons.Add(davidFincher);
-
-            //Create a Person Main Character
+            return davidFincher;
+        }
+        private Person PersonEdwardNorton()
+        {
             Person edwardNorton = new Person();
             edwardNorton.LastName = "Norton";
             edwardNorton.FirstName = "Edward";
             edwardNorton.Nationality = "Américaine";
             edwardNorton.BirthDate = new DateTime(1969, 8, 18);
-            context.Persons.Add(edwardNorton);
-
-            //Create a Person Tyler Durden
+            return edwardNorton;
+        }
+        private Person PersonBradPitt()
+        {
             Person bradPitt = new Person();
             bradPitt.LastName = "Pitt";
             bradPitt.FirstName = "Brad";
             bradPitt.Nationality = "Américaine";
             bradPitt.BirthDate = new DateTime(1963, 12, 18);
-            context.Persons.Add(bradPitt);
-
-            //Create a Person Marla Singer
+            return bradPitt;
+        }
+        private Person PersonHelenaCarter()
+        {
             Person helenaCarter = new Person();
             helenaCarter.LastName = "Carter";
             helenaCarter.FirstName = "Helena";
             helenaCarter.Nationality = "Britannique";
             helenaCarter.BirthDate = new DateTime(1966, 5, 26);
-            context.Persons.Add(helenaCarter);
-
-            //Create a Person Bob Paulson
+            return helenaCarter;
+        }
+        private Person PersonMeatLoaf()
+        {
             Person meatLoaf = new Person();
             meatLoaf.LastName = "Loaf";
             meatLoaf.FirstName = "Meat";
             meatLoaf.Nationality = "Américaine";
             meatLoaf.BirthDate = new DateTime(1947, 9, 27);
-            context.Persons.Add(meatLoaf);
-
-            //Create a Person John Sherridan
+            return meatLoaf;
+        }
+        private Person PersonBruceBoxleitner()
+        {
             Person bruceBoxleitner = new Person();
-            laurenceFishburne.LastName = "Boxleitner";
-            laurenceFishburne.FirstName = "Bruce";
-            laurenceFishburne.Nationality = "Améicaine";
-            laurenceFishburne.BirthDate = new DateTime(1950, 5, 12);
-            context.Persons.Add(laurenceFishburne);
-            //Create a Person Susan Ivanova
+            bruceBoxleitner.LastName = "Boxleitner";
+            bruceBoxleitner.FirstName = "Bruce";
+            bruceBoxleitner.Nationality = "Améicaine";
+            bruceBoxleitner.BirthDate = new DateTime(1950, 5, 12);
+            return bruceBoxleitner;
+        }
+        private Person PersonClaudiaChristian()
+        {
             Person claudiaChristian = new Person();
             claudiaChristian.LastName = "Christian";
             claudiaChristian.FirstName = "Claudia";
             claudiaChristian.Nationality = "Améicaine";
             claudiaChristian.BirthDate = new DateTime(1965, 8, 10);
-            context.Persons.Add(claudiaChristian);
-            //Create a Person Garibaldi
+            return claudiaChristian;
+        }
+        private Person PersonJerryDoyle()
+        {
             Person jerryDoyle = new Person();
             jerryDoyle.LastName = "Doyle";
             jerryDoyle.FirstName = "Jerry";
             jerryDoyle.Nationality = "Améicaine";
             jerryDoyle.BirthDate = new DateTime(1956, 7, 16);
-            context.Persons.Add(jerryDoyle);
-            //Create a Person Delenn
+            return jerryDoyle;
+        }
+        private Person PersonMiraFurlan()
+        {
             Person miraFurlan = new Person();
             miraFurlan.LastName = "Furlan";
             miraFurlan.FirstName = "Furlan";
             miraFurlan.Nationality = "Croate";
             miraFurlan.BirthDate = new DateTime(1955, 9, 7);
-            context.Persons.Add(miraFurlan);
-
-            //Create a Person G'kar
+            return miraFurlan;
+        }
+        private Person PersonAndreasKatsulas()
+        {
             Person andreasKatsulas = new Person();
             andreasKatsulas.LastName = "Katsulas";
             andreasKatsulas.FirstName = "Andreas";
             andreasKatsulas.Nationality = "Ameéicaine";
             andreasKatsulas.BirthDate = new DateTime(1946, 5, 18);
-            context.Persons.Add(andreasKatsulas);
-
-            //Create a Person Londo Mollari
+            return andreasKatsulas;
+        }
+        private Person PersonPeterJurasik()
+        {
             Person peterJurasik = new Person();
             peterJurasik.LastName = "Jurasik";
             peterJurasik.FirstName = "Peter";
             peterJurasik.Nationality = "Ameéicaine";
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
-            context.Persons.Add(peterJurasik);
-
-            context.SaveChanges();
+            return peterJurasik;
         }
     }
 }
