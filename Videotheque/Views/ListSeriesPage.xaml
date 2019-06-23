@@ -123,11 +123,11 @@
 
                                     <Button Content="Modifier" Command="{Binding DataContext.EditMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="7" Grid.Column="2"/>
+                                            Grid.Row="7" Grid.Column="0"/>
 
                                     <Button Content="Supprimer" Command="{Binding DataContext.DeleteMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="8" Grid.Column="2"/>
+                                            Grid.Row="8" Grid.Column="0"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>

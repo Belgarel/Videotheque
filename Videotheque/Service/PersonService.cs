@@ -34,7 +34,11 @@ namespace Videotheque.Service
 
         public List<Person> GetPersons()
         {
-            return context.Persons.ToList();
+            return context.Persons
+                .OrderBy(p => p.LastName + p.FirstName)
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .ToList();
         }
         public Person findByPersonId(int PersonId)
         {
@@ -43,7 +47,10 @@ namespace Videotheque.Service
         public Person findByName(string firstName, string lastName)
         {
             List<Person> Persons =  context.Persons
-                .Where((p) => p.FirstName.Equals(firstName) && p.LastName.Equals(lastName)).ToList();
+                .Where((p) => p.FirstName.Equals(firstName) && p.LastName.Equals(lastName))
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                    .ToList();
             if (Persons == null || Persons.Count == 0)
                 return null;
             return Persons.First();

@@ -40,18 +40,19 @@
                                         <ColumnDefinition Width="Auto"/> <!-- Button -->
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <!-- Title -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Last name -->
+                                        <RowDefinition Height="*" />
+                                        <!-- First name -->
                                         <RowDefinition Height="*" />
                                         <!--  -->
                                         <RowDefinition Height="*" />
-                                        <!--  -->
+                                        <!-- Nationality -->
                                         <RowDefinition Height="*" />
                                         <!--  -->
                                         <RowDefinition Height="*" />
-                                        <!--  -->
-                                        <RowDefinition Height="*" />
-                                        <!--  -->
-                                        <RowDefinition Height="*" />
-                                        <!--  -->
+                                        <!-- Roles -->
                                         <RowDefinition Height="*" />
                                         <!-- Button modify -->
                                         <RowDefinition Height="*" />
@@ -71,13 +72,32 @@
                                     <Label Content="Nationalité" Grid.Row="4" Grid.Column="0" />
                                     <Label Content="{Binding Nationality}" Grid.Row="4" Grid.Column="1" />
 
+                                    <Label Content="Rôles" Grid.Row="6" Grid.Column="0" />
+                                    <ListBox Grid.Row="6" Grid.Column="1"
+                                        ItemsSource="{Binding PersonMedias}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100"/>
+                                                        <ColumnDefinition Width="80"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Content="{Binding Media.Title}" Grid.Column="0"/>
+                                                    <Label Content="{Binding Function}" Grid.Column="1"/>
+                                                    <Label Content="{Binding Role}" Grid.Column="2"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ListBox>
+
                                     <Button Content="Modifier" Command="{Binding DataContext.EditPerson, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="7" Grid.Column="2"/>
+                                            Grid.Row="7" Grid.Column="0"/>
 
                                     <Button Content="Supprimer" Command="{Binding DataContext.DeletePerson, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="8" Grid.Column="2"/>
+                                            Grid.Row="8" Grid.Column="0"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>

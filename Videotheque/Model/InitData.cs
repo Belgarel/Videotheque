@@ -33,6 +33,11 @@ namespace Videotheque
                 GenreSf(),
                 GenreSpaceOpera()
             };
+
+            foreach (Genre genre in genres)
+                context.Genres.Add(genre);
+
+            // Create Medias
             List<Genre> genresFightClub = new List<Genre>();
             genresFightClub.Add(genres[0]);
             List<Genre> genresMatrix = new List<Genre>();
@@ -44,7 +49,6 @@ namespace Videotheque
             genresBabylon5.Add(genres[5]);
             genresBabylon5.Add(genres[6]);
 
-            // Create Medias
             var medias = new Media[]
             {
                 MovieMatrix(genresMatrix),
@@ -52,28 +56,31 @@ namespace Videotheque
                 SeriesBabylon5(genresBabylon5)
             };
 
+            foreach (Media media in medias)
+                context.Medias.Add(media);
+
             // Create Persons
             var persons = new Person[]
             {
-                PersonLanaWachowski(),
-                PersonLillyWachowski(),
-                PersonKeanuReeves(),
-                PersonCarrieAnneMoss(),
-                PersonLaurenceFishburne(),
-                PersonHugoWeaving(),
-                PersonDavidFincher(),
-                PersonEdwardNorton(),
-                PersonBradPitt(),
-                PersonHelenaCarter(),
-                PersonMeatLoaf(),
-                PersonBruceBoxleitner(),
-                PersonClaudiaChristian(),
-                PersonJerryDoyle(),
-                PersonMiraFurlan(),
-                PersonAndreasKatsulas(),
-                PersonPeterJurasik()
+                PersonLanaWachowski(medias[0]),
+                PersonLillyWachowski(medias[0]),
+                PersonKeanuReeves(medias[0]),
+                PersonCarrieAnneMoss(medias[0]),
+                PersonLaurenceFishburne(medias[0]),
+                PersonHugoWeaving(medias[0]),
+                PersonDavidFincher(medias[1]),
+                PersonEdwardNorton(medias[1]),
+                PersonBradPitt(medias[1]),
+                PersonHelenaCarter(medias[1]),
+                PersonMeatLoaf(medias[1]),
+                PersonBruceBoxleitner(medias[2]),
+                PersonClaudiaChristian(medias[2]),
+                PersonJerryDoyle(medias[2]),
+                PersonMiraFurlan(medias[2]),
+                PersonAndreasKatsulas(medias[2]),
+                PersonPeterJurasik(medias[2])
         };
-            // Adding their roles
+            /*/ Adding their roles
             this.AddRole(medias[0], persons[0], PersonMediaFunction.Director, ""); // Matrix
             this.AddRole(medias[0], persons[1], PersonMediaFunction.Director, ""); // Matrix
             this.AddRole(medias[0], persons[2], PersonMediaFunction.Actor, "Neo"); // Matrix
@@ -90,13 +97,8 @@ namespace Videotheque
             this.AddRole(medias[2], persons[13], PersonMediaFunction.Actor, "Michael Garibaldi"); // Babylon 5
             this.AddRole(medias[2], persons[14], PersonMediaFunction.Actor, "Delenn"); // Babylon 5
             this.AddRole(medias[2], persons[15], PersonMediaFunction.Actor, "G'Kar"); // Babylon 5
-            this.AddRole(medias[2], persons[16], PersonMediaFunction.Actor, "Londo Mollari"); // Babylon 5
+            this.AddRole(medias[2], persons[16], PersonMediaFunction.Actor, "Londo Mollari"); // Babylon 5 */
 
-            // Save changes
-            foreach (Genre genre in genres)
-                context.Genres.Add(genre);
-            foreach (Media media in medias)
-                context.Medias.Add(media);
             foreach (Person person in persons)
                 context.Persons.Add(person);
             context.SaveChanges();
@@ -268,157 +270,305 @@ namespace Videotheque
             return babylon5;
         }
 
-        private Person PersonLanaWachowski()
+        private Person PersonLanaWachowski(Media media)
         {
             Person lanaWachowski = new Person();
             lanaWachowski.LastName = "Wachowski";
             lanaWachowski.FirstName = "Lana";
             lanaWachowski.Nationality = "Americaine";
             lanaWachowski.BirthDate = new DateTime(1965, 6, 21);
+
+            lanaWachowski.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = lanaWachowski;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Director;
+            pm.Role = "";
+            lanaWachowski.PersonMedias.Add(pm);
+            PersonMedia pm2 = new PersonMedia();
+            pm2.Person = lanaWachowski;
+            pm2.Media = media;
+            pm2.Function = PersonMediaFunction.Productor;
+            pm2.Role = "Productrice exécutive";
+            lanaWachowski.PersonMedias.Add(pm2);
             return lanaWachowski;
         }
-        private Person PersonLillyWachowski()
+        private Person PersonLillyWachowski(Media media)
         {
             Person lillyWachowski = new Person();
             lillyWachowski.LastName = "Wachowski";
             lillyWachowski.FirstName = "Lilly";
             lillyWachowski.Nationality = "Americaine";
             lillyWachowski.BirthDate = new DateTime(1967, 12, 29);
+
+            lillyWachowski.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = lillyWachowski;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Director;
+            pm.Role = "";
+            lillyWachowski.PersonMedias.Add(pm);
+            PersonMedia pm2 = new PersonMedia();
+            pm2.Person = lillyWachowski;
+            pm2.Media = media;
+            pm2.Function = PersonMediaFunction.Productor;
+            pm2.Role = "Productrice exécutive";
+            lillyWachowski.PersonMedias.Add(pm2);
             return lillyWachowski;
         }
-        private Person PersonKeanuReeves()
+        private Person PersonKeanuReeves(Media media)
         {
             Person keanuReeves = new Person();
             keanuReeves.LastName = "Reeves";
             keanuReeves.FirstName = "Keanu";
             keanuReeves.Nationality = "Canadienne";
             keanuReeves.BirthDate = new DateTime(1964, 9, 2);
+
+            keanuReeves.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = keanuReeves;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Neo";
+            keanuReeves.PersonMedias.Add(pm);
             return keanuReeves;
         }
-        private Person PersonCarrieAnneMoss()
+        private Person PersonCarrieAnneMoss(Media media)
         {
             Person carrieAnneMoss = new Person();
             carrieAnneMoss.LastName = "Moss";
             carrieAnneMoss.FirstName = "Carrie-Anne";
             carrieAnneMoss.Nationality = "Canadienne";
             carrieAnneMoss.BirthDate = new DateTime(1967, 8, 21);
+
+            carrieAnneMoss.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = carrieAnneMoss;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Trinity";
+            carrieAnneMoss.PersonMedias.Add(pm);
             return carrieAnneMoss;
         }
-        private Person PersonLaurenceFishburne()
+        private Person PersonLaurenceFishburne(Media media)
         {
             Person laurenceFishburne = new Person();
             laurenceFishburne.LastName = "Fishburne";
             laurenceFishburne.FirstName = "Laurence";
             laurenceFishburne.Nationality = "Americaine";
             laurenceFishburne.BirthDate = new DateTime(1960, 7, 30);
+
+            laurenceFishburne.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = laurenceFishburne;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Morpheus";
+            laurenceFishburne.PersonMedias.Add(pm);
             return laurenceFishburne;
         }
-        private Person PersonHugoWeaving()
+        private Person PersonHugoWeaving(Media media)
         {
             Person hugoWeaving = new Person();
             hugoWeaving.LastName = "Weaving";
             hugoWeaving.FirstName = "Hugo";
             hugoWeaving.Nationality = "Australienne";
             hugoWeaving.BirthDate = new DateTime(1960, 4, 4);
+
+            hugoWeaving.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = hugoWeaving;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Agent Smith";
+            hugoWeaving.PersonMedias.Add(pm);
             return hugoWeaving;
         }
-        private Person PersonDavidFincher()
+        private Person PersonDavidFincher(Media media)
         {
             Person davidFincher = new Person();
             davidFincher.LastName = "Fincher";
             davidFincher.FirstName = "David";
             davidFincher.Nationality = "Américaine";
             davidFincher.BirthDate = new DateTime(1962, 8, 28);
+
+            davidFincher.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = davidFincher;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Director;
+            pm.Role = "";
+            davidFincher.PersonMedias.Add(pm);
             return davidFincher;
         }
-        private Person PersonEdwardNorton()
+        private Person PersonEdwardNorton(Media media)
         {
             Person edwardNorton = new Person();
             edwardNorton.LastName = "Norton";
             edwardNorton.FirstName = "Edward";
             edwardNorton.Nationality = "Américaine";
             edwardNorton.BirthDate = new DateTime(1969, 8, 18);
+
+            edwardNorton.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = edwardNorton;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Narrateur";
+            edwardNorton.PersonMedias.Add(pm);
             return edwardNorton;
         }
-        private Person PersonBradPitt()
+        private Person PersonBradPitt(Media media)
         {
             Person bradPitt = new Person();
             bradPitt.LastName = "Pitt";
             bradPitt.FirstName = "Brad";
             bradPitt.Nationality = "Américaine";
             bradPitt.BirthDate = new DateTime(1963, 12, 18);
+
+            bradPitt.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = bradPitt;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Tyler Durden";
+            bradPitt.PersonMedias.Add(pm);
             return bradPitt;
         }
-        private Person PersonHelenaCarter()
+        private Person PersonHelenaCarter(Media media)
         {
             Person helenaCarter = new Person();
             helenaCarter.LastName = "Carter";
             helenaCarter.FirstName = "Helena";
             helenaCarter.Nationality = "Britannique";
             helenaCarter.BirthDate = new DateTime(1966, 5, 26);
+
+            helenaCarter.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = helenaCarter;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Marla Singer";
+            helenaCarter.PersonMedias.Add(pm);
             return helenaCarter;
         }
-        private Person PersonMeatLoaf()
+        private Person PersonMeatLoaf(Media media)
         {
             Person meatLoaf = new Person();
             meatLoaf.LastName = "Loaf";
             meatLoaf.FirstName = "Meat";
             meatLoaf.Nationality = "Américaine";
             meatLoaf.BirthDate = new DateTime(1947, 9, 27);
+
+            meatLoaf.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = meatLoaf;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Bob Paulson";
+            meatLoaf.PersonMedias.Add(pm);
             return meatLoaf;
         }
-        private Person PersonBruceBoxleitner()
+        private Person PersonBruceBoxleitner(Media media)
         {
             Person bruceBoxleitner = new Person();
             bruceBoxleitner.LastName = "Boxleitner";
             bruceBoxleitner.FirstName = "Bruce";
             bruceBoxleitner.Nationality = "Améicaine";
             bruceBoxleitner.BirthDate = new DateTime(1950, 5, 12);
+
+            bruceBoxleitner.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = bruceBoxleitner;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "John Sherridan";
+            bruceBoxleitner.PersonMedias.Add(pm);
             return bruceBoxleitner;
         }
-        private Person PersonClaudiaChristian()
+        private Person PersonClaudiaChristian(Media media)
         {
             Person claudiaChristian = new Person();
             claudiaChristian.LastName = "Christian";
             claudiaChristian.FirstName = "Claudia";
             claudiaChristian.Nationality = "Améicaine";
             claudiaChristian.BirthDate = new DateTime(1965, 8, 10);
+
+            claudiaChristian.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = claudiaChristian;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Susan Ivanova";
+            claudiaChristian.PersonMedias.Add(pm);
             return claudiaChristian;
         }
-        private Person PersonJerryDoyle()
+        private Person PersonJerryDoyle(Media media)
         {
             Person jerryDoyle = new Person();
             jerryDoyle.LastName = "Doyle";
             jerryDoyle.FirstName = "Jerry";
             jerryDoyle.Nationality = "Améicaine";
             jerryDoyle.BirthDate = new DateTime(1956, 7, 16);
+
+            jerryDoyle.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = jerryDoyle;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Michael Garibaldi";
+            jerryDoyle.PersonMedias.Add(pm);
             return jerryDoyle;
         }
-        private Person PersonMiraFurlan()
+        private Person PersonMiraFurlan(Media media)
         {
             Person miraFurlan = new Person();
             miraFurlan.LastName = "Furlan";
             miraFurlan.FirstName = "Furlan";
             miraFurlan.Nationality = "Croate";
             miraFurlan.BirthDate = new DateTime(1955, 9, 7);
+
+            miraFurlan.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = miraFurlan;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Delenn";
+            miraFurlan.PersonMedias.Add(pm);
             return miraFurlan;
         }
-        private Person PersonAndreasKatsulas()
+        private Person PersonAndreasKatsulas(Media media)
         {
             Person andreasKatsulas = new Person();
             andreasKatsulas.LastName = "Katsulas";
             andreasKatsulas.FirstName = "Andreas";
             andreasKatsulas.Nationality = "Ameéicaine";
             andreasKatsulas.BirthDate = new DateTime(1946, 5, 18);
+
+            andreasKatsulas.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = andreasKatsulas;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "G'kar";
+            andreasKatsulas.PersonMedias.Add(pm);
             return andreasKatsulas;
         }
-        private Person PersonPeterJurasik()
+        private Person PersonPeterJurasik(Media media)
         {
             Person peterJurasik = new Person();
             peterJurasik.LastName = "Jurasik";
             peterJurasik.FirstName = "Peter";
             peterJurasik.Nationality = "Ameéicaine";
             peterJurasik.BirthDate = new DateTime(1950, 4, 25);
+
+            peterJurasik.PersonMedias = new List<PersonMedia>();
+            PersonMedia pm = new PersonMedia();
+            pm.Person = peterJurasik;
+            pm.Media = media;
+            pm.Function = PersonMediaFunction.Actor;
+            pm.Role = "Londo Mollari";
+            peterJurasik.PersonMedias.Add(pm);
             return peterJurasik;
         }
     }
