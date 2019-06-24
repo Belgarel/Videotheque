@@ -68,6 +68,15 @@
                 </ObjectDataProvider>
             </CollectionViewSource.Source>
         </CollectionViewSource>
+        <CollectionViewSource x:Key="dataPersonFunction">
+            <CollectionViewSource.Source>
+                <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="model:PersonMediaFunction" />
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </CollectionViewSource.Source>
+        </CollectionViewSource>
     </Application.Resources>
 </Application>
 

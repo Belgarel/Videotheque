@@ -47,6 +47,7 @@
                     <!-- 4.Nationality -->
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <!-- 6.Roles -->
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -67,6 +68,44 @@
 
                 <Label Content="Nationalité" Grid.Row="4" Grid.Column="0" />
                 <TextBox Text="{Binding Nationality}" Grid.Row="4" Grid.Column="1" />
+
+                <Grid Grid.Row="6" Grid.Column= "0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Rôles" Grid.Row="0"/>
+
+                    <ComboBox Grid.Row="1"
+                                          ItemsSource="{Binding Path=Medias}"
+                                          DisplayMemberPath="Title"
+                                          SelectedItem="{Binding SelectedMedia}" />
+                    <Button Content="Ajouter" Grid.Row="2" 
+                                        Command="{Binding AddRole}" />
+                    <Button Content="Retirer" Grid.Row="3" 
+                                        Command="{Binding RemoveRole}" />
+                </Grid>
+                <ListView Grid.Row="6" Grid.Column="1"
+                                        ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{Binding Media.Title}" Grid.Column="0"/>
+                                <ComboBox Grid.Column="1"
+                                          ItemsSource="{Binding Source={StaticResource dataPersonFunction}}"
+                                          SelectedItem="{Binding Function}" />
+                                <TextBox Text="{Binding Role}" Grid.Column="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
 
                 <Button Content="Sauvegarder" Command="{Binding Save}"
                                                 Grid.Row="10" Grid.Column="2"/>
