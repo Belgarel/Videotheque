@@ -16,7 +16,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
             <!-- General title -->
             <Grid Grid.Row="0">
@@ -27,7 +33,7 @@
             </Grid>
 
             <!-- Page content -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <!-- Labels -->
                     <ColumnDefinition Width="Auto"/>    
@@ -170,10 +176,9 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListBox>
-
-                <Button Content="Sauvegarder" Command="{Binding Save}"
-                                                Grid.Row="20" Grid.Column="2"/>
             </Grid>
+            <Button Content="Sauvegarder" Command="{Binding Save}"
+                                                Grid.Row="2" Grid.Column="2"/>
         </Grid>
     </ScrollViewer>
 </Page>

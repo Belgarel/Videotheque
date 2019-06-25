@@ -16,7 +16,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
             <!-- General title -->
             <Grid Grid.Row="0">
@@ -27,13 +33,11 @@
             </Grid>
 
             <!-- Page content -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <!-- Labels -->
                     <ColumnDefinition Width="Auto"/>    
                     <ColumnDefinition Width="*"/>
-                    <!-- Button -->
-                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <!-- 1.Title -->
@@ -111,10 +115,10 @@
 
                 <Label Content="Numérique" Grid.Row="13" Grid.Column="0" />
                 <CheckBox IsThreeState="True" IsChecked="{Binding NumericalSupport}" Grid.Row="13" Grid.Column="1" />
-
-                <Button Content="Sauvegarder" Command="{Binding Save}"
-                                                Grid.Row="16" Grid.Column="2"/>
             </Grid>
+
+            <Button Content="Sauvegarder" Command="{Binding Save}"
+                                            Grid.Row="2" Grid.Column="2"/>
         </Grid>
     </ScrollViewer>
 </Page>

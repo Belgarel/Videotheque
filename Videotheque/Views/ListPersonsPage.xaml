@@ -14,7 +14,15 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <!-- 0. Title -->
                 <RowDefinition Height="Auto" />
+                <!-- 1. New -->
+                <RowDefinition Height="Auto" />
+                <!-- 2. Filters: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 3. Order: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 4. List -->
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -25,10 +33,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Style="{StaticResource sPageTitle}" Content="Liste des personnes"></Label>
-                <Button Grid.Column="2" Content="Créer" Command="{Binding EditPerson}"
+                <Button Grid.Row="1" Grid.Column="2"
+                        Content="Créer" Command="{Binding EditPerson}"
                                                 CommandParameter="{Binding NewPerson}" />
             </Grid>
-            <ListBox Grid.Row="2" ItemsSource="{Binding ListPersons}">
+            <ListBox Grid.Row="4" ItemsSource="{Binding ListPersons}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Expander Header="{Binding LastName}" Style="{StaticResource sHeaderTitle}">

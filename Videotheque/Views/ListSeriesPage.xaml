@@ -14,21 +14,34 @@
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                <!-- 0. Title -->
+                <RowDefinition Height="Auto" />
+                <!-- 1. New -->
+                <RowDefinition Height="Auto" />
+                <!-- 2. Filters: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 3. Order: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 4. List -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Style="{StaticResource sPageTitle}" Content="Liste des séries"></Label>
-                    <Button Grid.Column="2" Content="Créer" Command="{Binding EditMedia}"
-                                                    CommandParameter="{Binding NewMedia}" />
+                <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource sPageTitle}" Content="Liste des séries"></Label>
+                <Button Grid.Row="1" Grid.Column="2"
+                        Content="Créer" Command="{Binding EditMedia}" CommandParameter="{Binding NewMedia}" />
             </Grid>
-            <ListBox Grid.Row="2" ItemsSource="{Binding ListMedias}">
+            <ListBox Grid.Row="4" ItemsSource="{Binding ListMedias}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Expander Header="{Binding Title}" Style="{StaticResource sHeaderTitle}">
