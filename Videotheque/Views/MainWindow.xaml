@@ -29,7 +29,7 @@
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
             <Button Style="{StaticResource sMainMenuItem}" Content="Films" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListMovies}"></Button>
             <Button Style="{StaticResource sMainMenuItem}" Content="Séries" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListSeries}"></Button>
-            <Button Style="{StaticResource sMainMenuItem}" Content="Acteurs" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}"></Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Personnes" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}"></Button>
         </StackPanel>
         
         <Frame Content="{Binding CurrentPage}" Grid.Column="1" Grid.Row="1"

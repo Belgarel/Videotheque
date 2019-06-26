@@ -11,7 +11,7 @@ using Videotheque.Views;
 
 namespace Videotheque.ViewModels
 {
-    class ListMoviesModel : BaseNotifyPropertyChanged
+    class ListMoviesModel : AbstractSortableViewModel
     {
         public MainWindowModel MainWindow { get; set; }
         public ObservableCollection<Media> ListMedias
@@ -30,6 +30,31 @@ namespace Videotheque.ViewModels
             this.NewMedia = new Media();
             this.NewMedia.Type = TypeMedia.Movie;
             this.ListMedias = new ObservableCollection<Media>(MediaService.GetInstance().GetMovies());
+        }
+
+        public override void SortByTitleAscExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderBy(m => m.Title));
+        }
+        public override void SortByTitleDescExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderByDescending(m => m.Title));
+        }
+        public override void SortByDateAscExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderBy(m => m.DateRelease));
+        }
+        public override void SortByDateDescExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderByDescending(m => m.DateRelease));
+        }
+        public override void SortByRatingAscExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderBy(m => m.Rated));
+        }
+        public override void SortByRatingDescExecute()
+        {
+            this.ListMedias = new ObservableCollection<Media>(this.ListMedias.OrderByDescending(m => m.Rated));
         }
 
         public ListMoviesModel(MainWindowModel MainWindow)

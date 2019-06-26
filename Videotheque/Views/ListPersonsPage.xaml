@@ -26,17 +26,58 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+            <!-- Page title & create button -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Style="{StaticResource sPageTitle}" Content="Liste des personnes"></Label>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource sPageTitle}" Content="Liste des personnes"></Label>
                 <Button Grid.Row="1" Grid.Column="2"
                         Content="Créer" Command="{Binding EditPerson}"
                                                 CommandParameter="{Binding NewPerson}" />
             </Grid>
+
+            <!-- Order bar -->
+            <Expander Grid.Row="3" Header="Trier" Style="{StaticResource sHeaderTitle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!-- Title: button up -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Title: label -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Title: button down -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Date: button up -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Date: label -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Date: button down -->
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Asc"
+                            Command="{Binding SortByTitleAsc}" CommandParameter="{Binding}" />
+                    <Label Grid.Column="1" Content="Titre" />
+                    <Button Grid.Column="2" Content="Desc"
+                            Command="{Binding SortByTitleDesc}" CommandParameter="{Binding}" />
+
+                    <Button Grid.Column="4" Content="Asc"
+                            Command="{Binding SortByDateAsc}" CommandParameter="{Binding}" />
+                    <Label Grid.Column="5" Content="Date de sortie" />
+                    <Button Grid.Column="6" Content="Desc"
+                            Command="{Binding SortByDateDesc}" CommandParameter="{Binding}" />
+                </Grid>
+            </Expander>
+
+            <!-- Content -->
             <ListBox Grid.Row="4" ItemsSource="{Binding ListPersons}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

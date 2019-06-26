@@ -292,6 +292,7 @@
     <Compile Include="Service\PersonService.cs" />
     <Compile Include="Service\GenreService.cs" />
     <Compile Include="Service\MediaService.cs" />
+    <Compile Include="ViewModels\AbstractSortableViewModel.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\EditSeriesViewModel.cs" />

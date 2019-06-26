@@ -11,7 +11,7 @@ using Videotheque.Views;
 
 namespace Videotheque.ViewModels
 {
-    class ListPersonsModel : BaseNotifyPropertyChanged
+    class ListPersonsModel : AbstractSortableViewModel
     {
         public MainWindowModel MainWindow { get; set; }
         public ObservableCollection<Person> ListPersons
@@ -29,6 +29,33 @@ namespace Videotheque.ViewModels
         {
             this.NewPerson = new Person();
             this.ListPersons = new ObservableCollection<Person>(PersonService.GetInstance().GetPersons());
+        }
+
+        public override void SortByTitleAscExecute()
+        {
+            this.ListPersons = new ObservableCollection<Person>(
+                this.ListPersons.OrderBy(p => p.LastName).ThenBy(p => p.FirstName));
+        }
+        public override void SortByTitleDescExecute()
+        {
+            this.ListPersons = new ObservableCollection<Person>(
+                this.ListPersons.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName));
+        }
+        public override void SortByDateAscExecute()
+        {
+            this.ListPersons = new ObservableCollection<Person>(this.ListPersons.OrderBy(p => p.BirthDate));
+        }
+        public override void SortByDateDescExecute()
+        {
+            this.ListPersons = new ObservableCollection<Person>(this.ListPersons.OrderByDescending(p => p.BirthDate));
+        }
+        public override void SortByRatingAscExecute()
+        {
+            throw new NotImplementedException();
+        }
+        public override void SortByRatingDescExecute()
+        {
+            throw new NotImplementedException();
         }
 
         public ListPersonsModel(MainWindowModel MainWindow)
