@@ -44,10 +44,54 @@
                                                 CommandParameter="{Binding NewPerson}" />
             </Grid>
 
+            <!-- Filter bar -->
+            <Expander Grid.Row="2" Header="Filtrer" Style="{StaticResource sHeaderTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- Label -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Field -->
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Name contains -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- With genre -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Button -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Name -->
+                    <Label Grid.Column="1" Grid.Row="0" Content="Nom" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding WithNameLike}"/>
+
+                    <!-- Function -->
+                    <Label Grid.Column="3" Grid.Row="0" Content="Fonction" />
+                    <ComboBox Grid.Column="3" Grid.Row="1"
+                            ItemsSource="{Binding Source={StaticResource dataPersonFunction}}"
+                            SelectedItem="{Binding WithFunction}" />
+
+                    <!-- Button -->
+                    <Button Grid.Column="5" Grid.Row="1" Content="Filtrer"
+                            Command="{Binding Filter}" CommandParameter="{Binding}" />
+                </Grid>
+            </Expander>
+
             <!-- Order bar -->
             <Expander Grid.Row="3" Header="Trier" Style="{StaticResource sHeaderTitle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
                         <!-- Title: button up -->
                         <ColumnDefinition Width="Auto"/>
                         <!-- Title: label -->
@@ -62,17 +106,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <!-- Date: button down -->
                         <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Asc"
+                    <Button Grid.Column="1" Content="Asc"
                             Command="{Binding SortByTitleAsc}" CommandParameter="{Binding}" />
-                    <Label Grid.Column="1" Content="Titre" />
-                    <Button Grid.Column="2" Content="Desc"
+                    <Label Grid.Column="2" Content="Titre" />
+                    <Button Grid.Column="3" Content="Desc"
                             Command="{Binding SortByTitleDesc}" CommandParameter="{Binding}" />
 
-                    <Button Grid.Column="4" Content="Asc"
+                    <Button Grid.Column="5" Content="Asc"
                             Command="{Binding SortByDateAsc}" CommandParameter="{Binding}" />
-                    <Label Grid.Column="5" Content="Date de sortie" />
-                    <Button Grid.Column="6" Content="Desc"
+                    <Label Grid.Column="6" Content="Date de sortie" />
+                    <Button Grid.Column="7" Content="Desc"
                             Command="{Binding SortByDateDesc}" CommandParameter="{Binding}" />
                 </Grid>
             </Expander>

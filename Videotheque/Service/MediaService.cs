@@ -61,6 +61,39 @@ namespace Videotheque.Service
                 .OrderBy(m => m.Title)
                 .ToList();
         }
+
+        public List<Media> findMediasByTypeAndTitle(TypeMedia type, string title)
+        {
+            return context.Medias
+                .Where(m => m.Type.Equals(type))
+                .Where(m => m.Title.Contains(title))
+                .Include(m => m.GenreMedias)
+                    .ThenInclude(gm => gm.Genre)
+                .OrderBy(m => m.Title)
+                .ToList();
+        }
+        public List<Media> findMediasByTypeAndGenre(TypeMedia type, Genre genre)
+        {
+            return context.Medias
+                .Where(m => m.Type.Equals(type))
+                .Where(m => m.GenreMedias.Any(gm => gm.Genre == genre))
+                .Include(m => m.GenreMedias)
+                    .ThenInclude(gm => gm.Genre)
+                .OrderBy(m => m.Title)
+                .ToList();
+        }
+        public List<Media> findMediasByTypeAndTitleAndGenre(TypeMedia type, string title, Genre genre)
+        {
+            return context.Medias
+                .Where(m => m.Type.Equals(type))
+                .Where(m => m.GenreMedias.Any(gm => gm.Genre == genre))
+                .Where(m => m.Title.Contains(title))
+                .Include(m => m.GenreMedias)
+                    .ThenInclude(gm => gm.Genre)
+                .OrderBy(m => m.Title)
+                .ToList();
+        }
+
         public void Save(Media m)
         {
             if (m.MediaId == 0)

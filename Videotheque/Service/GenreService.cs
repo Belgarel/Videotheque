@@ -32,6 +32,10 @@ namespace Videotheque.Service
             return _instance;
         }
 
+        public List<Genre> GetGenres()
+        {
+            return context.Genres.OrderBy(g => g.Libelle).ToList();
+        }
         public Genre findByGenreId(int genreId)
         {
             return context.Genres.Find(genreId);

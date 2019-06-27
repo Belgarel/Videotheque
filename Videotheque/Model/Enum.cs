@@ -33,7 +33,7 @@ namespace Videotheque.Model
     {
         Actor,
         Director,
-        Productor,
+        Producer,
         Unknown
     }
 }

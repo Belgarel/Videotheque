@@ -18,6 +18,20 @@ namespace Videotheque.ViewModels
             this.NewMedia = new Media();
             this.NewMedia.Type = TypeMedia.Series;
             this.ListMedias = new ObservableCollection<Media>(MediaService.GetInstance().GetSeries());
+            this.ListGenres = new ObservableCollection<Genre>(GenreService.GetInstance().GetGenres());
+        }
+
+        public override void FilterExecute()
+        {
+            if ((WithNameLike != null && WithNameLike != "") && (WithGenre != null && WithGenre.Libelle != null))
+                this.ListMedias = new ObservableCollection<Media>(
+                    MediaService.GetInstance().findMediasByTypeAndTitleAndGenre(TypeMedia.Series, WithNameLike, WithGenre));
+            else if (WithNameLike != null && WithNameLike != "")
+                this.ListMedias = new ObservableCollection<Media>(
+                    MediaService.GetInstance().findMediasByTypeAndTitle(TypeMedia.Series, WithNameLike));
+            else //if (WithGenre != null && WithGenre.Libelle != null)
+                this.ListMedias = new ObservableCollection<Media>(
+                    MediaService.GetInstance().findMediasByTypeAndGenre(TypeMedia.Series, WithGenre));
         }
 
         public ListSeriesModel(MainWindowModel MainWindow) :

@@ -19,16 +19,33 @@ namespace Videotheque.ViewModels
             get { return (ObservableCollection<Person>)GetProperty(); }
             set { SetProperty(value); }
         }
+        public string WithNameLike
+        {
+            get { return (string)GetProperty(); }
+            set { if (SetProperty(value)) Filter.OnCanExecuteChanged(); }
+        }
+        public PersonMediaFunction? WithFunction
+        {
+            get { return (PersonMediaFunction?)GetProperty() ?? PersonMediaFunction.Unknown; }
+            set { if (SetProperty(value)) Filter.OnCanExecuteChanged(); }
+        }
 
         public EditPerson EditPerson { get; set; }
         public Person NewPerson { get; set; } // NewPerson is an empty person that will be taken to the EditPerson page if button "Créer" is used
-
         public DeletePerson DeletePerson { get; set; }
+        public BaseCommand Filter { get; set; }
 
         public virtual void Refresh()
         {
             this.NewPerson = new Person();
             this.ListPersons = new ObservableCollection<Person>(PersonService.GetInstance().GetPersons());
+            this.WithNameLike = "";
+        }
+
+        public void FilterExecute()
+        {
+            this.ListPersons = new ObservableCollection<Person>(
+                PersonService.GetInstance().findPersonByNameAndFunction(WithNameLike, WithFunction));
         }
 
         public override void SortByTitleAscExecute()
@@ -61,6 +78,7 @@ namespace Videotheque.ViewModels
         public ListPersonsModel(MainWindowModel MainWindow)
         {
             this.MainWindow = MainWindow;
+            this.Filter = new BaseCommand(this.FilterExecute);
             this.EditPerson = new EditPerson(MainWindow, new ListPersonsPage(), this);
             this.DeletePerson = new DeletePerson(MainWindow, new ListPersonsPage(), this);
             this.Refresh(); // populate the list of medias by reading from the database

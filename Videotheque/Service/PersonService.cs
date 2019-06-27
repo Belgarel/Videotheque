@@ -55,6 +55,44 @@ namespace Videotheque.Service
                 return null;
             return Persons.First();
         }
+
+        public List<Person> findPersonByName(string WithNameLike)
+        {
+            if (WithNameLike == null || "".Equals(WithNameLike))
+                return this.GetPersons();
+            return context.Persons
+                .Where(p => p.FirstName.Contains(WithNameLike) || p.LastName.Contains(WithNameLike))
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .ToList();
+        }
+        public List<Person> findPersonByFunction(PersonMediaFunction? WithFunction)
+        {
+            if (WithFunction == null || WithFunction == PersonMediaFunction.Unknown)
+                return this.GetPersons();
+            return context.Persons
+                .Where(p => p.PersonMedias.Any(pm => pm.Function == WithFunction))
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .ToList();
+        }
+        public List<Person> findPersonByNameAndFunction(string WithNameLike, PersonMediaFunction? WithFunction)
+        {
+            if (WithFunction == null || WithFunction == PersonMediaFunction.Unknown)
+                return this.findPersonByName(WithNameLike);
+            if (WithNameLike == null || "".Equals(WithNameLike))
+                return this.findPersonByFunction(WithFunction);
+            return context.Persons
+                .Where(p => p.FirstName.Contains(WithNameLike) || p.LastName.Contains(WithNameLike))
+                .Where(p => p.PersonMedias.Any(pm => pm.Function == WithFunction))
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .ToList();
+        }
+
         public void Save(Person p)
         {
             if (p.PersonId == 0)
