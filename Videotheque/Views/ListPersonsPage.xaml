@@ -60,7 +60,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <!-- Separator -->
                         <ColumnDefinition Width="*"/>
-                        <!-- With genre -->
+                        <!-- With function -->
                         <ColumnDefinition Width="Auto"/>
                         <!-- Separator -->
                         <ColumnDefinition Width="*"/>
@@ -117,7 +117,7 @@
 
                     <Button Grid.Column="5" Content="Asc"
                             Command="{Binding SortByDateAsc}" CommandParameter="{Binding}" />
-                    <Label Grid.Column="6" Content="Date de sortie" />
+                    <Label Grid.Column="6" Content="Date de naissance" />
                     <Button Grid.Column="7" Content="Desc"
                             Command="{Binding SortByDateDesc}" CommandParameter="{Binding}" />
                 </Grid>
