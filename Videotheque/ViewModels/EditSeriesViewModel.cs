@@ -55,10 +55,6 @@ namespace Videotheque.ViewModels
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }
 
-            this.RefreshEpisodes();
-        }
-        private void RefreshEpisodes()
-        {
             ObservableCollection<Episode> episodes = new ObservableCollection<Episode>();
             if (this.Media.Episodes != null)
                 foreach (Episode episode in this.Media.Episodes)
@@ -72,10 +68,9 @@ namespace Videotheque.ViewModels
         }
         private void RemoveEpisodeExecute()
         {
-            if (this.Media.Episodes == null)
+            if (this.Episodes == null)
                 return;
-            this.Media.Episodes.Remove(this.SelectedEpisode);
-            this.RefreshEpisodes();
+            this.Episodes.Remove(this.SelectedEpisode);
         }
         private bool CanAddEpisode()
         {
@@ -83,10 +78,15 @@ namespace Videotheque.ViewModels
         }
         private void AddEpisodeExecute()
         {
-            if (this.Media.Episodes == null)
-                this.Media.Episodes = new List<Episode>();
-            this.Media.Episodes.Add(new Episode());
-            this.RefreshEpisodes();
+            if (this.Episodes == null)
+                this.Episodes = new ObservableCollection<Episode>();
+            this.Episodes.Add(new Episode());
+        }
+
+        protected override void SaveObject()
+        {
+            base.SaveObject();
+            this.Media.Episodes = this.Episodes.ToList();
         }
 
         public EditSeriesViewModel(Media media, SwitchPageParameter goToNextPage) :
