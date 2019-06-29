@@ -144,7 +144,7 @@ namespace Videotheque.Service
                         return;
                     context.Persons.Update(p);
                 }
-                context.SaveChangesAsync();
+                context.SaveChanges();
             });
             return t;
         }
@@ -159,7 +159,7 @@ namespace Videotheque.Service
         {
             Task t = Task.Run(() => {
                 context.Remove(p);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             });
             return t;
         }

@@ -109,7 +109,7 @@ namespace Videotheque.Service
                         return;
                     context.Medias.Update(m);
                 }
-                context.SaveChangesAsync();
+                context.SaveChanges();
             });
             return t;
         }
@@ -124,7 +124,7 @@ namespace Videotheque.Service
         {
             Task t = Task.Run(() => {
                 context.Remove(m);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             });
             return t;
         }
