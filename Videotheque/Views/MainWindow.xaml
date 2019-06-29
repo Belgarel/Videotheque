@@ -27,10 +27,46 @@
         <Label Grid.Column="1" Grid.Row="0" Style="{StaticResource sMainTitle}">Vidéothèque</Label>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
-            <Button Style="{StaticResource sMainMenuItem}" Content="Films" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListMovies}"></Button>
-            <Button Style="{StaticResource sMainMenuItem}" Content="Séries" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListSeries}"></Button>
-            <Button Style="{StaticResource sMainMenuItem}" Content="Créateurs" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}"></Button>
-            <Button Style="{StaticResource sMainMenuItem}" Content="Mes amis" Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListFriends}"></Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Films"
+                    Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListMovies}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard></Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Séries"
+                    Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListSeries}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard></Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Créateurs"
+                    Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListActors}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard></Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Style="{StaticResource sMainMenuItem}" Content="Mes amis"
+                    Command="{Binding SwitchPage}" CommandParameter="{Binding GoToListFriends}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard></Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
         </StackPanel>
         
         <Frame Content="{Binding CurrentPage}" Grid.Column="1" Grid.Row="1"

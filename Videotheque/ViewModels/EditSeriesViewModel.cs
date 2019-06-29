@@ -16,7 +16,7 @@ namespace Videotheque.ViewModels
         public ObservableCollection<Episode> Episodes
         {
             get { return (ObservableCollection<Episode>)GetProperty(); }
-            set { SetProperty(value); }
+            set { if (SetProperty(value)) Save.OnCanExecuteChanged(); }
         }
         public Episode SelectedEpisode
         {
@@ -30,6 +30,7 @@ namespace Videotheque.ViewModels
         protected override void InitValues()
         {
             base.InitValues();
+            this.TypeMedia = TypeMedia.Series;
 
             ObservableCollection<Episode> episodes = new ObservableCollection<Episode>();
             if (this.Media.Episodes != null)
@@ -59,6 +60,18 @@ namespace Videotheque.ViewModels
             this.Episodes.Add(new Episode());
         }
 
+        protected override bool CanSave()
+        {
+            if  (this.Title == null || "".Equals(this.Title))
+                return false;
+            bool ret = true;
+            foreach (Episode episode in this.Episodes)
+            {
+                if (episode.Title == null || "".Equals(episode.Title))
+                    ret = false;
+            }
+            return ret;
+        }
         protected override void SaveObject()
         {
             this.Media.Episodes = this.Episodes.ToList();

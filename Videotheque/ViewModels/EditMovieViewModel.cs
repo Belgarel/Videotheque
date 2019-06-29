@@ -36,7 +36,7 @@ namespace Videotheque.ViewModels
         public string Title
         {
             get { return (string)GetProperty(); }
-            set { SetProperty(value); }
+            set { if (SetProperty(value)) Save.OnCanExecuteChanged(); }
         }
         public string Genres
         {
@@ -100,13 +100,7 @@ namespace Videotheque.ViewModels
         }
 
         public SwitchPageParameter GoToNextPage { get; set; }
-        public BaseCommand Save
-        {
-            get
-            {
-                return new BaseCommand(this.SaveObject, this.CanSave);
-            }
-        }
+        public BaseCommand Save { get; set; }
 
         protected virtual void InitValues()
         {
@@ -136,9 +130,9 @@ namespace Videotheque.ViewModels
                     this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
             }
         }
-        private bool CanSave()
+        protected virtual bool CanSave()
         {
-            return (!"".Equals(this.Title));
+            return !(this.Title == null || "".Equals(this.Title));
         }
         protected virtual async void SaveObject()
         {
@@ -171,19 +165,19 @@ namespace Videotheque.ViewModels
 
             await MediaService.GetInstance().Save(this.Media, this.Loading);
 
-            if (this.GoToNextPage.DestinationModel is ListMoviesModel)
-                ((MainWindowModel)this.GoToNextPage.MainWindow).Movies();
-            else if (this.GoToNextPage.DestinationModel is ListSeriesModel)
+            if (this.GoToNextPage.DestinationModel is ListSeriesModel)
                 ((MainWindowModel)this.GoToNextPage.MainWindow).Series();
+            else if (this.GoToNextPage.DestinationModel is ListMoviesModel)
+                ((MainWindowModel)this.GoToNextPage.MainWindow).Movies();
         }
         public void Loading()
         {
-
             ((MainWindowModel)this.GoToNextPage.MainWindow).Loading();
         }
 
         public EditMovieViewModel(Media media, SwitchPageParameter goToNextPage)
         {
+            this.Save = new BaseCommand(this.SaveObject, this.CanSave);
             this.Media = media;
             this.GoToNextPage = goToNextPage;
         }

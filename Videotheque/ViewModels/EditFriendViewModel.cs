@@ -23,13 +23,7 @@ namespace Videotheque.ViewModels
             }
         }
         public SwitchPageParameter GoToNextPage { get; set; }
-        public BaseCommand Save
-        {
-            get
-            {
-                return new BaseCommand(this.SaveObjectAsync, this.CanSave);
-            }
-        }
+        public BaseCommand Save { get; set; }
 
         public string Title
         {
@@ -39,12 +33,12 @@ namespace Videotheque.ViewModels
         public string FirstName
         {
             get { return (string)GetProperty(); }
-            set { SetProperty(value); }
+            set { if (SetProperty(value)) Save.OnCanExecuteChanged(); }
         }
         public string LastName
         {
             get { return (string)GetProperty(); }
-            set { SetProperty(value); }
+            set { if (SetProperty(value)) Save.OnCanExecuteChanged(); }
         }
         public string Nationality
         {
@@ -73,10 +67,10 @@ namespace Videotheque.ViewModels
 
         private bool CanSave()
         {
-            return true;
-//            return (!"".Equals(this.FirstName) && !"".Equals(this.LastName));
+            return (this.FirstName != null && this.LastName != null
+                && !"".Equals(this.FirstName) && !"".Equals(this.LastName));
         }
-        protected virtual async void SaveObjectAsync()
+        protected virtual async void SaveObject()
         {
             this.Person.FirstName = this.FirstName;
             this.Person.LastName = this.LastName;
@@ -100,11 +94,13 @@ namespace Videotheque.ViewModels
 
         public EditFriendViewModel(Person person, SwitchPageParameter goToNextPage)
         {
+            this.Save = new BaseCommand(this.SaveObject, this.CanSave);
             this.Person = person;
             this.GoToNextPage = goToNextPage;
         }
         protected EditFriendViewModel(SwitchPageParameter goToNextPage)
         {
+            this.Save = new BaseCommand(this.SaveObject, this.CanSave);
             this.GoToNextPage = goToNextPage;
         }
     }

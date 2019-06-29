@@ -52,7 +52,7 @@ namespace Videotheque.ViewModels
             this.Roles = roles;
             this.NewRole = "";
         }
-        protected override async void SaveObjectAsync()
+        protected override async void SaveObject()
         {
             this.Person.FirstName = this.FirstName;
             this.Person.LastName = this.LastName;
