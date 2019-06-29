@@ -67,6 +67,16 @@ namespace Videotheque.ViewModels
             get { return (Media)GetProperty(); }
             set { if (SetProperty(value)) AddRole.OnCanExecuteChanged(); }
         }
+        public PersonMediaFunction? SelectedFunction
+        {
+            get { return (PersonMediaFunction?)GetProperty(); }
+            set { if (SetProperty(value)) AddRole.OnCanExecuteChanged(); }
+        }
+        public string NewRole
+        {
+            get { return (string)GetProperty(); }
+            set { if (SetProperty(value)) AddRole.OnCanExecuteChanged(); }
+        }
         public PersonMedia SelectedRole
         {
             get { return (PersonMedia)GetProperty(); }
@@ -88,6 +98,7 @@ namespace Videotheque.ViewModels
                 foreach (PersonMedia pm in this.Person.PersonMedias)
                     roles.Add(pm);
             this.Roles = roles;
+            this.NewRole = "";
         }
 
         private bool CanSave()
@@ -133,16 +144,20 @@ namespace Videotheque.ViewModels
                 this.Roles = new ObservableCollection<PersonMedia>();
             PersonMedia newRole = new PersonMedia();
             newRole.Media = this.SelectedMedia;
+            newRole.Function = this.SelectedFunction ?? PersonMediaFunction.Unknown;
+            newRole.Role = this.NewRole;
             this.Roles.Add(newRole);
             this.SelectedMedia = null;
+            this.SelectedFunction = null;
+            this.NewRole = "";
         }
 
         public EditPersonViewModel(Person person, SwitchPageParameter goToNextPage)
         {
-            this.Person = person;
-            this.Medias = MediaService.GetInstance().GetMedias();
             this.RemoveRole = new BaseCommand(this.RemoveRoleExecute, this.CanRemoveRole);
             this.AddRole = new BaseCommand(this.AddRoleExecute, this.CanAddRole);
+            this.Person = person;
+            this.Medias = MediaService.GetInstance().GetMedias();
             this.GoToNextPage = goToNextPage;
         }
     }

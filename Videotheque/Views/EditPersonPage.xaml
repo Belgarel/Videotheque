@@ -36,7 +36,7 @@
             <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <!-- Labels -->
-                    <ColumnDefinition Width="Auto"/>    
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <!-- Button -->
                     <ColumnDefinition Width="30"/>
@@ -55,6 +55,7 @@
                     <RowDefinition Height="Auto" />
                     <!-- 6.Roles -->
                     <RowDefinition Height="Auto" />
+                    <!-- 7.New Role -->
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -74,6 +75,7 @@
                 <Label Content="Nationalité" Grid.Row="4" Grid.Column="0" />
                 <TextBox Text="{Binding Nationality}" Grid.Row="4" Grid.Column="1" />
 
+                <!-- Roles -->
                 <Grid Grid.Row="6" Grid.Column= "0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -82,13 +84,6 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Label Content="Rôles" Grid.Row="0"/>
-
-                    <ComboBox Grid.Row="1"
-                                          ItemsSource="{Binding Path=Medias}"
-                                          DisplayMemberPath="Title"
-                                          SelectedItem="{Binding SelectedMedia}" />
-                    <Button Content="Ajouter" Grid.Row="2" 
-                                        Command="{Binding AddRole}" />
                     <Button Content="Retirer" Grid.Row="3" 
                                         Command="{Binding RemoveRole}" />
                 </Grid>
@@ -103,14 +98,30 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="{Binding Media.Title}" Grid.Column="0"/>
-                                <ComboBox Grid.Column="1"
-                                          ItemsSource="{Binding Source={StaticResource dataPersonFunction}}"
-                                          SelectedItem="{Binding Function}" />
+                                <Label Content="{Binding Function}" Grid.Column="1"/>
                                 <TextBox Text="{Binding Role}" Grid.Column="2"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListView>
+                
+                <!-- New role -->
+                <Button Content="Ajouter" Grid.Row="7" Command="{Binding AddRole}" />
+                <Grid Grid.Row="7" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Grid.Column="0"
+                                              ItemsSource="{Binding Path=Medias}"
+                                              DisplayMemberPath="Title"
+                                              SelectedItem="{Binding SelectedMedia}" />
+                    <ComboBox Grid.Column="1"
+                                              ItemsSource="{Binding Source={StaticResource dataPersonFunction}}"
+                                              SelectedValue="{Binding SelectedFunction}" />
+                    <TextBox Grid.Column="2" Text="{Binding NewRole}"/>
+                </Grid>
             </Grid>
             <Button Content="Sauvegarder" Command="{Binding Save}"
                                             Grid.Row="2" Grid.Column="2"/>
