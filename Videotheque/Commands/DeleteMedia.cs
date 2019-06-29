@@ -23,16 +23,21 @@ namespace Videotheque.Commands
             return true;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             if (parameter.GetType() != typeof(Media))
                 return;
-            MediaService.GetInstance().Delete((Media)parameter);
+            await MediaService.GetInstance().Delete((Media)parameter, this.Loading);
 
             //Refresh the list of medias
             if (this.GoToNextPage.DestinationModel is ListMoviesModel)
-                ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh();
-            ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
+                ((MainWindowModel)this.GoToNextPage.MainWindow).Movies();
+            else if (this.GoToNextPage.DestinationModel is ListSeriesModel)
+                ((MainWindowModel)this.GoToNextPage.MainWindow).Series();
+        }
+        public void Loading()
+        {
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Loading();
         }
         public DeleteMedia(MainWindowModel mainWindowModel, Page destinationPage, BaseNotifyPropertyChanged destinationModel)
         {

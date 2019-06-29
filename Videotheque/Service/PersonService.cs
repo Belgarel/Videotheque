@@ -128,26 +128,47 @@ namespace Videotheque.Service
                 .ToList();
         }
 
-        public void Save(Person p)
+        public Task Save(Person p)
         {
-            if (p.PersonId == 0)
+            Task t = Task.Run(() =>
             {
-                if (this.findByPersonId(p.PersonId) != null)
-                    return;
-                context.Persons.Add(p);
-            }
-            else
-            {
-                if (this.findByPersonId(p.PersonId) == null)
-                    return;
-                context.Persons.Update(p);
-            }
-            context.SaveChangesAsync();
+                if (p.PersonId == 0)
+                {
+                    if (this.findByPersonId(p.PersonId) != null)
+                        return;
+                    context.Persons.Add(p);
+                }
+                else
+                {
+                    if (this.findByPersonId(p.PersonId) == null)
+                        return;
+                    context.Persons.Update(p);
+                }
+                context.SaveChangesAsync();
+            });
+            return t;
         }
-        public void Delete(Person p)
+        public Task Save(Person p, Action loading)
         {
-            context.Remove(p);
-            context.SaveChangesAsync();
+            Task t = this.Save(p);
+            if (loading != null)
+                loading();
+            return t;
+        }
+        public Task Delete(Person p)
+        {
+            Task t = Task.Run(() => {
+                context.Remove(p);
+                context.SaveChangesAsync();
+            });
+            return t;
+        }
+        public Task Delete(Person p, Action loading)
+        {
+            Task t = this.Delete(p);
+            if (loading != null)
+                loading();
+            return t;
         }
     }
 }

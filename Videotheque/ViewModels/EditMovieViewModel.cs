@@ -140,7 +140,7 @@ namespace Videotheque.ViewModels
         {
             return (!"".Equals(this.Title));
         }
-        protected virtual void SaveObject()
+        protected virtual async void SaveObject()
         {
             this.Media.Title = this.Title;
             this.Media.Type = this.TypeMedia;
@@ -169,11 +169,17 @@ namespace Videotheque.ViewModels
             this.Media.GenreMedias = GenreMediaService.GetInstance()
                 .ToGenreMedias(this.Media, GenreService.GetInstance().ToGenres(this.Genres));
 
-            MediaService.GetInstance().Save(this.Media);
+            await MediaService.GetInstance().Save(this.Media, this.Loading);
 
-            ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
-            ((ListMoviesModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new media (if a new media was created)
-            new SwitchPage().Execute(this.GoToNextPage);
+            if (this.GoToNextPage.DestinationModel is ListMoviesModel)
+                ((MainWindowModel)this.GoToNextPage.MainWindow).Movies();
+            else if (this.GoToNextPage.DestinationModel is ListSeriesModel)
+                ((MainWindowModel)this.GoToNextPage.MainWindow).Series();
+        }
+        public void Loading()
+        {
+
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Loading();
         }
 
         public EditMovieViewModel(Media media, SwitchPageParameter goToNextPage)

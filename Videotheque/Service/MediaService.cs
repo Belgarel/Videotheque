@@ -94,26 +94,46 @@ namespace Videotheque.Service
                 .ToList();
         }
 
-        public void Save(Media m)
+        public Task Save(Media m)
         {
-            if (m.MediaId == 0)
-            {
-                if (this.findByMediaId(m.MediaId) != null)
-                    return;
-                context.Medias.Add(m);
-            }
-            else
-            {
-                if (this.findByMediaId(m.MediaId) == null)
-                    return;
-                context.Medias.Update(m);
-            }
-            context.SaveChangesAsync();
+            Task t = Task.Run(() => {
+                if (m.MediaId == 0)
+                {
+                    if (this.findByMediaId(m.MediaId) != null)
+                        return;
+                    context.Medias.Add(m);
+                }
+                else
+                {
+                    if (this.findByMediaId(m.MediaId) == null)
+                        return;
+                    context.Medias.Update(m);
+                }
+                context.SaveChangesAsync();
+            });
+            return t;
         }
-        public void Delete(Media m)
+        public Task Save(Media m, Action loading)
         {
-            context.Remove(m);
-            context.SaveChangesAsync();
+            Task t = this.Save(m);
+            if (loading != null)
+               loading();
+            return t;
+        }
+        public Task Delete(Media m)
+        {
+            Task t = Task.Run(() => {
+                context.Remove(m);
+                context.SaveChangesAsync();
+            });
+            return t;
+        }
+        public Task Delete(Media m, Action loading)
+        {
+            Task t = this.Delete(m);
+            if (loading != null)
+                loading();
+            return t;
         }
     }
 }

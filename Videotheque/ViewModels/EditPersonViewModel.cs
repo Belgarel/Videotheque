@@ -52,7 +52,7 @@ namespace Videotheque.ViewModels
             this.Roles = roles;
             this.NewRole = "";
         }
-        protected override void SaveObject()
+        protected override async void SaveObjectAsync()
         {
             this.Person.FirstName = this.FirstName;
             this.Person.LastName = this.LastName;
@@ -67,11 +67,9 @@ namespace Videotheque.ViewModels
 
             this.Person.PersonMedias = this.Roles.ToList();
 
-            PersonService.GetInstance().Save(this.Person);
+            await PersonService.GetInstance().Save(this.Person, this.Loading);
 
-            ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
-            ((ListPersonsModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new person (if a new person was created)
-            new SwitchPage().Execute(this.GoToNextPage);
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Actors();
         }
 
         private bool CanRemoveRole() { return this.SelectedRole != null; }

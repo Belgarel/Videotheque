@@ -27,7 +27,7 @@ namespace Videotheque.ViewModels
         {
             get
             {
-                return new BaseCommand(this.SaveObject, this.CanSave);
+                return new BaseCommand(this.SaveObjectAsync, this.CanSave);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Videotheque.ViewModels
             return true;
 //            return (!"".Equals(this.FirstName) && !"".Equals(this.LastName));
         }
-        protected virtual void SaveObject()
+        protected virtual async void SaveObjectAsync()
         {
             this.Person.FirstName = this.FirstName;
             this.Person.LastName = this.LastName;
@@ -88,11 +88,14 @@ namespace Videotheque.ViewModels
             PersonTitle.TryParse(this.Title, out Parsed);
             this.Person.Title = Parsed;
 
-            PersonService.GetInstance().Save(this.Person);
+            await PersonService.GetInstance().Save(this.Person, this.Loading);
 
-            ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
-            ((ListFriendsModel)this.GoToNextPage.DestinationModel).Refresh(); // refresh the list to include the new person (if a new person was created)
-            new SwitchPage().Execute(this.GoToNextPage);
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Friends();
+        }
+        public void Loading()
+        {
+
+            ((MainWindowModel)this.GoToNextPage.MainWindow).Loading();
         }
 
         public EditFriendViewModel(Person person, SwitchPageParameter goToNextPage)

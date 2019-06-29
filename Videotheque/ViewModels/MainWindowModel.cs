@@ -19,17 +19,62 @@ namespace Videotheque.ViewModels
         }
 
         public SwitchPage SwitchPage { get; }
-        public SwitchPageParameter GoToListMovies { get; set; }
-        public SwitchPageParameter GoToListSeries { get; set; }
-        public SwitchPageParameter GoToListActors { get; set; }
-        public SwitchPageParameter GoToListFriends { get; set; }
+        public SwitchPageParameter GoToListMovies
+        {
+            get { return (SwitchPageParameter)GetProperty(); }
+            set { SetProperty(value); }
+        }
+        public SwitchPageParameter GoToListSeries
+        {
+            get { return (SwitchPageParameter)GetProperty(); }
+            set { SetProperty(value); }
+        }
+        public SwitchPageParameter GoToListActors
+        {
+            get { return (SwitchPageParameter)GetProperty(); }
+            set { SetProperty(value); }
+        }
+        public SwitchPageParameter GoToListFriends
+        {
+            get { return (SwitchPageParameter)GetProperty(); }
+            set { SetProperty(value); }
+        }
 
         public void Refresh()
         {
+            // Oui, c'est bourrin.
             this.GoToListMovies = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
             this.GoToListSeries = new SwitchPageParameter(this, new ListSeriesPage(), new ListSeriesModel(this));
             this.GoToListActors = new SwitchPageParameter(this, new ListPersonsPage(), new ListPersonsModel(this));
             this.GoToListFriends = new SwitchPageParameter(this, new ListFriendsPage(), new ListFriendsModel(this));
+        }
+        public void Loading()
+        {
+            this.CurrentPage = new LoadingPage();
+        }
+        public void Movies()
+        {
+            // Vraiment...
+            this.Refresh();
+            SwitchPage.Execute(this.GoToListMovies);
+        }
+        public void Series()
+        {
+            // Vraiment...
+            this.Refresh();
+            SwitchPage.Execute(this.GoToListSeries);
+        }
+        public void Actors()
+        {
+            // Très...
+            this.Refresh();
+            SwitchPage.Execute(this.GoToListActors);
+        }
+        public void Friends()
+        {
+            // Bourrin.
+            this.Refresh();
+            SwitchPage.Execute(this.GoToListFriends);
         }
 
 
