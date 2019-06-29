@@ -1,0 +1,176 @@
+﻿<Page x:Class="Videotheque.Views.ListFriendsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Videotheque.Views" 
+      xmlns:vm="clr-namespace:Videotheque.ViewModels" 
+      xmlns:custom="clr-namespace:Videotheque.Controls" 
+      xmlns:model="clr-namespace:Videotheque.Model"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListFriendsPage">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <!-- 0. Title -->
+                <RowDefinition Height="Auto" />
+                <!-- 1. New -->
+                <RowDefinition Height="Auto" />
+                <!-- 2. Filters: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 3. Order: TODO -->
+                <RowDefinition Height="Auto" />
+                <!-- 4. List -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Page title & create button -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource sPageTitle}" Content="Mes amis"></Label>
+                <Button Grid.Row="1" Grid.Column="2"
+                        Content="Créer" Command="{Binding EditPerson}"
+                                                CommandParameter="{Binding NewPerson}" />
+            </Grid>
+
+            <!-- Filter bar -->
+            <Expander Grid.Row="2" Header="Filtrer" Style="{StaticResource sHeaderTitle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- Label -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Field -->
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Name contains -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Button -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Name -->
+                    <Label Grid.Column="1" Grid.Row="0" Content="Nom" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding WithNameLike}"/>
+
+                    <!-- Button -->
+                    <Button Grid.Column="3" Grid.Row="1" Content="Filtrer"
+                            Command="{Binding Filter}" CommandParameter="{Binding}" />
+                </Grid>
+            </Expander>
+
+            <!-- Order bar -->
+            <Expander Grid.Row="3" Header="Trier" Style="{StaticResource sHeaderTitle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Title: button up -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Title: label -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Title: button down -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- Date: button up -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Date: label -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Date: button down -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Separator -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Content="Asc"
+                            Command="{Binding SortByTitleAsc}" CommandParameter="{Binding}" />
+                    <Label Grid.Column="2" Content="Nom" />
+                    <Button Grid.Column="3" Content="Desc"
+                            Command="{Binding SortByTitleDesc}" CommandParameter="{Binding}" />
+
+                    <Button Grid.Column="5" Content="Asc"
+                            Command="{Binding SortByDateAsc}" CommandParameter="{Binding}" />
+                    <Label Grid.Column="6" Content="Date de naissance" />
+                    <Button Grid.Column="7" Content="Desc"
+                            Command="{Binding SortByDateDesc}" CommandParameter="{Binding}" />
+                </Grid>
+            </Expander>
+
+            <!-- Content -->
+            <ListBox Grid.Row="4" ItemsSource="{Binding ListPersons}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Header="{Binding LastName}" Style="{StaticResource sHeaderTitle}">
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/> <!-- Labels -->
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/> <!-- Button -->
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <!-- Title -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Last name -->
+                                        <RowDefinition Height="*" />
+                                        <!-- First name -->
+                                        <RowDefinition Height="*" />
+                                        <!--  -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Nationality -->
+                                        <RowDefinition Height="*" />
+                                        <!--  -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Roles -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Button modify -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Button delete -->
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Content="Civilité" Grid.Row="0" Grid.Column="0" />
+                                    <Label Content="{Binding Title}" Grid.Row="0" Grid.Column="1" />
+
+                                    <Label Content="Nom" Grid.Row="1" Grid.Column="0" />
+                                    <Label Content="{Binding LastName}" Grid.Row="1" Grid.Column="1" />
+
+                                    <Label Content="Prénom" Grid.Row="2" Grid.Column="0" />
+                                    <Label Content="{Binding FirstName}" Grid.Row="2" Grid.Column="1" />
+
+                                    <Label Content="Nationalité" Grid.Row="4" Grid.Column="0" />
+                                    <Label Content="{Binding Nationality}" Grid.Row="4" Grid.Column="1" />
+
+                                    <Button Content="Modifier" Command="{Binding DataContext.EditPerson, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Row="7" Grid.Column="0"/>
+
+                                    <Button Content="Supprimer" Command="{Binding DataContext.DeletePerson, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Row="8" Grid.Column="0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
+</Page>
