@@ -288,7 +288,7 @@ namespace Videotheque
             PersonMedia pm2 = new PersonMedia();
             pm2.Person = lanaWachowski;
             pm2.Media = media;
-            pm2.Function = PersonMediaFunction.Productor;
+            pm2.Function = PersonMediaFunction.Producer;
             pm2.Role = "Productrice exécutive";
             lanaWachowski.PersonMedias.Add(pm2);
             return lanaWachowski;
@@ -311,7 +311,7 @@ namespace Videotheque
             PersonMedia pm2 = new PersonMedia();
             pm2.Person = lillyWachowski;
             pm2.Media = media;
-            pm2.Function = PersonMediaFunction.Productor;
+            pm2.Function = PersonMediaFunction.Producer;
             pm2.Role = "Productrice exécutive";
             lillyWachowski.PersonMedias.Add(pm2);
             return lillyWachowski;
