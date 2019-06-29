@@ -29,31 +29,7 @@ namespace Videotheque.ViewModels
 
         protected override void InitValues()
         {
-            this.Comment = this.Media.Comment;
-            this.TypeMedia = TypeMedia.Series;
-            //            this.DateRelease = this.Media.DateRelease;
-            this.Duration = this.Media.Duration ?? 0;
-            //            this.ImagePath = this.Media.ImagePath;
-            this.LanguageMedia = this.Media.LanguageMedia.ToString();
-            this.LanguageSubtitles = this.Media.LanguageSubtitles.ToString();
-            this.LanguageVO = this.Media.LanguageVO.ToString();
-            this.MinAge = this.Media.MinAge ?? 0;
-            this.NumericalSupport = this.Media.NumericalSupport ?? false;
-            this.PhysicalSupport = this.Media.PhysicalSupport ?? false;
-            this.Rated = this.Media.Rated;
-            this.Seen = this.Media.Seen ?? false;
-            this.Synopsis = this.Media.Synopsis;
-            this.Title = this.Media.Title;
-
-            this.Genres = "";
-            if (this.Media.GenreMedias != null)
-            {
-                foreach (GenreMedia gm in this.Media.GenreMedias)
-                    if (gm.Genre != null)
-                        this.Genres += gm.Genre.Libelle + ", ";
-                if (this.Genres.Length >= 2)
-                    this.Genres = this.Genres.Substring(0, this.Genres.Length - 2);
-            }
+            base.InitValues();
 
             ObservableCollection<Episode> episodes = new ObservableCollection<Episode>();
             if (this.Media.Episodes != null)
