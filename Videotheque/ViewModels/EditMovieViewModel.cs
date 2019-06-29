@@ -112,7 +112,7 @@ namespace Videotheque.ViewModels
         {
             this.Comment = this.Media.Comment;
             this.TypeMedia = TypeMedia.Movie;
-            //            this.DateRelease = this.Media.DateRelease;
+            this.DateRelease = this.Media.DateRelease;
             this.Duration = this.Media.Duration ?? 0;
             //            this.ImagePath = this.Media.ImagePath;
             this.LanguageMedia = this.Media.LanguageMedia.ToString();
@@ -149,7 +149,7 @@ namespace Videotheque.ViewModels
             this.Media.Comment = this.Comment;
             this.Media.Rated = this.Rated ?? 0;
             this.Media.MinAge = this.MinAge;
-            //this.Media.DateRelease = this.DateRelease;
+            this.Media.DateRelease = this.DateRelease;
             this.Media.Duration = this.Duration;
             //this.Media.ImagePath = this.ImagePath;
             this.Media.NumericalSupport = this.NumericalSupport;

@@ -36,68 +36,81 @@
             <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <!-- Labels -->
-                    <ColumnDefinition Width="Auto"/>    
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <!-- 1.Title -->
                     <RowDefinition Height="Auto" />
-                    <!-- 2.Genres -->
+                    <!-- 2.DateRelease-->
                     <RowDefinition Height="Auto" />
-                    <!-- 3.Seen -->
+                    <!-- 3.Genres -->
                     <RowDefinition Height="Auto" />
-                    <!-- 4.Rated -->
+                    <!-- 4.Seen -->
                     <RowDefinition Height="Auto" />
-                    <!-- 5.Comment -->
+                    <!-- 5.Rated -->
                     <RowDefinition Height="Auto" />
-                    <!-- 6.Synopsis -->
+                    <!-- 6.Comment -->
                     <RowDefinition Height="Auto" />
-                    <!-- 7.Duration -->
+                    <!-- 7.Synopsis -->
                     <RowDefinition Height="Auto" />
-                    <!-- 8.Minimal age -->
+                    <!-- 8.Duration -->
                     <RowDefinition Height="Auto" />
-                    <!-- 9.VO -->
+                    <!-- 9.Minimal age -->
                     <RowDefinition Height="Auto" />
-                    <!-- 10.Language -->
+                    <!-- 10.VO -->
                     <RowDefinition Height="Auto" />
-                    <!-- 11.Subs -->
+                    <!-- 11.Language -->
                     <RowDefinition Height="Auto" />
-                    <!-- 12.Physical Support -->
+                    <!-- 12.Subs -->
                     <RowDefinition Height="Auto" />
-                    <!-- 13 Numerical Support -->
+                    <!-- 13.Physical Support -->
                     <RowDefinition Height="Auto" />
-                    <!-- 16.Button -->
+                    <!-- 14 Numerical Support -->
+                    <RowDefinition Height="Auto" />
+                    <!-- 15.Button -->
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Nom" Grid.Row="1" Grid.Column="0" />
                 <TextBox Text="{Binding Title}" Grid.Row="1" Grid.Column="1" />
 
-                <Label Content="Genre(s)" Grid.Row="2" Grid.Column="0" />
-                <TextBox Text="{Binding Genres}" Grid.Row="2" Grid.Column="1" />
+                <Label Content="Date" Grid.Row="2" Grid.Column="0" />
+                <DatePicker  SelectedDate="{Binding DateRelease}" Grid.Row="2" Grid.Column="1" />
 
-                <Label Content="Vu" Grid.Row="3" Grid.Column="0" />
-                <CheckBox IsThreeState="True" IsChecked="{Binding Seen}" Grid.Row="3" Grid.Column="1" />
+                <Label Content="Genre(s)" Grid.Row="3" Grid.Column="0" />
+                <TextBox Text="{Binding Genres}" Grid.Row="3" Grid.Column="1" />
 
-                <Label Content="Note" Grid.Row="4" Grid.Column="0" />
-                <Grid  Grid.Row="4" Grid.Column="1">
+                <Label Content="Vu" Grid.Row="4" Grid.Column="0" />
+                <CheckBox IsChecked="{Binding Seen}" Grid.Row="4" Grid.Column="1" />
+
+                <Label Content="Note" Grid.Row="5" Grid.Column="0" />
+                <Grid  Grid.Row="5" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <xctk:IntegerUpDown Value="{Binding Rated}" Minimum="0" Maximum="5"  Grid.Column="0"/> 
+                    <xctk:IntegerUpDown Value="{Binding Rated}" Minimum="0" Maximum="5"  Grid.Column="0"/>
                     <Label Content=" / 5" Grid.Column="1"/>
                 </Grid>
 
-                <Label Content="Commentaire" Grid.Row="5" Grid.Column="0" />
-                <TextBox Text="{Binding Comment}" Grid.Row="5" Grid.Column="1" />
+                <Label Content="Commentaire" Grid.Row="6" Grid.Column="0" />
+                <TextBox Text="{Binding Comment}" Grid.Row="6" Grid.Column="1" />
 
-                <Label Content="Synopsis" Grid.Row="6" Grid.Column="0" />
-                <TextBox Text="{Binding Synopsis}" Grid.Row="6" Grid.Column="1" />
+                <Label Content="Synopsis" Grid.Row="7" Grid.Column="0" />
+                <TextBox Text="{Binding Synopsis}" Grid.Row="7" Grid.Column="1" />
 
                 <Label Content="Âge minimum" Grid.Row="8" Grid.Column="0" />
-                <TextBox Text="{Binding MinAge}" Grid.Row="8" Grid.Column="1" />
-
+                <Grid  Grid.Row="8" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <xctk:IntegerUpDown Value="{Binding MinAge}" Minimum="0" Maximum="5"  Grid.Column="0"/>
+                    <Label Content=" / 21" Grid.Column="1"/>
+                </Grid>
+                
+                
                 <Label Content="VO" Grid.Row="9" Grid.Column="0" />
                 <ComboBox Grid.Row="9" Grid.Column="1"
                     ItemsSource="{Binding Source={StaticResource dataLanguagesVO}}" SelectedItem="{Binding LanguageVO}" />
@@ -110,11 +123,11 @@
                 <ComboBox Grid.Row="11" Grid.Column="1"
                     ItemsSource="{Binding Source={StaticResource dataLanguagesSubs}}" SelectedItem="{Binding LanguageSubtitles}" />
 
-                <Label Content="Physique" Grid.Row="12" Grid.Column="0" />
-                <CheckBox IsThreeState="True" IsChecked="{Binding PhysicalSupport}" Grid.Row="12" Grid.Column="1" />
+                <Label Content="Support Physique" Grid.Row="12" Grid.Column="0" />
+                <CheckBox IsChecked="{Binding PhysicalSupport}" Grid.Row="12" Grid.Column="1" />
 
-                <Label Content="Numérique" Grid.Row="13" Grid.Column="0" />
-                <CheckBox IsThreeState="True" IsChecked="{Binding NumericalSupport}" Grid.Row="13" Grid.Column="1" />
+                <Label Content="Support Numérique" Grid.Row="13" Grid.Column="0" />
+                <CheckBox IsChecked="{Binding NumericalSupport}" Grid.Row="13" Grid.Column="1" />
             </Grid>
 
             <Button Content="Sauvegarder" Command="{Binding Save}"
