@@ -82,10 +82,7 @@ namespace Videotheque.ViewModels
             this.LastName = this.Person.LastName ?? "";
             this.Nationality = this.Person.Nationality ?? "";
             //            this.BirthDate = this.Person.BirthDate;
-            this.RefreshRoles();
-        }
-        private void RefreshRoles()
-        {
+
             ObservableCollection<PersonMedia> roles = new ObservableCollection<PersonMedia>();
             if (this.Person.PersonMedias != null)
                 foreach (PersonMedia pm in this.Person.PersonMedias)
@@ -111,6 +108,8 @@ namespace Videotheque.ViewModels
             PersonTitle.TryParse(this.Title, out Parsed);
             this.Person.Title = Parsed;
 
+            this.Person.PersonMedias = this.Roles.ToList();
+
             PersonService.GetInstance().Save(this.Person);
 
             ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
@@ -121,22 +120,20 @@ namespace Videotheque.ViewModels
         private bool CanRemoveRole() { return this.SelectedRole != null; }
         private void RemoveRoleExecute()
         {
-            if (this.Person.PersonMedias == null)
+            if (this.Roles == null)
                 return;
-            this.Person.PersonMedias.Remove(this.SelectedRole);
-            this.RefreshRoles();
+            this.Roles.Remove(this.SelectedRole);
         }
         private bool CanAddRole() { return this.SelectedMedia != null; }
         private void AddRoleExecute()
         {
             if (this.SelectedMedia == null)
                 return;
-            if (this.Person.PersonMedias == null)
-                this.Person.PersonMedias = new List<PersonMedia>();
+            if (this.Roles == null)
+                this.Roles = new ObservableCollection<PersonMedia>();
             PersonMedia newRole = new PersonMedia();
             newRole.Media = this.SelectedMedia;
-            this.Person.PersonMedias.Add(newRole);
-            this.RefreshRoles();
+            this.Roles.Add(newRole);
             this.SelectedMedia = null;
         }
 
