@@ -21,6 +21,12 @@ namespace Videotheque.Model
         Unknown
     }
 
+    public enum TypePerson
+    {
+        Friend,
+        Other
+    }
+
     public enum PersonTitle
     {
         Mme,

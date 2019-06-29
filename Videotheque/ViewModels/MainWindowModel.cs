@@ -22,12 +22,14 @@ namespace Videotheque.ViewModels
         public SwitchPageParameter GoToListMovies { get; set; }
         public SwitchPageParameter GoToListSeries { get; set; }
         public SwitchPageParameter GoToListActors { get; set; }
+        public SwitchPageParameter GoToListFriends { get; set; }
 
         public void Refresh()
         {
             this.GoToListMovies = new SwitchPageParameter(this, new ListMoviesPage(), new ListMoviesModel(this));
             this.GoToListSeries = new SwitchPageParameter(this, new ListSeriesPage(), new ListSeriesModel(this));
             this.GoToListActors = new SwitchPageParameter(this, new ListPersonsPage(), new ListPersonsModel(this));
+            this.GoToListFriends = new SwitchPageParameter(this, new ListFriendsPage(), new ListFriendsModel(this));
         }
 
 

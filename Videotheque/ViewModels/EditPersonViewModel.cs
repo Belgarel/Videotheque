@@ -11,51 +11,8 @@ using Videotheque.Service;
 
 namespace Videotheque.ViewModels
 {
-    class EditPersonViewModel : BaseNotifyPropertyChanged
+    class EditPersonViewModel : EditFriendViewModel
     {
-        public Person Person
-        {
-            get { return (Person)GetProperty(); }
-            set
-            {
-                SetProperty(value);
-                InitValues();
-            }
-        }
-        public SwitchPageParameter GoToNextPage { get; set; }
-        public BaseCommand Save
-        {
-            get
-            {
-                return new BaseCommand(this.SaveObject, this.CanSave);
-            }
-        }
-
-        public string Title
-        {
-            get { return (string)GetProperty(); }
-            set { SetProperty(value); }
-        }
-        public string FirstName
-        {
-            get { return (string)GetProperty(); }
-            set { SetProperty(value); }
-        }
-        public string LastName
-        {
-            get { return (string)GetProperty(); }
-            set { SetProperty(value); }
-        }
-        public string Nationality
-        {
-            get { return (string)GetProperty(); }
-            set { SetProperty(value); }
-        }
-        public DateTime BirthDate
-        {
-            get { return (DateTime)GetProperty(); }
-            set { SetProperty(value); }
-        }
         public ObservableCollection<PersonMedia> Roles
         {
             get { return (ObservableCollection<PersonMedia>)GetProperty(); }
@@ -85,14 +42,9 @@ namespace Videotheque.ViewModels
         public BaseCommand RemoveRole { get; }
         public BaseCommand AddRole { get; }
 
-        protected virtual void InitValues()
+        protected override void InitValues()
         {
-            this.Title = this.Person.Title.ToString();
-            this.FirstName = this.Person.FirstName ?? "";
-            this.LastName = this.Person.LastName ?? "";
-            this.Nationality = this.Person.Nationality ?? "";
-            //            this.BirthDate = this.Person.BirthDate;
-
+            base.InitValues();
             ObservableCollection<PersonMedia> roles = new ObservableCollection<PersonMedia>();
             if (this.Person.PersonMedias != null)
                 foreach (PersonMedia pm in this.Person.PersonMedias)
@@ -100,13 +52,7 @@ namespace Videotheque.ViewModels
             this.Roles = roles;
             this.NewRole = "";
         }
-
-        private bool CanSave()
-        {
-            return true;
-//            return (!"".Equals(this.FirstName) && !"".Equals(this.LastName));
-        }
-        protected virtual void SaveObject()
+        protected override void SaveObject()
         {
             this.Person.FirstName = this.FirstName;
             this.Person.LastName = this.LastName;
@@ -152,13 +98,13 @@ namespace Videotheque.ViewModels
             this.NewRole = "";
         }
 
-        public EditPersonViewModel(Person person, SwitchPageParameter goToNextPage)
+        public EditPersonViewModel(Person person, SwitchPageParameter goToNextPage) :
+            base(goToNextPage)
         {
             this.RemoveRole = new BaseCommand(this.RemoveRoleExecute, this.CanRemoveRole);
             this.AddRole = new BaseCommand(this.AddRoleExecute, this.CanAddRole);
-            this.Person = person;
             this.Medias = MediaService.GetInstance().GetMedias();
-            this.GoToNextPage = goToNextPage;
+            this.Person = person;
         }
     }
 }

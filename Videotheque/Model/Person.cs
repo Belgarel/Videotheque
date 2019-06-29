@@ -15,6 +15,8 @@ namespace Videotheque.Model
         public int PersonId { get; set; }
 
         public PersonTitle Title { get; set; }
+        [Required]
+        public TypePerson Type { get; set; }
 
         [Required]
         public string LastName { get; set; }

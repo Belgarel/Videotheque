@@ -78,7 +78,13 @@ namespace Videotheque
                 PersonJerryDoyle(medias[2]),
                 PersonMiraFurlan(medias[2]),
                 PersonAndreasKatsulas(medias[2]),
-                PersonPeterJurasik(medias[2])
+                PersonPeterJurasik(medias[2]),
+                PersonJosephStalin(),
+                PersonDonaldTrump(),
+                PersonMaggyThatcher(),
+                PersonMaoZedung(),
+                PersonToujouHideki(),
+                PersonPolPot()
         };
             /*/ Adding their roles
             this.AddRole(medias[0], persons[0], PersonMediaFunction.Director, ""); // Matrix
@@ -273,6 +279,7 @@ namespace Videotheque
         private Person PersonLanaWachowski(Media media)
         {
             Person lanaWachowski = new Person();
+            lanaWachowski.Type = TypePerson.Other;
             lanaWachowski.LastName = "Wachowski";
             lanaWachowski.FirstName = "Lana";
             lanaWachowski.Nationality = "Americaine";
@@ -296,6 +303,7 @@ namespace Videotheque
         private Person PersonLillyWachowski(Media media)
         {
             Person lillyWachowski = new Person();
+            lillyWachowski.Type = TypePerson.Other;
             lillyWachowski.LastName = "Wachowski";
             lillyWachowski.FirstName = "Lilly";
             lillyWachowski.Nationality = "Americaine";
@@ -319,6 +327,7 @@ namespace Videotheque
         private Person PersonKeanuReeves(Media media)
         {
             Person keanuReeves = new Person();
+            keanuReeves.Type = TypePerson.Other;
             keanuReeves.LastName = "Reeves";
             keanuReeves.FirstName = "Keanu";
             keanuReeves.Nationality = "Canadienne";
@@ -336,6 +345,7 @@ namespace Videotheque
         private Person PersonCarrieAnneMoss(Media media)
         {
             Person carrieAnneMoss = new Person();
+            carrieAnneMoss.Type = TypePerson.Other;
             carrieAnneMoss.LastName = "Moss";
             carrieAnneMoss.FirstName = "Carrie-Anne";
             carrieAnneMoss.Nationality = "Canadienne";
@@ -353,6 +363,7 @@ namespace Videotheque
         private Person PersonLaurenceFishburne(Media media)
         {
             Person laurenceFishburne = new Person();
+            laurenceFishburne.Type = TypePerson.Other;
             laurenceFishburne.LastName = "Fishburne";
             laurenceFishburne.FirstName = "Laurence";
             laurenceFishburne.Nationality = "Americaine";
@@ -370,6 +381,7 @@ namespace Videotheque
         private Person PersonHugoWeaving(Media media)
         {
             Person hugoWeaving = new Person();
+            hugoWeaving.Type = TypePerson.Other;
             hugoWeaving.LastName = "Weaving";
             hugoWeaving.FirstName = "Hugo";
             hugoWeaving.Nationality = "Australienne";
@@ -387,6 +399,7 @@ namespace Videotheque
         private Person PersonDavidFincher(Media media)
         {
             Person davidFincher = new Person();
+            davidFincher.Type = TypePerson.Other;
             davidFincher.LastName = "Fincher";
             davidFincher.FirstName = "David";
             davidFincher.Nationality = "Américaine";
@@ -404,6 +417,7 @@ namespace Videotheque
         private Person PersonEdwardNorton(Media media)
         {
             Person edwardNorton = new Person();
+            edwardNorton.Type = TypePerson.Other;
             edwardNorton.LastName = "Norton";
             edwardNorton.FirstName = "Edward";
             edwardNorton.Nationality = "Américaine";
@@ -421,6 +435,7 @@ namespace Videotheque
         private Person PersonBradPitt(Media media)
         {
             Person bradPitt = new Person();
+            bradPitt.Type = TypePerson.Other;
             bradPitt.LastName = "Pitt";
             bradPitt.FirstName = "Brad";
             bradPitt.Nationality = "Américaine";
@@ -438,6 +453,7 @@ namespace Videotheque
         private Person PersonHelenaCarter(Media media)
         {
             Person helenaCarter = new Person();
+            helenaCarter.Type = TypePerson.Other;
             helenaCarter.LastName = "Carter";
             helenaCarter.FirstName = "Helena";
             helenaCarter.Nationality = "Britannique";
@@ -455,6 +471,7 @@ namespace Videotheque
         private Person PersonMeatLoaf(Media media)
         {
             Person meatLoaf = new Person();
+            meatLoaf.Type = TypePerson.Other;
             meatLoaf.LastName = "Loaf";
             meatLoaf.FirstName = "Meat";
             meatLoaf.Nationality = "Américaine";
@@ -472,9 +489,10 @@ namespace Videotheque
         private Person PersonBruceBoxleitner(Media media)
         {
             Person bruceBoxleitner = new Person();
+            bruceBoxleitner.Type = TypePerson.Other;
             bruceBoxleitner.LastName = "Boxleitner";
             bruceBoxleitner.FirstName = "Bruce";
-            bruceBoxleitner.Nationality = "Améicaine";
+            bruceBoxleitner.Nationality = "Américaine";
             bruceBoxleitner.BirthDate = new DateTime(1950, 5, 12);
 
             bruceBoxleitner.PersonMedias = new List<PersonMedia>();
@@ -489,9 +507,10 @@ namespace Videotheque
         private Person PersonClaudiaChristian(Media media)
         {
             Person claudiaChristian = new Person();
+            claudiaChristian.Type = TypePerson.Other;
             claudiaChristian.LastName = "Christian";
             claudiaChristian.FirstName = "Claudia";
-            claudiaChristian.Nationality = "Améicaine";
+            claudiaChristian.Nationality = "Américaine";
             claudiaChristian.BirthDate = new DateTime(1965, 8, 10);
 
             claudiaChristian.PersonMedias = new List<PersonMedia>();
@@ -506,9 +525,10 @@ namespace Videotheque
         private Person PersonJerryDoyle(Media media)
         {
             Person jerryDoyle = new Person();
+            jerryDoyle.Type = TypePerson.Other;
             jerryDoyle.LastName = "Doyle";
             jerryDoyle.FirstName = "Jerry";
-            jerryDoyle.Nationality = "Améicaine";
+            jerryDoyle.Nationality = "Américaine";
             jerryDoyle.BirthDate = new DateTime(1956, 7, 16);
 
             jerryDoyle.PersonMedias = new List<PersonMedia>();
@@ -523,6 +543,7 @@ namespace Videotheque
         private Person PersonMiraFurlan(Media media)
         {
             Person miraFurlan = new Person();
+            miraFurlan.Type = TypePerson.Other;
             miraFurlan.LastName = "Furlan";
             miraFurlan.FirstName = "Furlan";
             miraFurlan.Nationality = "Croate";
@@ -540,6 +561,7 @@ namespace Videotheque
         private Person PersonAndreasKatsulas(Media media)
         {
             Person andreasKatsulas = new Person();
+            andreasKatsulas.Type = TypePerson.Other;
             andreasKatsulas.LastName = "Katsulas";
             andreasKatsulas.FirstName = "Andreas";
             andreasKatsulas.Nationality = "Ameéicaine";
@@ -557,6 +579,7 @@ namespace Videotheque
         private Person PersonPeterJurasik(Media media)
         {
             Person peterJurasik = new Person();
+            peterJurasik.Type = TypePerson.Other;
             peterJurasik.LastName = "Jurasik";
             peterJurasik.FirstName = "Peter";
             peterJurasik.Nationality = "Ameéicaine";
@@ -570,6 +593,67 @@ namespace Videotheque
             pm.Role = "Londo Mollari";
             peterJurasik.PersonMedias.Add(pm);
             return peterJurasik;
+        }
+
+        private Person PersonJosephStalin()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Staline";
+            f.FirstName = "Joseph";
+            f.Nationality = "Russe";
+            f.BirthDate = new DateTime(1878, 12, 18);
+            return f;
+        }
+        private Person PersonDonaldTrump()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Trump";
+            f.FirstName = "Donald";
+            f.Nationality = "Américaine";
+            f.BirthDate = new DateTime(1946, 6, 14);
+            return f;
+        }
+        private Person PersonMaggyThatcher()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Thatcher";
+            f.FirstName = "Margaret";
+            f.Nationality = "Britannique";
+            f.BirthDate = new DateTime(1925, 10, 13);
+            return f;
+        }
+        private Person PersonMaoZedung()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Zedung";
+            f.FirstName = "Mao";
+            f.Nationality = "Chinoise";
+            f.BirthDate = new DateTime(1893, 12, 26);
+            return f;
+        }
+        private Person PersonToujouHideki()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Hideki";
+            f.FirstName = "Tojo";
+            f.Nationality = "Japonaise";
+            f.BirthDate = new DateTime(1884);
+            return f;
+        }
+        private Person PersonPolPot()
+        {
+            Person f = new Person();
+            f.Type = TypePerson.Friend;
+            f.LastName = "Pot";
+            f.FirstName = "Pol";
+            f.Nationality = "Cambodgienne";
+            f.BirthDate = new DateTime(1925, 5, 19);
+            return f;
         }
     }
 }

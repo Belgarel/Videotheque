@@ -244,11 +244,16 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\DeletePerson.cs" />
     <Compile Include="Commands\DeleteMedia.cs" />
+    <Compile Include="Commands\EditFriend.cs" />
     <Compile Include="Commands\EditPerson.cs" />
     <Compile Include="Commands\EditMedia.cs" />
     <Compile Include="Controls\RatingBar.xaml.cs">
       <DependentUpon>RatingBar.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EditFriendPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\EditPersonPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -260,6 +265,10 @@
     <Page Include="Views\EditMoviePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListFriendsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ListPersonsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -283,9 +292,9 @@
     </Compile>
     <Compile Include="Commands\SwitchPage.cs" />
     <Compile Include="Commands\SwitchPageParameter.cs" />
-    <Compile Include="Migrations\20190618070054_final.cs" />
-    <Compile Include="Migrations\20190618070054_final.designer.cs">
-      <DependentUpon>20190618070054_final.cs</DependentUpon>
+    <Compile Include="Migrations\20190629180916_friendship.cs" />
+    <Compile Include="Migrations\20190629180916_friendship.designer.cs">
+      <DependentUpon>20190629180916_friendship.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VideothequeDbContextModelSnapshot.cs" />
     <Compile Include="Service\GenreMediaService.cs" />
@@ -294,14 +303,19 @@
     <Compile Include="Service\MediaService.cs" />
     <Compile Include="ViewModels\AbstractSortableViewModel.cs" />
     <Compile Include="ViewModels\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\EditFriendViewModel.cs" />
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\EditSeriesViewModel.cs" />
     <Compile Include="ViewModels\EditMovieViewModel.cs" />
+    <Compile Include="ViewModels\ListFriendsModel.cs" />
     <Compile Include="ViewModels\ListPersonsModel.cs" />
     <Compile Include="ViewModels\ListSeriesModel.cs" />
     <Compile Include="ViewModels\ListMoviesModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\RatingBarViewModel.cs" />
+    <Compile Include="Views\EditFriendPage.xaml.cs">
+      <DependentUpon>EditFriendPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditPersonPage.xaml.cs">
       <DependentUpon>EditPersonPage.xaml</DependentUpon>
     </Compile>
@@ -310,6 +324,9 @@
     </Compile>
     <Compile Include="Views\EditMoviePage.xaml.cs">
       <DependentUpon>EditMoviePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListFriendsPage.xaml.cs">
+      <DependentUpon>ListFriendsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListPersonsPage.xaml.cs">
       <DependentUpon>ListPersonsPage.xaml</DependentUpon>

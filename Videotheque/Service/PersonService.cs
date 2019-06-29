@@ -40,13 +40,23 @@ namespace Videotheque.Service
                     .ThenInclude(pm => pm.Media)
                 .ToList();
         }
+        public List<Person> GetPersonsNotFriends()
+        {
+            return context.Persons
+                .Where(p => p.Type != TypePerson.Friend)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .ToList();
+        }
         public Person findByPersonId(int PersonId)
         {
             return context.Persons.Find(PersonId);
         }
-        public Person findByName(string firstName, string lastName)
+        public Person findPersonByName(string firstName, string lastName)
         {
-            List<Person> Persons =  context.Persons
+            List<Person> Persons = context.Persons
+                .Where(p => p.Type != TypePerson.Friend)
                 .Where((p) => p.FirstName.Equals(firstName) && p.LastName.Equals(lastName))
                 .Include(p => p.PersonMedias)
                     .ThenInclude(pm => pm.Media)
@@ -56,11 +66,12 @@ namespace Videotheque.Service
             return Persons.First();
         }
 
-        public List<Person> findPersonByName(string WithNameLike)
+        public List<Person> findPersonWithName(string WithNameLike)
         {
             if (WithNameLike == null || "".Equals(WithNameLike))
                 return this.GetPersons();
             return context.Persons
+                .Where(p => p.Type != TypePerson.Friend)
                 .Where(p => p.FirstName.Contains(WithNameLike) || p.LastName.Contains(WithNameLike))
                 .Include(p => p.PersonMedias)
                     .ThenInclude(pm => pm.Media)
@@ -72,6 +83,7 @@ namespace Videotheque.Service
             if (WithFunction == null || WithFunction == PersonMediaFunction.Unknown)
                 return this.GetPersons();
             return context.Persons
+                .Where(p => p.Type != TypePerson.Friend)
                 .Where(p => p.PersonMedias.Any(pm => pm.Function == WithFunction))
                 .Include(p => p.PersonMedias)
                     .ThenInclude(pm => pm.Media)
@@ -81,12 +93,35 @@ namespace Videotheque.Service
         public List<Person> findPersonByNameAndFunction(string WithNameLike, PersonMediaFunction? WithFunction)
         {
             if (WithFunction == null || WithFunction == PersonMediaFunction.Unknown)
-                return this.findPersonByName(WithNameLike);
+                return this.findPersonWithName(WithNameLike);
             if (WithNameLike == null || "".Equals(WithNameLike))
                 return this.findPersonByFunction(WithFunction);
             return context.Persons
+                .Where(p => p.Type != TypePerson.Friend)
                 .Where(p => p.FirstName.Contains(WithNameLike) || p.LastName.Contains(WithNameLike))
                 .Where(p => p.PersonMedias.Any(pm => pm.Function == WithFunction))
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .ToList();
+        }
+
+        public List<Person> GetFriends()
+        {
+            return context.Persons
+                .Where(p => p.Type == TypePerson.Friend)
+                .OrderBy(p => p.LastName + p.FirstName)
+                .Include(p => p.PersonMedias)
+                    .ThenInclude(pm => pm.Media)
+                .ToList();
+        }
+        public List<Person> findFriendWithName(string WithNameLike)
+        {
+            if (WithNameLike == null || "".Equals(WithNameLike))
+                return this.GetPersons();
+            return context.Persons
+                .Where(p => p.Type == TypePerson.Friend)
+                .Where(p => p.FirstName.Contains(WithNameLike) || p.LastName.Contains(WithNameLike))
                 .Include(p => p.PersonMedias)
                     .ThenInclude(pm => pm.Media)
                 .OrderBy(p => p.LastName + p.FirstName)

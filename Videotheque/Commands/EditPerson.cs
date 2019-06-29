@@ -22,7 +22,7 @@ namespace Videotheque.Commands
             return true;
         }
 
-        public void Execute(object parameter)
+        public virtual void Execute(object parameter)
         {
             if (parameter.GetType() != typeof(Person))
                 return;
@@ -32,7 +32,10 @@ namespace Videotheque.Commands
             this.MainWindow.CurrentPage.DataContext = new EditPersonViewModel(person, this.GoToNextPage);
 
             //Refresh the list of persons
-            ((ListPersonsModel)this.GoToNextPage.DestinationModel).Refresh();
+            if (this.GoToNextPage.DestinationModel is ListPersonsModel)
+                ((ListPersonsModel)this.GoToNextPage.DestinationModel).Refresh();
+            else if (this.GoToNextPage.DestinationModel is ListFriendsModel)
+                ((ListFriendsModel)this.GoToNextPage.DestinationModel).Refresh();
             ((MainWindowModel)this.GoToNextPage.MainWindow).Refresh();
         }
         public EditPerson(MainWindowModel mainWindowModel, Page destinationPage, BaseNotifyPropertyChanged destinationModel)

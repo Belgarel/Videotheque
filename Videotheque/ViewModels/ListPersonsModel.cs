@@ -11,77 +11,31 @@ using Videotheque.Views;
 
 namespace Videotheque.ViewModels
 {
-    class ListPersonsModel : AbstractSortableViewModel
+    class ListPersonsModel : ListFriendsModel
     {
-        public MainWindowModel MainWindow { get; set; }
-        public ObservableCollection<Person> ListPersons
-        {
-            get { return (ObservableCollection<Person>)GetProperty(); }
-            set { SetProperty(value); }
-        }
-        public string WithNameLike
-        {
-            get { return (string)GetProperty(); }
-            set { if (SetProperty(value)) Filter.OnCanExecuteChanged(); }
-        }
         public PersonMediaFunction? WithFunction
         {
             get { return (PersonMediaFunction?)GetProperty() ?? PersonMediaFunction.Unknown; }
             set { if (SetProperty(value)) Filter.OnCanExecuteChanged(); }
         }
-
-        public EditPerson EditPerson { get; set; }
-        public Person NewPerson { get; set; } // NewPerson is an empty person that will be taken to the EditPerson page if button "Créer" is used
-        public DeletePerson DeletePerson { get; set; }
-        public BaseCommand Filter { get; set; }
-
-        public virtual void Refresh()
+        public override void Refresh()
         {
             this.NewPerson = new Person();
-            this.ListPersons = new ObservableCollection<Person>(PersonService.GetInstance().GetPersons());
+            this.NewPerson.Type = TypePerson.Other;
+            this.ListPersons = new ObservableCollection<Person>(PersonService.GetInstance().GetPersonsNotFriends());
             this.WithNameLike = "";
         }
 
-        public void FilterExecute()
+        public override void FilterExecute()
         {
             this.ListPersons = new ObservableCollection<Person>(
                 PersonService.GetInstance().findPersonByNameAndFunction(WithNameLike, WithFunction));
         }
 
-        public override void SortByTitleAscExecute()
+        public ListPersonsModel(MainWindowModel MainWindow) : base(MainWindow)
         {
-            this.ListPersons = new ObservableCollection<Person>(
-                this.ListPersons.OrderBy(p => p.LastName).ThenBy(p => p.FirstName));
-        }
-        public override void SortByTitleDescExecute()
-        {
-            this.ListPersons = new ObservableCollection<Person>(
-                this.ListPersons.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName));
-        }
-        public override void SortByDateAscExecute()
-        {
-            this.ListPersons = new ObservableCollection<Person>(this.ListPersons.OrderBy(p => p.BirthDate));
-        }
-        public override void SortByDateDescExecute()
-        {
-            this.ListPersons = new ObservableCollection<Person>(this.ListPersons.OrderByDescending(p => p.BirthDate));
-        }
-        public override void SortByRatingAscExecute()
-        {
-            throw new NotImplementedException();
-        }
-        public override void SortByRatingDescExecute()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ListPersonsModel(MainWindowModel MainWindow)
-        {
-            this.MainWindow = MainWindow;
-            this.Filter = new BaseCommand(this.FilterExecute);
             this.EditPerson = new EditPerson(MainWindow, new ListPersonsPage(), this);
             this.DeletePerson = new DeletePerson(MainWindow, new ListPersonsPage(), this);
-            this.Refresh(); // populate the list of medias by reading from the database
         }
     }
 }

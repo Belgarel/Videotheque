@@ -128,6 +128,8 @@ namespace Videotheque.Migrations
 
                     b.Property<int>("Title");
 
+                    b.Property<int>("Type");
+
                     b.HasKey("PersonId");
 
                     b.ToTable("Persons");
