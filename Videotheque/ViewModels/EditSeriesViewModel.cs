@@ -85,8 +85,8 @@ namespace Videotheque.ViewModels
 
         protected override void SaveObject()
         {
-            base.SaveObject();
             this.Media.Episodes = this.Episodes.ToList();
+            base.SaveObject();
         }
 
         public EditSeriesViewModel(Media media, SwitchPageParameter goToNextPage) :
