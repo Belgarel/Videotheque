@@ -106,7 +106,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <xctk:IntegerUpDown Value="{Binding MinAge}" Minimum="0" Maximum="5"  Grid.Column="0"/>
+                    <xctk:IntegerUpDown Value="{Binding MinAge}" Minimum="0" Maximum="21"  Grid.Column="0"/>
                     <Label Content=" / 21" Grid.Column="1"/>
                 </Grid>
                 

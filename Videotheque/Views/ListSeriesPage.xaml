@@ -149,19 +149,32 @@
                                         <ColumnDefinition Width="Auto"/> <!-- Button -->
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <!-- DateRelease -->
                                         <RowDefinition Height="*" /> <!-- Genres -->
+                                        <RowDefinition Height="*" />
+                                        <!-- Seen -->
                                         <RowDefinition Height="*" /> <!-- Rated / Comment -->
                                         <RowDefinition Height="*" /> <!-- Synopsis -->
+                                        <RowDefinition Height="*" />
+                                        <!-- MinAge -->
                                         <RowDefinition Height="*" /> <!-- VO -->
                                         <RowDefinition Height="*" /> <!-- Language -->
                                         <RowDefinition Height="*" /> <!-- Subs -->
+                                        <!-- Physical Support -->
+                                        <RowDefinition Height="Auto" />
+                                        <!-- Numerical Support -->
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" /> <!-- Nb Episodes -->
                                         <RowDefinition Height="*" /> <!-- Button modify -->
                                         <RowDefinition Height="*" /> <!-- Button delete -->
                                     </Grid.RowDefinitions>
-                            
-                                    <Label Content="Genre(s)" Grid.Row="0" Grid.Column="0" />
-                                    <ListBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
+
+                                    <Label Content="Date" Grid.Row="0" Grid.Column="0" />
+                                    <Label Content="{Binding DateRelease}" Grid.Row="0" Grid.Column="1" />
+
+                                    <Label Content="Genre(s)" Grid.Row="1" Grid.Column="0" />
+                                    <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding GenreMedias}" >
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel />
@@ -173,8 +186,11 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ListBox>
-                            
-                                    <Grid  Grid.Row="1" Grid.Column="0">
+
+                                    <Label Content="Vu" Grid.Row="2" Grid.Column="0" />
+                                    <CheckBox IsChecked="{Binding Seen}" IsEnabled="False" Grid.Row="2" Grid.Column="1" />
+
+                                    <Grid  Grid.Row="3" Grid.Column="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -182,24 +198,33 @@
                                         <Label Content="{Binding Rated}" Grid.Column="0"/>
                                         <Label Content=" / 5" Grid.Column="1"/>
                                     </Grid>
-                                    <Label Content="{Binding Comment}" Grid.Row="1" Grid.Column="1" />
+                                    <Label Content="{Binding Comment}" Grid.Row="3" Grid.Column="1" />
 
-                                    <Label Content="Synopsis" Grid.Row="2" Grid.Column="0" />
-                                    <Label Content="{Binding Synopsis}" Grid.Row="2" Grid.Column="1" />
+                                    <Label Content="Âge minimum" Grid.Row="4" Grid.Column="0" />
+                                    <Label Content="{Binding MinAge}" Grid.Row="4" Grid.Column="1" />
+                                    
+                                    <Label Content="Synopsis" Grid.Row="5" Grid.Column="0" />
+                                    <Label Content="{Binding Synopsis}" Grid.Row="5" Grid.Column="1" />
 
-                                    <Label Content="VO" Grid.Row="3" Grid.Column="0" />
-                                    <Label Content="{Binding LanguageVO}" Grid.Row="3" Grid.Column="1" />
+                                    <Label Content="VO" Grid.Row="6" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageVO}" Grid.Row="6" Grid.Column="1" />
 
-                                    <Label Content="Langage" Grid.Row="4" Grid.Column="0" />
-                                    <Label Content="{Binding LanguageMedia}" Grid.Row="4" Grid.Column="1" />
+                                    <Label Content="Langage" Grid.Row="7" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageMedia}" Grid.Row="7" Grid.Column="1" />
 
-                                    <Label Content="Sous-titres" Grid.Row="5" Grid.Column="0" />
-                                    <Label Content="{Binding LanguageSubtitles}" Grid.Row="5" Grid.Column="1" />
+                                    <Label Content="Sous-titres" Grid.Row="8" Grid.Column="0" />
+                                    <Label Content="{Binding LanguageSubtitles}" Grid.Row="8" Grid.Column="1" />
 
     <!--                                <Label Content="Nb. épisodes" Grid.Row="6" Grid.Column="0" />
                                     <Label Content="{Binding Episodes.Count}" Grid.Row="6" Grid.Column="1" /> -->
 
-                                    <Label Content="Episodes" Grid.Row="6" Grid.Column="0" />
+                                    <Label Content="Support Physique" Grid.Row="9" Grid.Column="0" />
+                                    <CheckBox IsChecked="{Binding PhysicalSupport}" IsEnabled="False" Grid.Row="9" Grid.Column="1" />
+
+                                    <Label Content="Support Numérique" Grid.Row="10" Grid.Column="0" />
+                                    <CheckBox IsChecked="{Binding NumericalSupport}" IsEnabled="False" Grid.Row="10" Grid.Column="1" />
+                                    
+                                    <Label Content="Episodes" Grid.Row="11" Grid.Column="0" />
                                     <ListBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Episodes}" >
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -232,11 +257,11 @@
 
                                     <Button Content="Modifier" Command="{Binding DataContext.EditMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="7" Grid.Column="0"/>
+                                            Grid.Row="12" Grid.Column="0"/>
 
                                     <Button Content="Supprimer" Command="{Binding DataContext.DeleteMedia, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                             CommandParameter="{Binding}"
-                                            Grid.Row="8" Grid.Column="0"/>
+                                            Grid.Row="13" Grid.Column="0"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>
